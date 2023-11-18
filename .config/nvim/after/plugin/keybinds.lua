@@ -7,8 +7,8 @@ local map = vim.api.nvim_set_keymap
  local opts = { noremap = true, silent = true }
 
 -- open NeoTree
-map('n', '<leader>ee', ':Neotree toggle<CR>', { noremap = true, silent=true, desc = '[E]xplorer [T]oggle' });
-map('n', '<leader>ef', ':Neotree focus<CR>', { noremap = true, silent=true, desc = '[E]xplorer [F]ocus' });
+map('n', '<leader>ee', ':NvimTreeToggle<CR>', { noremap = true, silent=true, desc = '[E]xplorer [T]oggle' });
+map('n', '<leader>ef', ':NvimTreeFocus<CR>', { noremap = true, silent=true, desc = '[E]xplorer [F]ocus' });
 
 -- open Undotree 
 map('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, desc = '[U]ndo Tree' });
