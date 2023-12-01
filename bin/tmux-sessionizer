@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$((find ~/code ~/.dotfiles /tmp/disnotes -mindepth 1 -maxdepth 1 -type d && echo main) | fzf)
+    selected=$((echo "main" && find ~/code ~/.dotfiles /tmp/disnotes -mindepth 1 -maxdepth 1 -type d) | fzf)
 fi
 
 if [[ -z $selected ]]; then
