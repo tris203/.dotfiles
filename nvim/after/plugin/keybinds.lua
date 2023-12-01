@@ -36,13 +36,26 @@ map('n', '<C-s>', ':w<CR>', opts);
 map('i', '<C-s>', '<ESC>:w<CR>', opts);
 
 
--- harpoon keybinds
+-- harpoon keybindsi
+--[[
 map('n', '<leader>a', ':lua require("harpoon.mark").add_file()<CR>', { desc = 'Harpoon [A]dd File'});
 map('n', '<C-e>', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Harpoon [E]xplore' });
 map('n', '<C-t>', ':lua require("harpoon.ui").nav_file(1)<CR>', { desc = 'Harpoon Toggle 1' });
 map('n', '<C-h>', ':lua require("harpoon.ui").nav_file(2)<CR>', { desc = 'Harpoon Toggle 2' });
 map('n', '<C-n>', ':lua require("harpoon.ui").nav_file(3)<CR>', { desc = 'Harpoon Toggle 3' });
 map('n', '<C-b>', ':lua require("harpoon.ui").nav_file(4)<CR>', { desc = 'Harpoon Toggle 4' });
+]]-- 
+
+-- harpoon2 keybinds 
+local harpoon = require("harpoon")
+harpoon:setup()
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-t>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-b>", function() harpoon:list():select(4) end)
 
 -- disable the arrow keys, because i cant help myself
 map('n', '<up>', '<Nop>', opts);

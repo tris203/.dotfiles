@@ -3,14 +3,11 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/code ~/.dotfiles /tmp/disnotes -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$((find ~/code ~/.dotfiles /tmp/disnotes -mindepth 1 -maxdepth 1 -type d && echo main) | fzf)
 fi
 
 if [[ -z $selected ]]; then
-    read -p "Enter session name: " selected
-    if [[ -z $selected ]]; then
         exit 0 
-    fi
 fi
 
 selected_name=$(basename "$selected" | tr . _)
