@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Function to check if the tmux session exists
+session_exists() {
+    tmux has-session -t "$1" 2>/dev/null
+}
+
+# Check if tmux session "screenkey_running" exists
+if session_exists "screenkey_running"; then
+    tmux kill-session -t screenkey_running
+else
+    tmux new-session -d -s screenkey_running 'while true; do /usr/bin/screenkey --geometry 711x900+1812+0 -s medium --opacity 0.4 & pid=$!; sleep 10; kill "$pid"; done'
+fi
+
