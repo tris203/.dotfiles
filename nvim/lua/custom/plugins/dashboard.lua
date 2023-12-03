@@ -1,13 +1,9 @@
 return {
 
-  { "nvimdev/dashboard-nvim", enabled = false },
-  { "echasnovski/mini.starter", enabled = false },
-  -- Dashboard. This runs when neovim starts, and is what displays
-  -- the "LAZYVIM" banner.
   {
     "goolord/alpha-nvim",
     event = "VimEnter",
-    enabled = true,
+    enabled = false,
     init = false,
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
