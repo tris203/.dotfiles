@@ -6,8 +6,7 @@
  local opts = { noremap = true, silent = true }
 
 -- open NeoTree
-vim.api.nvim_set_keymap('n', '<leader>ee', ':NvimTreeToggle<CR>', { noremap = true, silent=true, desc = '[E]xplorer [T]oggle' });
-vim.api.nvim_set_keymap('n', '<leader>ef', ':NvimTreeFocus<CR>', { noremap = true, silent=true, desc = '[E]xplorer [F]ocus' });
+vim.api.nvim_set_keymap('n', '<leader>ef', ':NvimTreeToggle<CR>', { noremap = true, silent=true, desc = '[E]xplorer [F]iles' });
 
 -- open Undotree 
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', { noremap = true, desc = '[U]ndo Tree' });
