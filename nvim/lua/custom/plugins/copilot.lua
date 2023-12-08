@@ -3,6 +3,7 @@
 return {
     {
         "zbirenbaum/copilot.lua",
+        event = "BufEnter",
         config= {
             suggestion = {
                 auto_trigger = true

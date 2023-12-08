@@ -1,5 +1,6 @@
 return {
-  { 'theprimeagen/harpoon',
+  { 
+    'theprimeagen/harpoon',
     branch = 'harpoon2',
     lazy = false,
     dependencies = {
