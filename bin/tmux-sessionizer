@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-exclude_dirs="*node_modules*|*.git*|*crates*|*target*"
+exclude_dirs="*node_modules*|*.git*|*crates*|*target*|*.next*|*dist*"
 
 if [[ $# -eq 1 ]]; then
     selected=$1
