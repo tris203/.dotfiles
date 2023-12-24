@@ -3,7 +3,7 @@
 return {
   {
     'zbirenbaum/copilot.lua',
-    event = 'VeryLazy',
+    event = 'InsertEnter',
     config = {
       suggestion = {
         auto_trigger = true,
