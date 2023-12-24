@@ -1,2 +1,1 @@
-
-print("Ready to go!")
+print 'Ready to go!'

@@ -8,17 +8,21 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' }, }, },
+  { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  { 'tpope/vim-sleuth', event = 'VeryLazy' },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
+    config = function()
+      require 'lsp-setup'
+    end,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
@@ -36,6 +40,10 @@ require('lazy').setup({
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    config = function()
+      require 'cmp-setup'
+    end,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -50,10 +58,11 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim', event = 'VeryLazy', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'VeryLazy',
     opts = {
       -- See `:help gitsigns.txt`
       signs = {
@@ -91,22 +100,14 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    event = 'BufEnter',
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'onedark',
+        theme = 'palenight',
         component_separators = '|',
         section_separators = '',
       },
@@ -116,6 +117,7 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
+    event = 'VeryLazy',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
@@ -123,12 +125,16 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim', opts = {}, event = 'VeryLazy' },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
+    event = 'VeryLazy',
     branch = '0.1.x',
+    config = function()
+      require 'telescope-setup'
+    end,
     dependencies = {
       'nvim-lua/plenary.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -149,6 +155,10 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    event = 'VeryLazy',
+    config = function()
+      require 'treesitter-setup'
+    end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -167,7 +177,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- vim: ts=2 sts=2 sw=2 et

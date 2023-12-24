@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+CURRENT="$(tmux display-message -p '#S')"
+
+input() {
+    (tmux list-sessions | sed -E 's/:.*$//' | grep -v "$CURRENT") || echo "$CURRENT"
+}
+
+handle_output() {
+    target=$(echo "$1" | tr -d '\n')
+    if [[ -z "$target" ]]; then
+        exit 0
+    fi
+    if ! tmux has-session -t="$target" 2> /dev/null; then
+        if test -d "$target"; then
+            tmux new-session -ds "${target##*/}" -c "$target"
+            target="${target##*/}"
+        else
+            tmux new-session -ds "$target"
+        fi
+    fi
+    tmux switch-client -t "$target"
+}
+
+BIND_ENTER="enter:replace-query+print-query"
+
+RESULT=$(input | fzf  --preview="~/.dotfiles/bin/tmuxpreview {}")
+read -r -p "[Attach(Enter)/Kill(K)]" -N 1 response
+if [[ "$response" =~ (k|K) ]]; then
+    read -r -p "Kill session $RESULT? [y/N]" -N 1 response
+    if [[ "$response" =~ (y|Y) ]]; then
+    tmux kill-session -t "$RESULT"
+    exit 0
+    fi
+fi
+
+handle_output "$RESULT"

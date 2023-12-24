@@ -1,14 +1,17 @@
 return {
-  "nvim-tree/nvim-tree.lua",
-  version = "*",
-  lazy = false,
+  'nvim-tree/nvim-tree.lua',
+  version = '*',
+  cmd = 'NvimTreeToggle',
+  keys = {
+    { '<leader>ef', '<cmd>NvimTreeToggle<cr>', { noremap = true, silent = true } },
+  },
   dependencies = {
-    "nvim-tree/nvim-web-devicons",
+    'nvim-tree/nvim-web-devicons',
   },
   config = function()
     local HEIGHT_RATIO = 0.8 -- You can change this
-    local WIDTH_RATIO = 0.5  -- You can change this too
-    require("nvim-tree").setup {
+    local WIDTH_RATIO = 0.5 -- You can change this too
+    require('nvim-tree').setup {
       filters = {
         dotfiles = false,
       },
@@ -24,11 +27,10 @@ return {
             local window_w_int = math.floor(window_w)
             local window_h_int = math.floor(window_h)
             local center_x = (screen_w - window_w) / 2
-            local center_y = ((vim.opt.lines:get() - window_h) / 2)
-                - vim.opt.cmdheight:get()
+            local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
             return {
-              border = "rounded",
-              relative = "editor",
+              border = 'rounded',
+              relative = 'editor',
               row = center_y,
               col = center_x,
               width = window_w_int,
@@ -39,7 +41,6 @@ return {
         width = function()
           return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
         end,
-
       },
     }
   end,

@@ -1,4 +1,4 @@
 return {
-    'nvim-treesitter/playground',
-    cmd = 'TSPlaygroundToggle',
+  'nvim-treesitter/playground',
+  cmd = 'TSPlaygroundToggle',
 }

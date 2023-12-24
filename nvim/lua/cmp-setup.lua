@@ -1,11 +1,10 @@
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
-local copilot = require('copilot.suggestion')
+local copilot = require 'copilot.suggestion'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
-
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -35,7 +34,7 @@ cmp.setup {
       if copilot.is_visible() then
         copilot.accept()
       elseif cmp.visible() then
-        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
       elseif luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       else
