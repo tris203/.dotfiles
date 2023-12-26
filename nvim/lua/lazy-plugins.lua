@@ -102,7 +102,7 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    event = 'BufEnter',
+    event = 'VeryLazy',
     -- See `:help lualine.txt`
     opts = {
       options = {

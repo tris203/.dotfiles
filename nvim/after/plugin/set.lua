@@ -1,5 +1,3 @@
-vim.cmd('colorscheme tokyonight')
-
 vim.opt.guicursor = ''
 
 vim.opt.nu = true
