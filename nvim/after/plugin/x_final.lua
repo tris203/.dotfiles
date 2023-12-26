@@ -3,7 +3,6 @@ vim.api.nvim_create_autocmd('User', {
   callback = function()
     local intro = require('custom.intro')
     intro.show()
-    vim.cmd('colorscheme tokyonight')
     end
     })
 
