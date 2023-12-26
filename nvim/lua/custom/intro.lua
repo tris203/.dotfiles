@@ -6,6 +6,7 @@ local augroup = vim.api.nvim_create_augroup("NvimIntro", { clear = true })
 
 local winid
 local autocmd
+local redrawAutoCmd
 
 ---@class intro_chunk_t
 ---@field text string
@@ -36,7 +37,7 @@ function M.show()
       chunks = {
         {
           text = "Neovim",
-          hl = "Identifier",
+          hl = "Function",
         },
         {
           text = " :: ",
@@ -44,25 +45,16 @@ function M.show()
         },
         {
           text = tostring(version),
-          hl = "Identifier",
+          hl = "Function",
         },
       },
     },
     {
       chunks = {
         {
-          text = tostring(stats.count) .. " plugins",
-          hl = "Comment",
-        },
-        {
-          text = " :: ",
-          hl = "Comment",
-        },
-        {
-          text = "startup in "
-            .. string.format("%.2f", stats.startuptime)
+          text = string.format("%.2f", stats.startuptime)
             .. "ms",
-          hl = "Comment",
+          hl = "Identifier",
         },
       },
     },
@@ -166,7 +158,6 @@ function M.show()
     "InsertEnter",
     "TermOpen",
     "TextChanged",
-    "VimResized",
     "WinEnter",
   }, {
     once = true,
@@ -174,6 +165,19 @@ function M.show()
     callback = M.hide,
   })
 end
+
+redrawAutoCmd = vim.api.nvim_create_autocmd({
+  "VimResized",
+  "WinScrolled",
+}, {
+  group = augroup,
+  callback = function()
+    if winid and vim.api.nvim_win_is_valid(winid) then
+      M.hide()
+      M.show()
+    end
+  end,
+})
 
 function M.hide()
   if winid and vim.api.nvim_win_is_valid(winid) then
@@ -184,6 +188,11 @@ function M.hide()
   if autocmd then
     vim.api.nvim_del_autocmd(autocmd)
     autocmd = nil
+  end
+
+  if redrawAutoCmd then
+    vim.api.nvim_del_autocmd(redrawAutoCmd)
+    redrawAutoCmd = nil
   end
 end
 
