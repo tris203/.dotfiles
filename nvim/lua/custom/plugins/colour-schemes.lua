@@ -32,7 +32,7 @@ return {
   {
 'rose-pine/neovim',
     name = 'rose-pine',
-    event = 'UIEnter',
+    lazy = true,
     config = function()
       require('rose-pine').setup({
   disable_background = true,
@@ -46,7 +46,7 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    event = 'UIEnter',
+    lazy = true,
     config = function()
       require('catppuccin').setup({
 transparent_background = true,
