@@ -8,7 +8,7 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' }, }, },
+  { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
   { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
 
   -- Detect tabstop and shiftwidth automatically
@@ -125,7 +125,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {}, event = 'VeryLazy' },
+  { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -178,6 +178,27 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
-}, {})
+}, {
+  performance = {
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true,
+    rtp = {
+      reset = true,
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+        'man',
+      },
+    },
+  },
+})
 
 -- vim: ts=2 sts=2 sw=2 et
