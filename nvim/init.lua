@@ -43,6 +43,18 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+-- Loading shada is SLOW, so we're going to load it manually,
+-- after UI-enter so it doesn't block startup.
+local shada = vim.o.shada
+vim.o.shada = ''
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'VeryLazy',
+  callback = function()
+    vim.o.shada = shada
+    pcall(vim.cmd.rshada, { bang = true })
+  end,
+})
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-bootstrap'
 
