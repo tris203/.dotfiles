@@ -1,5 +1,6 @@
 return {
-  dir = '/home/tris/code/hawtkeys.nvim',
+  'tris203/hawtkeys.nvim',
+  dev = false,
   cmd = { 'Hawtkeys', 'HawtkeysAll', 'HawtkeysDupes' },
   config = {
     customMaps = {
