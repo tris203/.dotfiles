@@ -31,8 +31,10 @@ vim.api.nvim_set_keymap('n', 'Q', '<Nop>', opts)
 
 -- harpoon keybindsi
 --[[
-vim.api.nvim_set_keymap('n', '<leader>a', ':lua require("harpoon.mark").add_file()<CR>', { desc = 'Harpoon [A]dd File'});
-vim.api.nvim_set_keymap('n', '<C-e>', ':lua require("harpoon.ui").togle_quick_menu()<CR>', { desc = 'Harpoon [E]xplore' });
+vim.api.nvim_set_keymap('n', '<leader>a',
+':lua require("harpoon.mark").add_file()<CR>', { desc = 'Harpoon [A]dd File'});
+vim.api.nvim_set_keymap('n',
+'<C-e>', ':lua require("harpoon.ui").togle_quick_menu()<CR>', { desc = 'Harpoon [E]xplore' });
 vim.api.nvim_set_keymap('n', '<C-t>', ':lua require("harpoon.ui").nav_file(1)<CR>', { desc = 'Harpoon Toggle 1' });
 vim.api.nvim_set_keymap('n', '<C-h>', ':lua require("harpoon.ui").nav_file(2)<CR>', { desc = 'Harpoon Toggle 2' });
 vim.api.nvim_set_keymap('n', '<C-n>', ':lua require("harpoon.ui").nav_file(3)<CR>', { desc = 'Harpoon Toggle 3' });
