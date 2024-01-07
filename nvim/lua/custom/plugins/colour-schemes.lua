@@ -1,13 +1,3 @@
-local schemes = {
-  'folke/tokyonight.nvim',
-  'rose-pine/neovim',
-  'catppuccin/nvim',
-}
---[[ math.randomseed(os.time())
-local random_theme = schemes[math.random(#schemes)] ]]
-
-local random_theme = schemes[1]
-
 return {
   {
     'folke/tokyonight.nvim',
@@ -24,36 +14,25 @@ return {
           floats = 'transparent',
         },
       }
-      if random_theme == 'folke/tokyonight.nvim' then
-        vim.cmd('colorscheme tokyonight')
-      end
+      vim.cmd 'colorscheme tokyonight'
     end,
   },
   {
-'rose-pine/neovim',
+    'rose-pine/neovim',
     name = 'rose-pine',
-    lazy = true,
-    config = function()
-      require('rose-pine').setup({
-  disable_background = true,
-  disable_float_background = true,
-      })
-      if random_theme == 'rose-pine/neovim' then
-        vim.cmd('colorscheme rose-pine')
-      end
-    end,
+    event = 'VeryLazy',
+    opts = {
+      disable_background = true,
+      disable_float_background = true,
+    },
   },
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    lazy = true,
-    config = function()
-      require('catppuccin').setup({
-transparent_background = true,
-      })
-      if random_theme == 'catppuccin/nvim' then
-        vim.cmd('colorscheme catppuccin')
-      end
-    end,
-  }
+    event = 'VeryLazy',
+    opts = {
+      transparent_background = true,
+    },
+  },
 }
+
