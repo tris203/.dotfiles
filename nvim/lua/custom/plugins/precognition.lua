@@ -1,7 +1,17 @@
 return {
   'tris203/precognition.nvim',
-  dev = true,
-  enabled = false,
   event = 'VeryLazy',
-  config = true,
+  dev = true,
+  --  enabled = false,
+  opts = {
+    startVisible = false,
+  },
+  keys = {
+    {
+      '<leader>pr',
+      function()
+        require('precognition').toggle()
+      end,
+    },
+  },
 }

@@ -2,7 +2,7 @@ return {
   --'mehalter/nvim-colorizer.lua',
   'willothy/nvim-colorizer.lua',
   event = 'VeryLazy',
-  config = {
+  opts = {
     user_default_options = {
       tailwind = true,
       mode = 'inline',

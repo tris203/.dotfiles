@@ -1,8 +1,10 @@
 return {
   'tris203/hawtkeys.nvim',
-  dev = false,
+  dev = true,
+  dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = { 'Hawtkeys', 'HawtkeysAll', 'HawtkeysDupes' },
-  config = {
+  opts = {
+    -- keyboardLayout = "colemak",
     customMaps = {
       ['nmap'] = {
         modeIndex = 'n',

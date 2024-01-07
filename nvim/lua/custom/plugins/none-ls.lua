@@ -7,11 +7,13 @@ return {
     null_ls.setup {
       debug = true,
       sources = {
-        builtins.formatting.stylua,
+        builtins.formatting.stylua.with {
+          to_temp_file = true,
+        },
         builtins.formatting.prettier,
         builtins.formatting.markdownlint,
         builtins.diagnostics.luacheck.with {
-args = { "--formatter", "plain", "--codes", "--ranges", "--globals", "vim",  "--filename", "$FILENAME", "-" }
+          args = { '--formatter', 'plain', '--codes', '--ranges', '--globals', 'vim', '--filename', '$FILENAME', '-' },
         },
         builtins.diagnostics.eslint_d,
         builtins.diagnostics.yamllint,

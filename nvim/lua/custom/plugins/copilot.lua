@@ -4,7 +4,7 @@ return {
   {
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
-    config = {
+    opts = {
       suggestion = {
         auto_trigger = true,
       },

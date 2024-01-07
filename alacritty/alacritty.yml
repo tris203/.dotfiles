@@ -1,5 +1,5 @@
 window:
-  opacity: 0.9
+  opacity: 0.95
 shell:
   program: /usr/bin/tmux
   args:
@@ -68,5 +68,9 @@ schemes:
       white:   '#acb0d0'
 colors: *tokyo-night
 key_bindings:
- - { key: Numpad0,  mods: Control, action: ResetFontSize }
-
+  - {key: Numpad0, mods: Control, action: ResetFontSize}
+font:
+  normal:
+    family: JetbrainsMono NerdFont
+    style: Regular
+  size: 11
