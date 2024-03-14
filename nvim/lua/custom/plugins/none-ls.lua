@@ -7,19 +7,24 @@ return {
     null_ls.setup {
       debug = true,
       sources = {
-        builtins.formatting.stylua.with {
-          to_temp_file = true,
-        },
+        builtins.formatting.stylua,
         builtins.formatting.prettier,
+        require('none-ls.formatting.eslint_d'),
         builtins.formatting.markdownlint,
-        builtins.diagnostics.luacheck.with {
+        require('none-ls-luacheck.diagnostics.luacheck').with {
           args = { '--formatter', 'plain', '--codes', '--ranges', '--globals', 'vim', '--filename', '$FILENAME', '-' },
         },
-        builtins.diagnostics.eslint_d,
+        require('none-ls.diagnostics.eslint_d'),
         builtins.diagnostics.yamllint,
-        builtins.diagnostics.markdownlint,
+        builtins.diagnostics.markdownlint.with {
+          extra_args = { '--disable', 'MD013' },
+        },
       },
     }
   end,
+  dependencies = {
+    'gbprod/none-ls-luacheck.nvim',
+    'nvimtools/none-ls-extras.nvim',
+  },
   event = 'VeryLazy',
 }
