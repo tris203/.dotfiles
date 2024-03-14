@@ -52,3 +52,9 @@ vim.api.nvim_set_keymap('n', '<leader>?', '<cmd>Cheatsheet<CR>', { noremap = tru
 vim.keymap.set('n', '<leader><leader>', function()
   vim.cmd 'so'
 end)
+
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+
+vim.api.nvim_set_keymap('n', '<LEADER>lo', "<cmd>echo 123<CR>", {} )
+
+
