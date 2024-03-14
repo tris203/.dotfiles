@@ -7,6 +7,7 @@ return {
       require('tokyonight').setup {
         transparent = true,
         on_colors = function(colors)
+          ---@diagnostic disable-next-line: inject-field
           colors.fg_gutter = '#b2b8cf'
         end,
         styles = {
@@ -35,4 +36,3 @@ return {
     },
   },
 }
-

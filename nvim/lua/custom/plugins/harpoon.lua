@@ -25,7 +25,7 @@ return {
         end,
       },
       {
-        '<C-t>',
+        '<C-x>',
         function()
           harpoon:list():select(1)
         end,

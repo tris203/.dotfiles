@@ -1,6 +1,6 @@
 return {
   'tris203/hawtkeys.nvim',
-  dev = true,
+  dev = false,
   dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = { 'Hawtkeys', 'HawtkeysAll', 'HawtkeysDupes' },
   opts = {
