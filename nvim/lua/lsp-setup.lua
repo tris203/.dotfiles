@@ -72,10 +72,15 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  rust_analyzer = {},
+  -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+  nil_ls = {
+    ['nil'] = {
+    testSetting = 42,
+    formatting = { command = { 'nixpkgs-fmt' } },
+  },
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
