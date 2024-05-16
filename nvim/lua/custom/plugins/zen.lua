@@ -12,6 +12,7 @@ return {
       },
       plugins = {
         tmux = { enabled = true },
+        twilight = { enabled = false },
       },
     },
   },

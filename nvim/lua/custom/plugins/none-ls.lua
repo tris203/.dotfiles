@@ -9,17 +9,18 @@ return {
       sources = {
         builtins.formatting.stylua,
         builtins.formatting.prettier,
-        require('none-ls.formatting.eslint_d'),
+        require 'none-ls.formatting.eslint_d',
         builtins.formatting.markdownlint,
         require('none-ls-luacheck.diagnostics.luacheck').with {
           args = { '--formatter', 'plain', '--codes', '--ranges', '--globals', 'vim', '--filename', '$FILENAME', '-' },
         },
-        require('none-ls.diagnostics.eslint_d'),
+        require 'none-ls.diagnostics.eslint_d',
         builtins.diagnostics.yamllint,
         builtins.diagnostics.markdownlint.with {
           extra_args = { '--disable', 'MD013' },
         },
       },
+      builtins.formatting.nixpkgs_fmt,
     }
   end,
   dependencies = {

@@ -42,16 +42,12 @@ vim.api.nvim_set_keymap('n', '<C-b>', ':lua require("harpoon.ui").nav_file(4)<CR
 ]]
 --
 -- disable the arrow keys, because i cant help myself
-vim.api.nvim_set_keymap('n', '<up>', '<Nop>', opts)
-vim.api.nvim_set_keymap('n', '<down>', '<Nop>', opts)
-vim.api.nvim_set_keymap('n', '<left>', '<Nop>', opts)
-vim.api.nvim_set_keymap('n', '<right>', '<Nop>', opts)
+-- vim.api.nvim_set_keymap('n', '<up>', '<Nop>', opts)
+-- vim.api.nvim_set_keymap('n', '<down>', '<Nop>', opts)
+-- vim.api.nvim_set_keymap('n', '<left>', '<Nop>', opts)
+-- vim.api.nvim_set_keymap('n', '<right>', '<Nop>', opts)
 
 vim.api.nvim_set_keymap('n', '<leader>?', '<cmd>Cheatsheet<CR>', { noremap = true, silent = true, desc = 'Cheatsheet' })
-
-vim.keymap.set('n', '<leader><leader>', function()
-  vim.cmd 'so'
-end)
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 

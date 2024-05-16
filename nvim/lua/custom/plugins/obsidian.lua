@@ -7,13 +7,13 @@ local function getPath()
   else
     path = '/tmp/obsidian'
   end
-  print(path)
+  -- print(path)
   return path
 end
 
 return {
   'epwalsh/obsidian.nvim',
-  event = 'VeryLazy',
+  cmd = { 'ObsidianOpen', 'ObsidianSearch', 'ObsidianQuickSwitch', 'ObsidianNew' },
   version = '*', -- recommended, use latest release instead of latest commit
   keys = {
     { '<leader>of', '<cmd>ObsidianQuickSwitch<cr>' },
