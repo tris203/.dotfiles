@@ -18,7 +18,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  -- nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -27,7 +27,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>lf', vim.lsp.buf.format, '[L]SP [F]ormat')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
@@ -77,14 +77,19 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   nil_ls = {
     ['nil'] = {
-    testSetting = 42,
-    formatting = { command = { 'nixpkgs-fmt' } },
-  },
+      testSetting = 42,
+      formatting = { command = { 'nixpkgs-fmt' } },
+    },
   },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = {
+        unusedLocalExclude = {
+          '_*',
+        },
+      },
     },
   },
 }

@@ -46,14 +46,25 @@ require('lazy').setup({
     end,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
+      {
+        'L3MON4D3/LuaSnip',
+        build = 'make install_jsregexp',
+        dependencies = {
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
+        },
+      },
       'saadparwaiz1/cmp_luasnip',
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
+      'onsails/lspkind.nvim',
     },
   },
 
@@ -76,7 +87,9 @@ require('lazy').setup({
         local gs = package.loaded.gitsigns
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
         vim.keymap.set('n', '<leader>gb', gs.toggle_current_line_blame, { buffer = bufnr, desc = 'Toggle git blame' })
-        vim.keymap.set('n', '<leader>gB', function() gs.blame_line({full = false}) end, { buffer = bufnr, desc = 'Git Blame Line' })
+        vim.keymap.set('n', '<leader>gB', function()
+          gs.blame_line { full = false }
+        end, { buffer = bufnr, desc = 'Git Blame Line' })
 
         -- don't override the built-in and fugitive keymaps
         vim.keymap.set({ 'n', 'v' }, ']c', function()
@@ -127,7 +140,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
+  -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -157,7 +170,7 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-   event = 'BufRead',
+    event = 'BufRead',
     config = function()
       require 'treesitter-setup'
     end,
@@ -181,9 +194,9 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
 }, {
-    dev = {
-      path = '~/code',
-      },
+  dev = {
+    path = '~/code',
+  },
   performance = {
     cache = {
       enabled = true,
