@@ -5,6 +5,6 @@ return {
     cloak_length = 30,
   },
   keys = {
-    { '<leader>ct', '<cmd>CloakToggle<cr>' },
+    { '<leader>ct', '<cmd>CloakToggle<cr>', desc = 'Toggle Cloak' },
   },
 }

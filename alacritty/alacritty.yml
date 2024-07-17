@@ -1,5 +1,8 @@
 window:
   opacity: 0.95
+  padding:
+    x: 6
+    y: 6
 shell:
   program: /usr/bin/tmux
   args:

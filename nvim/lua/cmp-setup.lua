@@ -2,7 +2,6 @@
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.shortmess:append 'c'
 
@@ -13,12 +12,30 @@ luasnip.config.setup {}
 local lspkind = require 'lspkind'
 lspkind.init()
 
+local custom_names = {
+  cmp_yanky = 'Yanky',
+  nerdfont = 'NF Icon',
+  emoji = 'Emoji',
+  buffer = 'Buffer',
+  ['vim-dadbod-completion'] = 'DB',
+}
+
+local custom_icons = {
+  Yanky = '',
+  Copilot = '',
+  ['NF Icon'] = '󰌓',
+  Emoji = '',
+  Buffer = '󰧮',
+  DB = '',
+}
+
 cmp.setup {
+  ---@diagnostic disable-next-line: missing-fields
   formatting = {
     format = lspkind.cmp_format {
       mode = 'symbol_text',
       maxwidth = 50,
-      symbol_map = { Copilot = '' },
+      symbol_map = custom_icons,
       -- can also be a function to dynamically calculate max width such as
       -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
       ellipsis_char = '...',
@@ -27,10 +44,17 @@ cmp.setup {
       -- The function below will be called before any actual modifications from lspkind
       -- so that you can provide more controls on popup customization.
       -- (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      before = function(_entry, vim_item)
+      before = function(entry, vim_item)
+        if custom_names[entry.source.name] then
+          vim_item.kind = custom_names[entry.source.name]
+        end
+
         return vim_item
       end,
     },
+  },
+  view = {
+    entries = { name = 'custom', selection_order = 'near_cursor' },
   },
   snippet = {
     expand = function(args)
@@ -134,10 +158,18 @@ cmp.setup {
   sources = {
     { name = 'copilot' },
     { name = 'nvim_lsp' },
-    { name = 'path' },
+    { name = 'path', max_item_count = 5 },
     { name = 'luasnip' },
-    { name = 'buffer' },
+    { name = 'buffer', max_item_count = 5 },
+    { name = 'emoji', max_item_count = 10 },
+    { name = 'cmp_yanky', max_item_count = 10 },
+    { name = 'nerdfont', max_item_count = 10 },
+    { name = 'vim-dadbod-completion', keyword_length = 2 },
   },
 }
+
+for _, ft_path in ipairs(vim.api.nvim_get_runtime_file('lua/custom/snippets/*.lua', true)) do
+  loadfile(ft_path)()
+end
 
 -- vim: ts=2 sts=2 sw=2 et

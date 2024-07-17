@@ -7,6 +7,8 @@ return {
     null_ls.setup {
       debug = true,
       sources = {
+        builtins.formatting.nixpkgs_fmt,
+        builtins.formatting.gofumpt,
         builtins.formatting.stylua,
         builtins.formatting.prettier,
         require 'none-ls.formatting.eslint_d',
@@ -16,16 +18,23 @@ return {
         },
         require 'none-ls.diagnostics.eslint_d',
         builtins.diagnostics.yamllint,
+        builtins.code_actions.proselint,
+        builtins.diagnostics.proselint,
         builtins.diagnostics.markdownlint.with {
           extra_args = { '--disable', 'MD013' },
         },
       },
-      builtins.formatting.nixpkgs_fmt,
+      builtins.code_actions.refactoring,
     }
   end,
   dependencies = {
     'gbprod/none-ls-luacheck.nvim',
     'nvimtools/none-ls-extras.nvim',
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
   },
   event = 'VeryLazy',
 }

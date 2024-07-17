@@ -17,7 +17,7 @@ vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', opts)
 vim.keymap.set('n', 'J', 'mzJ`z')
 
 --find and replace word under cursor
-vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Find and Replace" })
 
 -- reset cursoe position after search
 vim.api.nvim_set_keymap('n', 'n', 'nzzzv', opts)
@@ -25,9 +25,6 @@ vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', opts)
 
 -- vim.api.nvim_set_keymap ctrl c to escape
 vim.api.nvim_set_keymap('i', '<C-c>', '<ESC>', opts)
-
--- null Q press ( not sure why )
-vim.api.nvim_set_keymap('n', 'Q', '<Nop>', opts)
 
 -- harpoon keybindsi
 --[[
@@ -47,10 +44,4 @@ vim.api.nvim_set_keymap('n', '<C-b>', ':lua require("harpoon.ui").nav_file(4)<CR
 -- vim.api.nvim_set_keymap('n', '<left>', '<Nop>', opts)
 -- vim.api.nvim_set_keymap('n', '<right>', '<Nop>', opts)
 
-vim.api.nvim_set_keymap('n', '<leader>?', '<cmd>Cheatsheet<CR>', { noremap = true, silent = true, desc = 'Cheatsheet' })
-
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-
-vim.api.nvim_set_keymap('n', '<LEADER>lo', "<cmd>echo 123<CR>", {} )
-
-

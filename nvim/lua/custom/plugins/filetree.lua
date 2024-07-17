@@ -3,18 +3,19 @@ return {
   version = '*',
   cmd = 'NvimTreeToggle',
   keys = {
-    { '<leader>ef', '<cmd>NvimTreeToggle<cr>', { noremap = true, silent = true } },
+    { '<leader>ef', '<cmd>NvimTreeToggle<cr>', { noremap = true, silent = true }, desc = 'Open File Tree' },
   },
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
   config = function()
     local HEIGHT_RATIO = 0.8 -- You can change this
-    local WIDTH_RATIO = 0.5 -- You can change this too
+    local WIDTH_RATIO = 0.5  -- You can change this too
     require('nvim-tree').setup {
       filters = {
         dotfiles = false,
       },
+      hijack_cursor = true,
       view = {
         relativenumber = true,
         float = {

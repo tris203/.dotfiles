@@ -6,13 +6,13 @@
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
-
   -- Git related plugins
-  { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
-  { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
+  { 'tpope/vim-fugitive',     cmd = { 'Git' },    keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
+  { 'tpope/vim-rhubarb',      cmd = { 'Gbrowse' } },
+  { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {} },
 
   -- Detect tabstop and shiftwidth automatically
-  { 'tpope/vim-sleuth', event = 'VeryLazy' },
+  { 'tpope/vim-sleuth',       event = 'VeryLazy' },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -33,7 +33,7 @@ require('lazy').setup({
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      -- 'folke/neodev.nvim',
     },
   },
 
@@ -64,12 +64,15 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-emoji',
+      'chrisgrieser/cmp-nerdfont',
+      'chrisgrieser/cmp_yanky',
       'onsails/lspkind.nvim',
     },
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', event = 'VeryLazy', opts = {} },
+  { 'folke/which-key.nvim',                      event = 'VeryLazy', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -119,14 +122,35 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = 'palenight',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
+    config = function()
+      require('lualine').setup {
+        options = {
+          icons_enabled = true,
+          theme = 'palenight',
+          component_separators = '|',
+          section_separators = '',
+        },
+        sections = {
+          ---@diagnostic disable-next-line: undefined-field
+          lualine_y = {
+            {
+              function()
+                ---@type string
+                ---@diagnostic disable-next-line: undefined-field
+                local status = require('noice').api.status.mode.get()
+                if string.find(status, 'recording') then
+                  return status
+                end
+                return ''
+              end,
+            },
+            {
+              'progress',
+            },
+          },
+        },
+      }
+    end,
   },
 
   {
@@ -138,10 +162,9 @@ require('lazy').setup({
     main = 'ibl',
     opts = {},
   },
-
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
-
+  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {} },
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -166,17 +189,16 @@ require('lazy').setup({
       },
     },
   },
-
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    event = 'BufRead',
-    config = function()
-      require 'treesitter-setup'
-    end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
+    event = 'VeryLazy',
+    config = function()
+      require 'treesitter-setup'
+    end,
     build = ':TSUpdate',
   },
 
@@ -184,7 +206,7 @@ require('lazy').setup({
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping

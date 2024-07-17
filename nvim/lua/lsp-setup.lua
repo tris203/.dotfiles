@@ -1,10 +1,9 @@
--- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
-  --
+
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
@@ -25,6 +24,9 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
   nmap('<leader>lf', vim.lsp.buf.format, '[L]SP [F]ormat')
+  nmap('<leader>lh', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+  end, 'Toggle inlay hints')
 
   -- See `:help K` for why this keymap
   -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -44,16 +46,31 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+require('which-key').add {
+  {
+    { '<leader>c', group = '[C]ode' },
+    { '<leader>o', group = '[O]bsidian', icon = { icon = '󰇈', color = 'purple' } },
+    { '<leader>cc', group = '[C]opilot [C]hat', icon = ';' },
+    { '<leader>d', group = '[D]ocument' },
+    { '<leader>r', group = '[R]ename' },
+    { '<leader>s', group = '[S]earch' },
+    { '<leader>w', group = '[W]orkspace' },
+    { '<leader>t', group = '[T]ests & Diagnostics' },
+    { '<leader>g', group = '[G]it Search' },
+    { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+  },
 }
+
+-- -- document existing key chains
+-- require('which-key').add {
+--   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+--   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+--   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+--   ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
+--   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+--   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+--   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+-- }
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
@@ -70,10 +87,54 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  html = {},
+  gopls = {
+    gopls = {
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralType = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+    },
+  },
   -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  rust_analyzer = {
+    ['rust-analyzer'] = {
+      diagnostics = true,
+    },
+  },
+  tsserver = {
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
+  },
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   nil_ls = {
     ['nil'] = {
@@ -85,6 +146,7 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      hint = { enable = true },
       diagnostics = {
         unusedLocalExclude = {
           '_*',
@@ -95,7 +157,7 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+-- require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -118,5 +180,31 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+require('roslyn').setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+require('rzls').setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  path = '/home/tris/code/razor/artifacts/bin/rzls/Release/net8.0/linux-x64/publish',
+}
+
+-- local pmlsp = vim.lsp.start_client {
+--   name = 'pm-lsp',
+--   cmd = { '/home/tris/code/pmlsp/apps/lsp/tmp/main' },
+--   on_attach = on_attach,
+--   root_dir = vim.loop.cwd()
+-- }
+--
+-- if pmlsp then
+--   vim.api.nvim_create_autocmd('FileType', {
+--     callback = function()
+--       vim.lsp.buf_attach_client(0, pmlsp)
+--     end,
+--   })
+-- end
 
 -- vim: ts=2 sts=2 sw=2 et

@@ -14,18 +14,20 @@ end
 return {
   'epwalsh/obsidian.nvim',
   cmd = { 'ObsidianOpen', 'ObsidianSearch', 'ObsidianQuickSwitch', 'ObsidianNew' },
-  version = '*', -- recommended, use latest release instead of latest commit
+  -- version = '*', -- recommended, use latest release instead of latest commit
   keys = {
-    { '<leader>of', '<cmd>ObsidianQuickSwitch<cr>' },
-    { '<leader>og', '<cmd>ObsidianSearch<cr>' },
+    { '<leader>of', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Obsidan Quick Switch' },
+    { '<leader>og', '<cmd>ObsidianSearch<cr>',      desc = 'Obsidian Search' },
     {
       '<leader>on',
       function()
         local note_name = vim.fn.input 'Note name: '
         vim.cmd('ObsidianNew ' .. note_name)
       end,
+      desc = 'Obsidian New',
     },
-    { '<leader>oo', '<cmd>ObsidianOpen<cr>' },
+    { '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = 'Obsidian Open' },
+    { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = 'Obsidian Tags' },
   },
   ft = 'markdown',
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -48,21 +50,21 @@ return {
         path = getPath(),
       },
     },
-      note_id_func = function(title)
-        -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
-        -- In this case a note with the title 'My new note' will be given an ID that looks
-        -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
-        local suffix = ''
-        if title ~= nil then
-          -- If title is given, transform it into valid file name.
-          suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
-        else
-          -- If title is nil, just add 4 random uppercase letters to the suffix.
-          for _ = 1, 4 do
-            suffix = suffix .. string.char(math.random(65, 90))
-          end
+    note_id_func = function(title)
+      -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
+      -- In this case a note with the title 'My new note' will be given an ID that looks
+      -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
+      local suffix = ''
+      if title ~= nil then
+        -- If title is given, transform it into valid file name.
+        suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+      else
+        -- If title is nil, just add 4 random uppercase letters to the suffix.
+        for _ = 1, 4 do
+          suffix = suffix .. string.char(math.random(65, 90))
         end
-        return tostring(os.time()) .. '-' .. suffix
-      end,
+      end
+      return tostring(os.time()) .. '-' .. suffix
+    end,
   },
 }

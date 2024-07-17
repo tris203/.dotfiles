@@ -4,7 +4,7 @@ exclude_dirs="*node_modules*|*.git*|*crates*|*target*|*.next*|*dist*"
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$((echo "main" && find ~/code ~/.dotfiles /tmp/disnotes -mindepth 1 -maxdepth 1 -type d) | fzf --preview "tree -a {}  -C -I '$exclude_dirs' | head -200")
+    selected=$((echo "main" && find ~/code ~/.dotfiles -mindepth 1 -maxdepth 1 -type d) | fzf --preview "tree -a {}  -C -I '$exclude_dirs' | head -200")
 fi
 
 if [[ -z $selected ]]; then

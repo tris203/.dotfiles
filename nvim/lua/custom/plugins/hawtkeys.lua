@@ -3,6 +3,8 @@ return {
   dev = false,
   dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = { 'Hawtkeys', 'HawtkeysAll', 'HawtkeysDupes' },
+  --- @module "hawtkeys"
+  --- @type HawtKeyPartialConfig
   opts = {
     -- keyboardLayout = "colemak",
     customMaps = {
