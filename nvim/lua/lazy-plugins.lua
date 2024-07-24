@@ -120,7 +120,7 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    event = 'VeryLazy',
+    event = 'UIEnter',
     -- See `:help lualine.txt`
     config = function()
       require('lualine').setup {
@@ -232,7 +232,7 @@ require('lazy').setup({
         'matchparen',
         'netrwPlugin',
         'tarPlugin',
-        'tohtml',
+        -- 'tohtml',
         'tutor',
         'zipPlugin',
         'man',

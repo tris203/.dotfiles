@@ -10,6 +10,7 @@ return {
   {
     'theprimeagen/harpoon',
     branch = 'harpoon2',
+    event = 'VeryLazy',
     dev = false,
     config = function()
       harpoon = require 'harpoon'
@@ -24,6 +25,7 @@ return {
       {
         '<leader>a',
         function()
+      harpoon = require 'harpoon'
           harpoon:list():add()
         end,
         desc = 'Add to Harpoon List',

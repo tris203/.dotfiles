@@ -1,3 +1,6 @@
+vim.keymap.set('n', "<m-,>", "<C-w>5<")
+vim.keymap.set('n', "<m-.>", "<C-w>5>")
+
 return {
   'christoomey/vim-tmux-navigator',
   cmd = {

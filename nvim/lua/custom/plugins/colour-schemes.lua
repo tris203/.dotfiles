@@ -2,6 +2,7 @@ return {
   {
     'vague2k/huez.nvim',
     -- import = 'huez-manager.import',
+    priority = 1000,
     event = 'UIEnter',
     dependencies = {
       'nvim-telescope/telescope.nvim',
