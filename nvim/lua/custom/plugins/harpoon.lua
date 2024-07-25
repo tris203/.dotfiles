@@ -38,7 +38,7 @@ return {
         desc = 'Toggle Harpoon List',
       },
       {
-        '<m-h>',
+        '<c-h>',
         function()
           local prev_buf = checkifDefaultBuffer()
           harpoon:list():select(1)
@@ -49,7 +49,7 @@ return {
         desc = 'Select Harpoon List 1',
       },
       {
-        '<m-j>',
+        '<c-j>',
         function()
           local prev_buf = checkifDefaultBuffer()
           harpoon:list():select(2)
@@ -60,7 +60,7 @@ return {
         desc = 'Select Harpoon List 2',
       },
       {
-        '<m-k>',
+        '<c-k>',
         function()
           local prev_buf = checkifDefaultBuffer()
           harpoon:list():select(3)
@@ -71,7 +71,7 @@ return {
         desc = 'Select Harpoon List 3',
       },
       {
-        '<m-l>',
+        '<c-l>',
         function()
           local prev_buf = checkifDefaultBuffer()
           harpoon:list():select(4)

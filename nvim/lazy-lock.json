@@ -60,6 +60,7 @@
   "obsidian.nvim": { "branch": "main", "commit": "ee298fd2136612a4ca6a745a4aec3f49ce6f94b0" },
   "oil.nvim": { "branch": "master", "commit": "9e5eb2fcd1dfee2ff30c89273ffff179e42034b9" },
   "one-small-step-for-vimkind": { "branch": "main", "commit": "730189c92c6fd80eb92bb6c1886392a142dba273" },
+  "other.nvim": { "branch": "main", "commit": "63f587dde62149bd2ed3e31edceb49d5c4097a26" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "refactoring.nvim": { "branch": "master", "commit": "8ef9cfb8199bed4be4d609cc4b5dbfb5416b3ca6" },
   "resession.nvim": { "branch": "master", "commit": "e087ebeef81df25a12fcc4ec067ca73e2bb54c4a" },

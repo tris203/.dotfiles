@@ -1,6 +1,6 @@
-vim.keymap.set('n', "<m-,>", "<C-w>5<")
-vim.keymap.set('n', "<m-.>", "<C-w>5>")
-
+-- vim.keymap.set('n', "<m-,>", "<C-w>5<")tmux
+-- vim.keymap.set('n', "<m-.>", "<C-w>5>")
+--
 return {
   'christoomey/vim-tmux-navigator',
   cmd = {
@@ -11,10 +11,12 @@ return {
     'TmuxNavigatePrevious',
   },
   keys = {
-    { '<c-h>',  '<cmd><C-U>TmuxNavigateLeft<cr>' },
-    { '<C-j>',  '<cmd><C-U>TmuxNavigateDown<cr>' },
-    { '<C-k>',  '<cmd><C-U>TmuxNavigateUp<cr>' },
-    { '<C-l>',  '<cmd><C-U>TmuxNavigateRight<cr>' },
-    { '<C-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+    { '<m-h>',  '<cmd>TmuxNavigateLeft<cr>' },
+    { '<m-j>',  '<cmd>TmuxNavigateDown<cr>' },
+    { '<m-k>',  '<cmd>TmuxNavigateUp<cr>' },
+    { '<m-l>',  '<cmd>TmuxNavigateRight<cr>' },
+    { '<m-\\>', '<cmd>TmuxNavigatePrevious<cr>' },
+    { '<m-,>',  '<C-w>5<' },
+    { '<m-.>',  '<C-w>5>' },
   },
 }
