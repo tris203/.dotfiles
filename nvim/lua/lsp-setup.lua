@@ -189,8 +189,10 @@ mason_lspconfig.setup_handlers {
 }
 
 require('roslyn').setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+  config = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
 }
 
 require('rzls').setup {

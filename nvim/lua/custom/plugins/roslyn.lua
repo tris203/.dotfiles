@@ -1,6 +1,7 @@
 return {
   -- enabled = false,
-'jmederosalvarado/roslyn.nvim',
-  event="VeryLazy",
+  -- 'jmederosalvarado/roslyn.nvim',
+  'seblj/roslyn.nvim',
+  event = 'VeryLazy',
   -- config = true,
 }
