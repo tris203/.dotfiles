@@ -164,12 +164,12 @@ require('lazy').setup({
   },
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
-  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {} },
+  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {}, dev = true},
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
     event = 'VeryLazy',
-    branch = '0.1.x',
+    -- branch = '0.1.x',
     config = function()
       require 'telescope-setup'
     end,
