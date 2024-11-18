@@ -7,12 +7,13 @@
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   -- Git related plugins
-  { 'tpope/vim-fugitive',     cmd = { 'Git' },    keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
-  { 'tpope/vim-rhubarb',      cmd = { 'Gbrowse' } },
+  { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
+  { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
+  { 'tpope/vim-unimpaired', event = 'VeryLazy' },
   { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {} },
 
   -- Detect tabstop and shiftwidth automatically
-  { 'tpope/vim-sleuth',       event = 'VeryLazy' },
+  { 'tpope/vim-sleuth', event = 'VeryLazy' },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -30,7 +31,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      -- { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       -- 'folke/neodev.nvim',
@@ -72,7 +73,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',                      event = 'VeryLazy', opts = {} },
+  { 'folke/which-key.nvim', event = 'VeryLazy', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -164,7 +165,7 @@ require('lazy').setup({
   },
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
-  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {}, dev = true},
+  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {} },
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',

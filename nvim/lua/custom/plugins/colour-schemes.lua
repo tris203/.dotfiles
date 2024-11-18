@@ -1,32 +1,32 @@
 return {
-  {
-    'vague2k/huez.nvim',
-    -- import = 'huez-manager.import',
-    priority = 1000,
-    event = 'UIEnter',
-    dependencies = {
-      'nvim-telescope/telescope.nvim',
-    },
-    -- event = 'UIEnter',
-    -- config = function()
-    --   local scheme = require('huez.api').colorscheme.get()
-    --   -- local scheme = 'tokyonight'
-    --   vim.cmd('colorscheme ' .. scheme)
-    -- end,
-    opts = {},
-    keys = {
-      {
-        '<leader>hh',
-        '<cmd>Huez<CR>',
-        desc = 'Change colorscheme',
-      },
-      {
-        '<leader>hl',
-        '<cmd>HuezLive<CR>',
-        desc = 'View Registry',
-      },
-    },
-  },
+  -- {
+  --   'vague2k/huez.nvim',
+  --   -- import = 'huez-manager.import',
+  --   priority = 1000,
+  --   event = 'UIEnter',
+  --   dependencies = {
+  --     'nvim-telescope/telescope.nvim',
+  --   },
+  --   -- event = 'UIEnter',
+  --   -- config = function()
+  --   --   local scheme = require('huez.api').colorscheme.get()
+  --   --   -- local scheme = 'tokyonight'
+  --   --   vim.cmd('colorscheme ' .. scheme)
+  --   -- end,
+  --   opts = {},
+  --   keys = {
+  --     {
+  --       '<leader>hh',
+  --       '<cmd>Huez<CR>',
+  --       desc = 'Change colorscheme',
+  --     },
+  --     {
+  --       '<leader>hl',
+  --       '<cmd>HuezLive<CR>',
+  --       desc = 'View Registry',
+  --     },
+  --   },
+  -- },
   {
     'folke/tokyonight.nvim',
     priority = 1000,
@@ -48,7 +48,7 @@ return {
           floats = 'transparent',
         },
       }
-      -- vim.cmd 'colorscheme tokyonight'
+      vim.cmd 'colorscheme tokyonight'
     end,
   },
   {

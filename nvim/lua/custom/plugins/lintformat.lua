@@ -52,6 +52,16 @@ return {
         html = { 'prettierd' },
         markdown = { 'markdownlint', 'prettierd' },
       },
+      default_format_opts = {
+        lsp_format = 'fallback',
+      },
+      formatters = {
+        uncrustify = {
+          env = {
+            UNCRUSTIFY_CONFIG = vim.fn.getcwd() .. '/src/uncrustify.cfg',
+          },
+        },
+      },
     },
     keys = {
       {

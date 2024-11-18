@@ -66,6 +66,13 @@ require 'options'
 
 -- [[ Basic Keymaps ]]
 require 'keymaps'
+_G.dd = function(...)
+  Snacks.debug.inspect(...)
+end
+_G.bt = function()
+  Snacks.debug.backtrace()
+end
+-- vim.print = _G.dd
 
 -- [[ Configure Telescope ]]
 -- (fuzzy finder)

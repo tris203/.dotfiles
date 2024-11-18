@@ -74,7 +74,13 @@ require('which-key').add {
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
-require('mason').setup()
+require('mason').setup {
+  registries = {
+    'github:mason-org/mason-registry',
+    -- 'github:syndim/mason-registry',
+    'github:crashdummyy/mason-registry',
+  },
+}
 require('mason-lspconfig').setup()
 
 -- Enable the following language servers
@@ -106,38 +112,38 @@ local servers = {
   --   ['rust-analyzer'] = {
   --   },
   -- },
-  vtsls = {
-      typescript = {
-        suggest = { completeFunctionCalls = true },
-        inlayHints = {
-          parameterNames = { enabled = 'all' },
-          parameterTypes = { enabled = true },
-          variableTypes = { enabled = true },
-          propertyDeclarationTypes = { enabled = true },
-          functionLikeReturnTypes = { enabled = true },
-          enumMemberValues = { enabled = true },
-        },
-      },
-      javascript = {
-        suggest = { completeFunctionCalls = true },
-        inlayHints = {
-          parameterNames = { enabled = 'all' },
-          parameterTypes = { enabled = true },
-          variableTypes = { enabled = true },
-          propertyDeclarationTypes = { enabled = true },
-          functionLikeReturnTypes = { enabled = true },
-          enumMemberValues = { enabled = true },
-        },
-      },
-      vtsls = {
-        experimental = {
-          maxInlayHintLength = 30,
-          completion = {
-            enableServerSideFuzzyMatch = true,
-          },
-        },
-      },
-  },
+  -- vtsls = {
+  --   typescript = {
+  --     suggest = { completeFunctionCalls = true },
+  --     inlayHints = {
+  --       parameterNames = { enabled = 'all' },
+  --       parameterTypes = { enabled = true },
+  --       variableTypes = { enabled = true },
+  --       propertyDeclarationTypes = { enabled = true },
+  --       functionLikeReturnTypes = { enabled = true },
+  --       enumMemberValues = { enabled = true },
+  --     },
+  --   },
+  --   javascript = {
+  --     suggest = { completeFunctionCalls = true },
+  --     inlayHints = {
+  --       parameterNames = { enabled = 'all' },
+  --       parameterTypes = { enabled = true },
+  --       variableTypes = { enabled = true },
+  --       propertyDeclarationTypes = { enabled = true },
+  --       functionLikeReturnTypes = { enabled = true },
+  --       enumMemberValues = { enabled = true },
+  --     },
+  --   },
+  --   vtsls = {
+  --     experimental = {
+  --       maxInlayHintLength = 30,
+  --       completion = {
+  --         enableServerSideFuzzyMatch = true,
+  --       },
+  --     },
+  --   },
+  -- },
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   nil_ls = {
     ['nil'] = {
@@ -164,6 +170,22 @@ local servers = {
       },
     },
   },
+  -- denols = {
+  --   settings = {
+  --     deno = {
+  --       enable = true,
+  --       lint = true,
+  --       unstable = true,
+  --       suggest = {
+  --         imports = {
+  --           hosts = {
+  --             ['https://deno.land'] = true,
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
 }
 
 -- Setup neovim lua configuration
@@ -171,7 +193,7 @@ local servers = {
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
@@ -182,6 +204,16 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
+    -- if server_name == 'templ' then
+    --   require('lspconfig')[server_name].setup {
+    --     capabilities = capabilities,
+    --     cmd = { '/home/tris/code/templ/dist/templ_linux_amd64_v1/templ', 'lsp', '-http=localhost:7474', '-log=/home/tris/templ.log' },
+    --     on_attach = require 'lspattach',
+    --     settings = servers[server_name],
+    --     filetypes = { 'templ', 'go' },
+    --   }
+    --   return
+    -- end
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = require 'lspattach',
@@ -192,16 +224,31 @@ mason_lspconfig.setup_handlers {
 }
 
 require('roslyn').setup {
+  args = {
+    '--logLevel=Information',
+    '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
+    '--razorSourceGenerator='
+      .. vim.fs.joinpath(vim.fn.stdpath 'data' --[[@as string]], 'mason', 'packages', 'roslyn', 'libexec', 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
+    '--razorDesignTimePath=' .. vim.fs.joinpath(
+      vim.fn.stdpath 'data' --[[@as string]],
+      'mason',
+      'packages',
+      'rzls',
+      'libexec',
+      'Targets',
+      'Microsoft.NET.Sdk.Razor.DesignTime.targets'
+    ),
+  },
   config = {
     on_attach = require 'lspattach',
     capabilities = capabilities,
+    handlers = require 'rzls.roslyn_handlers',
   },
 }
 
 require('rzls').setup {
   on_attach = require 'lspattach',
   capabilities = capabilities,
-  path = '/home/tris/code/razor/artifacts/bin/rzls/Release/net8.0/linux-x64/publish',
 }
 
 -- local pmlsp = vim.lsp.start_client {

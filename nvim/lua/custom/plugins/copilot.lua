@@ -15,8 +15,9 @@ return {
     },
   },
   {
-    'zbirenbaum/copilot-cmp',
-    -- dev = true,
+    -- 'zbirenbaum/copilot-cmp',
+    'tris203/copilot-cmp',
+    branch = 'getcompletions',
     event = 'VeryLazy',
     opts = {},
   },
@@ -45,7 +46,7 @@ return {
     },
     dependencies = {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
-      { 'nvim-lua/plenary.nvim' },  -- for curl, log wrapper
+      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
     },
     opts = {
       -- debug = true, -- Enable debugging
@@ -55,16 +56,23 @@ return {
       },
     },
     keys = {
-      { '<leader>cc',  '<cmd>CopilotChatToggle<cr>',       desc = 'Toggle Chat' },
-      { '<leader>cce', '<cmd>CopilotChatExplain<cr>',      desc = 'Explain' },
-      { '<leader>ccr', '<cmd>CopilotChatReview<cr>',       desc = 'Review' },
-      { '<leader>ccf', '<cmd>CopilotChatFix<cr>',          desc = 'Fix' },
-      { '<leader>cco', '<cmd>CopilotChatOptimize<cr>',     desc = 'Optimize' },
-      { '<leader>ccd', '<cmd>CopilotChatDocs<cr>',         desc = 'Document' },
-      { '<leader>cct', '<cmd>CopilotChatTests<cr>',        desc = 'Test' },
+      { '<leader>cc', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Chat' },
+      { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'Explain' },
+      { '<leader>ccr', '<cmd>CopilotChatReview<cr>', desc = 'Review' },
+      { '<leader>ccf', '<cmd>CopilotChatFix<cr>', desc = 'Fix' },
+      { '<leader>cco', '<cmd>CopilotChatOptimize<cr>', desc = 'Optimize' },
+      { '<leader>ccd', '<cmd>CopilotChatDocs<cr>', desc = 'Document' },
+      { '<leader>cct', '<cmd>CopilotChatTests<cr>', desc = 'Test' },
       { '<leader>ccs', '<cmd>CopilotChatCommitStaged<cr>', desc = 'Write Commit' },
     },
 
     -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    'supermaven-inc/supermaven-nvim',
+    event = 'VeryLazy',
+    opts = {
+      disable_inline_completion = true,
+    },
   },
 }

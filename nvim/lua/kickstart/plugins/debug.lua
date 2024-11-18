@@ -104,7 +104,7 @@ return {
   },
   {
     'nvim-neotest/neotest',
-    event = 'VeryLazy',
+    event = 'BufRead',
     dependencies = {
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
@@ -149,9 +149,19 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {},
+    opts = {
+      modes = {
+        diagnostics = {
+          filter = function(items)
+            return vim.tbl_filter(function(item)
+              return not string.match(item.basename, [[%__virtual.cs$]])
+            end, items)
+          end,
+        },
+      },
+    },
     keys = {
-      { '<leader>tt', '<cmd>Trouble diagnostics toggle<cr>', desc = "Toggle Diagnostics" },
+      { '<leader>tt', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Toggle Diagnostics' },
     },
   },
 }

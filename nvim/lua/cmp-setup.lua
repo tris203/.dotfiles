@@ -17,6 +17,7 @@ local custom_names = {
   nerdfont = 'NF Icon',
   emoji = 'Emoji',
   buffer = 'Buffer',
+  supermaven = 'SuperMaven',
   ['vim-dadbod-completion'] = 'DB',
 }
 
@@ -27,32 +28,10 @@ local custom_icons = {
   Emoji = '',
   Buffer = '󰧮',
   DB = '',
+  SuperMaven = '',
 }
 
 cmp.setup {
-  ---@diagnostic disable-next-line: missing-fields
-  formatting = {
-    format = lspkind.cmp_format {
-      mode = 'symbol_text',
-      maxwidth = 50,
-      symbol_map = custom_icons,
-      -- can also be a function to dynamically calculate max width such as
-      -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-      ellipsis_char = '...',
-      show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-
-      -- The function below will be called before any actual modifications from lspkind
-      -- so that you can provide more controls on popup customization.
-      -- (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      before = function(entry, vim_item)
-        if custom_names[entry.source.name] then
-          vim_item.kind = custom_names[entry.source.name]
-        end
-
-        return vim_item
-      end,
-    },
-  },
   view = {
     entries = { name = 'custom', selection_order = 'near_cursor' },
   },
@@ -159,14 +138,47 @@ cmp.setup {
   --   },
   sources = {
     { name = 'copilot' },
+    { name = 'supermaven' },
     { name = 'nvim_lsp' },
-    { name = 'path',                  max_item_count = 5 },
+    { name = 'path', max_item_count = 5 },
     { name = 'luasnip' },
-    { name = 'buffer',                max_item_count = 5 },
-    { name = 'emoji',                 max_item_count = 10 },
-    { name = 'cmp_yanky',             max_item_count = 10 },
-    { name = 'nerdfont',              max_item_count = 10 },
+    { name = 'buffer', max_item_count = 5 },
+    { name = 'emoji', max_item_count = 10 },
+    { name = 'cmp_yanky', max_item_count = 10 },
+    { name = 'nerdfont', max_item_count = 10 },
     { name = 'vim-dadbod-completion', keyword_length = 2 },
+  },
+  ---@diagnostic disable-next-line: missing-fields
+  formatting = {
+    format = function(entry, item)
+      local color_item = require('nvim-highlight-colors').format(entry, { kind = item.kind })
+      item = require('lspkind').cmp_format {
+        -- any lspkind format settings here
+        mode = 'symbol_text',
+        maxwidth = 50,
+        symbol_map = custom_icons,
+        -- can also be a function to dynamically calculate max width such as
+        -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+        ellipsis_char = '...',
+        show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+        -- The function below will be called before any actual modifications from lspkind
+        -- so that you can provide more controls on popup customization.
+        -- (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+        before = function(oentry, vim_item)
+          if custom_names[oentry.source.name] then
+            vim_item.kind = custom_names[oentry.source.name]
+          end
+
+          return vim_item
+        end,
+      }(entry, item)
+      if color_item.abbr_hl_group then
+        item.kind_hl_group = color_item.abbr_hl_group
+        item.kind = color_item.abbr
+      end
+      return item
+    end,
   },
 }
 
