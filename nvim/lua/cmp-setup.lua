@@ -18,6 +18,7 @@ local custom_names = {
   emoji = 'Emoji',
   buffer = 'Buffer',
   supermaven = 'SuperMaven',
+  git = 'Git',
   ['vim-dadbod-completion'] = 'DB',
 }
 
@@ -29,6 +30,7 @@ local custom_icons = {
   Buffer = '󰧮',
   DB = '',
   SuperMaven = '',
+  Git = '󰊤',
 }
 
 cmp.setup {
@@ -140,13 +142,14 @@ cmp.setup {
     { name = 'copilot' },
     { name = 'supermaven' },
     { name = 'nvim_lsp' },
-    { name = 'path', max_item_count = 5 },
     { name = 'luasnip' },
     { name = 'buffer', max_item_count = 5 },
-    { name = 'emoji', max_item_count = 10 },
-    { name = 'cmp_yanky', max_item_count = 10 },
-    { name = 'nerdfont', max_item_count = 10 },
     { name = 'vim-dadbod-completion', keyword_length = 2 },
+    { name = 'cmp_yanky', max_item_count = 10 },
+    { name = 'path', max_item_count = 5 },
+    { name = 'git' },
+    { name = 'emoji', max_item_count = 10 },
+    { name = 'nerdfont', max_item_count = 10 },
   },
   ---@diagnostic disable-next-line: missing-fields
   formatting = {

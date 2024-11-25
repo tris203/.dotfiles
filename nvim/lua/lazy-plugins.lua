@@ -10,7 +10,9 @@ require('lazy').setup({
   { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
   { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
   { 'tpope/vim-unimpaired', event = 'VeryLazy' },
-  { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {} },
+  { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {
+    move_cursor = 'sticky',
+  } },
 
   -- Detect tabstop and shiftwidth automatically
   { 'tpope/vim-sleuth', event = 'VeryLazy' },
@@ -69,6 +71,7 @@ require('lazy').setup({
       'chrisgrieser/cmp-nerdfont',
       'chrisgrieser/cmp_yanky',
       'onsails/lspkind.nvim',
+      { 'petertriho/cmp-git', opts = {} },
     },
   },
 

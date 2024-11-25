@@ -1,7 +1,15 @@
-return {
-  {
-    event = "VeryLazy",
-    'tris203/rzls.nvim',
-    dev = true,
-  },
-}
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+--
+-- return {
+--   {
+--     event = 'VeryLazy',
+--     'tris203/rzls.nvim',
+--     dev = true,
+--     opts = {
+--       on_attach = require 'lspattach',
+--       capabilities = capabilities,
+--     },
+--   },
+-- }
+return {}
