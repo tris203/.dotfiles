@@ -12,6 +12,7 @@ return {
       -- highlightColor = { link = 'Function' },
       -- hints = { Zero = {  prio = 0 } },
       -- hints = { Zero = { text = 'â', prio = 10 } },
+      disabled_fts = { 'netrw' },
     },
     -- config = function()
     --   require('precognition').setup()
@@ -28,13 +29,13 @@ return {
   },
   {
     'm4xshen/hardtime.nvim',
-    dev = true,
     enabled = false,
     opts = {
-      callback = function(config, text)
-        vim.print(vim.inspect(config))
-        vim.print(text)
-      end,
+      -- callback = function(text)
+      --   -- vim.print(vim.inspect(config))
+      --   -- vim.print(text)
+      --   require('precognition').peek()
+      -- end,
     },
   },
 }

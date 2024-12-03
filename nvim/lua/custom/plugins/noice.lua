@@ -4,11 +4,40 @@ return -- lazy.nvim
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
-    opts = {
-      notifier = {
-        enabled = true,
-        margin = { top = 1, right = 3 },
-        padding = true,
+    opts = function()
+ -- Toggle the profiler
+      Snacks.toggle.profiler():map("<leader>pp")
+      -- Toggle the profiler highlights
+      Snacks.toggle.profiler_highlights():map("<leader>ph")
+      return {
+        notifier = {
+          enabled = true,
+          margin = { top = 1, right = 3 },
+          padding = true,
+        },
+      }
+    end,
+    keys = {
+      {
+        '<leader>.',
+        function()
+          Snacks.scratch()
+        end,
+        desc = 'Toggle Scratch Buffer',
+      },
+      {
+        '<leader>S',
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = 'Select Scratch Buffer',
+      },
+      {
+        '<leader>ps',
+        function()
+          Snacks.profiler.scratch()
+        end,
+        desc = 'Profiler Scratch Bufer',
       },
     },
   },
@@ -16,6 +45,7 @@ return -- lazy.nvim
     'folke/noice.nvim',
     priority = 1000,
     lazy = false,
+    -- enabled = false,
     ---@module "noice"
     ---@type NoiceConfig
     opts = {

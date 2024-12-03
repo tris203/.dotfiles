@@ -4,7 +4,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',       -- Required for v0.4.0+
     'nvim-tree/nvim-web-devicons', -- If you want devicons
-    'stevearc/resession.nvim',     -- Optional, for persistent history
+    -- 'stevearc/resession.nvim',     -- Optional, for persistent history
   },
   config = function()
     local is_picking_focus = require('cokeline.mappings').is_picking_focus
@@ -69,6 +69,11 @@ return {
           end,
           fg = function(buffer)
             return (buffer.diagnostics.errors > 0 and lspError) or (buffer.diagnostics.warnings > 0 and lspWarn) or nil
+          end,
+          on_click = function(_, _, _, _, buffer)
+            -- TODO: write a function that if the buffer isnt in the same tab then switch to that tab
+            -- also look into bufferpick as this doesnt trigger the click
+            buffer:focus()
           end,
         },
         {

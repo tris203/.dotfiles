@@ -1,4 +1,4 @@
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -43,6 +43,12 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  if client:supports_method 'textDocument/foldingRange' then
+    vim.o.foldmethod = 'expr'
+    vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    -- vim.o.foldexpr = 'vim.lsp.foldexpr()'
+  end
 end
 
 return on_attach

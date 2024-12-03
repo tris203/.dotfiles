@@ -39,6 +39,9 @@ return {
           colors.fg_gutter = '#b2b8cf'
         end,
         on_highlights = function(hl, colors)
+          hl.Folded = {
+            link = 'Normal',
+          }
           hl.LspInlayHint = {
             link = 'Comment',
           }
@@ -54,7 +57,7 @@ return {
   {
     'rose-pine/neovim',
     name = 'rose-pine',
-    event = 'UIEnter',
+    event = 'VeryLazy',
     opts = {
       disable_background = true,
       disable_float_background = true,
@@ -63,7 +66,7 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    event = 'UIEnter',
+    event = 'VeryLazy',
     opts = {
       transparent_background = true,
     },
@@ -71,7 +74,7 @@ return {
   {
     'scottmckendry/cyberdream.nvim',
     name = 'cyberdream',
-    event = 'UIEnter',
+    event = 'VeryLazy',
     opts = {
       transparent = true,
       italic_comments = true,
@@ -82,7 +85,7 @@ return {
   },
   {
     'rebelot/kanagawa.nvim',
-    event = 'UIEnter',
+    event = 'VeryLazy',
     config = function()
       require('kanagawa').setup {
         transparent = true,

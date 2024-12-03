@@ -1,7 +1,5 @@
-local capabilities = require('lspcapabilities')
 return {
   {
-    -- enabled = false,
     -- 'jmederosalvarado/roslyn.nvim',
     'seblj/roslyn.nvim',
     event = 'VeryLazy',
@@ -11,7 +9,7 @@ return {
         dev = true,
         opts = {
           on_attach = require 'lspattach',
-          capabilities = capabilities,
+          capabilities = require('lspcapabilities')
         },
       },
     },
@@ -34,7 +32,7 @@ return {
         },
         config = {
           on_attach = require 'lspattach',
-          capabilities = capabilities,
+          capabilities = require('lspcapabilities'),
           handlers = require 'rzls.roslyn_handlers',
           settings = {
             ['csharp|inlay_hints'] = {

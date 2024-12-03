@@ -16,6 +16,18 @@ vim.o.mouse = 'a'
 --  See `:help 'clipboard'`
 -- vim.o.clipboard = 'unnamedplus'
 
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- vim.o.foldtext =
+--     [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
+
+vim.opt.foldtext = require('foldtext')
+vim.o.foldnestmax = 3
+vim.o.foldminlines = 1
+vim.o.foldmethod = 'expr'
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldenable = true
+
 -- Enable break indent
 vim.o.breakindent = true
 
