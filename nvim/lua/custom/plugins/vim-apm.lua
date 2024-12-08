@@ -1,4 +1,5 @@
 return {
+  {
   'ThePrimeagen/vim-apm',
   enabled = false,
   event = 'VeryLazy',
@@ -7,4 +8,9 @@ return {
     vimapm:setup {}
     vimapm:toggle_monitor()
   end,
+  },
+  {
+  'ThePrimeagen/vim-be-good',
+    cmd = 'VimBeGood',
+  }
 }

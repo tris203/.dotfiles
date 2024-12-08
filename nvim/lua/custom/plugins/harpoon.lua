@@ -25,13 +25,13 @@ return {
       {
         '<leader>a',
         function()
-      harpoon = require 'harpoon'
+          harpoon = require 'harpoon'
           harpoon:list():add()
         end,
         desc = 'Add to Harpoon List',
       },
       {
-        '<c-m-h>',
+        '<leader>h',
         function()
           harpoon.ui:toggle_quick_menu(harpoon:list())
         end,
@@ -75,6 +75,17 @@ return {
         function()
           local prev_buf = checkifDefaultBuffer()
           harpoon:list():select(4)
+          if prev_buf then
+            vim.api.nvim_buf_delete(prev_buf, {})
+          end
+        end,
+        desc = 'Select Harpoon List 4',
+      },
+      {
+        '<c-;>',
+        function()
+          local prev_buf = checkifDefaultBuffer()
+          harpoon:list():select(5)
           if prev_buf then
             vim.api.nvim_buf_delete(prev_buf, {})
           end

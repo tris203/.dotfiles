@@ -1,9 +1,13 @@
 return {
   {
     'chrisgrieser/nvim-various-textobjs',
-    event = 'BufRead',
+    event = 'VeryLazy',
     ---@module "various-textobjs"
-    ---@type config
-    opts = { useDefaultKeymaps = true },
+    ---@type VariousTextobjs.Config
+    opts = {
+      keymaps = {
+        useDefaults = true,
+      },
+    },
   },
 }

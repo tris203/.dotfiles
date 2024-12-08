@@ -39,11 +39,11 @@ require('lazy').setup({
       -- 'folke/neodev.nvim',
     },
   },
-
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
+    enabled = false,
     config = function()
       require 'cmp-setup'
     end,
@@ -93,10 +93,10 @@ require('lazy').setup({
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-        vim.keymap.set('n', '<leader>gb', gs.toggle_current_line_blame, { buffer = bufnr, desc = 'Toggle git blame' })
-        vim.keymap.set('n', '<leader>gB', function()
-          gs.blame_line { full = false }
-        end, { buffer = bufnr, desc = 'Git Blame Line' })
+        -- vim.keymap.set('n', '<leader>gb', gs.toggle_current_line_blame, { buffer = bufnr, desc = 'Toggle git blame' })
+        -- vim.keymap.set('n', '<leader>gB', function()
+        --   gs.blame_line { full = false }
+        -- end, { buffer = bufnr, desc = 'Git Blame Line' })
 
         -- don't override the built-in and fugitive keymaps
         vim.keymap.set({ 'n', 'v' }, ']c', function()
@@ -130,7 +130,7 @@ require('lazy').setup({
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'palenight',
+          -- theme = 'palenight',
           component_separators = '|',
           section_separators = '',
         },
@@ -182,6 +182,7 @@ require('lazy').setup({
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
       -- requirements installed.
+      'nvim-telescope/telescope-symbols.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         -- NOTE: If you are having trouble with this installation,

@@ -20,7 +20,8 @@ vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- vim.o.foldtext =
 --     [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
 
-vim.opt.foldtext = require('foldtext')
+vim.opt.foldtext = require 'foldtext'
+vim.o.fillchars = 'fold: '
 vim.o.foldnestmax = 3
 vim.o.foldminlines = 1
 vim.o.foldmethod = 'expr'

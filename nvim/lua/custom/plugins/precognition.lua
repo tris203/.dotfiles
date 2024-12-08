@@ -8,7 +8,7 @@ return {
     --- @type Precognition.PartialConfig
     opts = {
       startVisible = false,
-      debounceMs = 400,
+      debounceMs = 0.8 * 1000,
       -- highlightColor = { link = 'Function' },
       -- hints = { Zero = {  prio = 0 } },
       -- hints = { Zero = { text = 'â', prio = 10 } },
@@ -31,10 +31,31 @@ return {
     'm4xshen/hardtime.nvim',
     enabled = false,
     opts = {
+      disable_mouse = false,
+      hints = {
+        ['[dcyvV][ia][%(%)]'] = {
+          message = function(keys)
+            return 'Use ' .. keys:sub(1, 2) .. 'b instead of ' .. keys
+          end,
+          length = 3,
+        },
+        ['[dcyvV][ia][%{%}]'] = {
+          message = function(keys)
+            return 'Use ' .. keys:sub(1, 2) .. 'B instead of ' .. keys
+          end,
+          length = 3,
+        },
+      },
+      disabled_keys = {
+        ['<Up>'] = {},
+        ['<Down>'] = {},
+        ['<Left>'] = {},
+        ['<Right>'] = {},
+      },
       -- callback = function(text)
       --   -- vim.print(vim.inspect(config))
       --   -- vim.print(text)
-      --   require('precognition').peek()
+      --   -- require('precognition').peek()
       -- end,
     },
   },

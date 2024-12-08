@@ -30,15 +30,14 @@ return {
   {
     'folke/tokyonight.nvim',
     priority = 1000,
-    event = 'UIEnter',
     config = function()
       require('tokyonight').setup {
         transparent = true,
-        on_colors = function(colors)
-          ---@diagnostic disable-next-line: inject-field
-          colors.fg_gutter = '#b2b8cf'
-        end,
-        on_highlights = function(hl, colors)
+        -- on_colors = function(colors)
+        --   ---@diagnostic disable-next-line: inject-field
+        --   -- colors.fg_gutter = '#b2b8cf'
+        -- end,
+        on_highlights = function(hl, _colors)
           hl.Folded = {
             link = 'Normal',
           }
@@ -91,8 +90,8 @@ return {
         transparent = true,
         dimInactive = true,
 
-        overrides = function(colors)
-          local theme = colors.theme
+        overrides = function(_colors)
+          -- local _theme = colors.theme
           return {
             NormalFloat = { bg = 'none' },
             FloatBorder = { bg = 'none' },
@@ -101,5 +100,13 @@ return {
         end,
       }
     end,
+  },
+  {
+    'darkvoid-theme/darkvoid.nvim',
+    event = 'UIEnter',
+    opts = {
+      transparent = true,
+      glow = true,
+    },
   },
 }

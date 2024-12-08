@@ -31,7 +31,16 @@ return {
     'gbprod/cutlass.nvim',
     event = 'UIEnter',
     opts = {
-      cut_key = 'm',
+      exclude = { 'ns', 'nS' },
     },
+    config = function(_, opts)
+      require('cutlass').setup(opts)
+
+      local keymap_opts = { noremap = true, silent = true }
+      local cut_key = "m"
+      vim.keymap.set('n', cut_key, 'd', keymap_opts)
+      vim.keymap.set('x', cut_key, 'd', keymap_opts)
+      vim.keymap.set('n', cut_key .. cut_key, 'dd', keymap_opts)
+    end,
   },
 }

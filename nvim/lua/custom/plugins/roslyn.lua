@@ -7,10 +7,12 @@ return {
       {
         'tris203/rzls.nvim',
         dev = true,
-        opts = {
-          on_attach = require 'lspattach',
-          capabilities = require('lspcapabilities')
-        },
+        config = function()
+          require('rzls').setup {
+            on_attach = require 'lspattach',
+            capabilities = require 'lspcapabilities',
+          }
+        end,
       },
     },
     config = function()
@@ -32,7 +34,7 @@ return {
         },
         config = {
           on_attach = require 'lspattach',
-          capabilities = require('lspcapabilities'),
+          capabilities = require 'lspcapabilities',
           handlers = require 'rzls.roslyn_handlers',
           settings = {
             ['csharp|inlay_hints'] = {

@@ -10,7 +10,7 @@ local function parse_line(linenr)
   end
 
   local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
-  if not ok then
+  if not ok or not parser then
     return nil
   end
 
@@ -40,7 +40,9 @@ local function parse_line(linenr)
           range = { line_pos, start_col },
         })
       end
-      line_pos = end_col
+      if end_col then
+        line_pos = end_col
+      end
 
       local text = line:sub(start_col + 1, end_col)
       table.insert(result, { text, { { '@' .. name, priority } }, range = { start_col, end_col } })
@@ -84,7 +86,7 @@ local function parse_line(linenr)
   return result
 end
 
-function HighlightedFoldtext()
+function _G.HighlightedFoldtext()
   local result = parse_line(vim.v.foldstart)
   if not result then
     return vim.fn.foldtext()
@@ -125,4 +127,4 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   callback = set_fold_hl,
 })
 
-return 'luaeval("HighlightedFoldtext")()'
+return 'luaeval("_G.HighlightedFoldtext")()'
