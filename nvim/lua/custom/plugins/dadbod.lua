@@ -1,17 +1,17 @@
 return {
   'kristijanhusak/vim-dadbod-ui',
-  dependencies = {
-    { 'tpope/vim-dadbod', lazy = true },
-    { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
-  },
   cmd = {
     'DBUI',
     'DBUIToggle',
     'DBUIAddConnection',
     'DBUIFindBuffer',
   },
+  dependencies = {
+    { 'tpope/vim-dadbod', lazy = true },
+    { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+  },
   keys = {
-    { '<leader>db', '<cmd>DBUIToggle<CR>', desc = "Open DBUI" },
+    { '<leader>db', '<cmd>DBUIToggle<CR>', desc = 'Open DBUI' },
   },
   init = function()
     -- Your DBUI configuration

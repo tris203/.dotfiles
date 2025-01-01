@@ -4,8 +4,15 @@ return -- lazy.nvim
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
+    ---@module 'snacks'
     ---@type snacks.Config
     opts = {
+      indent = {
+        enabled = true,
+        chunk = {
+          enabled = true,
+        },
+      },
       notifier = {
         enabled = true,
         margin = { top = 1, right = 3 },
@@ -13,11 +20,40 @@ return -- lazy.nvim
         timeout = 3000,
       },
       statuscolumn = { enabled = true },
+      -- scroll = { enabled = true },
+      zen = { enabled = true },
       styles = {
-        wo = { wrap = true },
+        -- wo = { wrap = true },
+        notification = {
+          wo = {
+            winblend = 0,
+            -- wrap = true,
+          },
+        },
       },
     },
     keys = {
+      {
+        '<leader>ps',
+        function()
+          Snacks.profiler.scratch()
+        end,
+        desc = 'Profiler Scratch Bufer',
+      },
+      {
+        '<leader>z',
+        function()
+          Snacks.zen()
+        end,
+        desc = 'Toggle Zen Mode',
+      },
+      {
+        '<leader>Z',
+        function()
+          Snacks.zen.zoom()
+        end,
+        desc = 'Toggle Zoom',
+      },
       {
         '<leader>.',
         function()
@@ -47,13 +83,6 @@ return -- lazy.nvim
         desc = 'Delete Buffer',
       },
       {
-        '<leader>cR',
-        function()
-          Snacks.rename.rename_file()
-        end,
-        desc = 'Rename File',
-      },
-      {
         '<leader>gB',
         function()
           Snacks.gitbrowse()
@@ -66,27 +95,6 @@ return -- lazy.nvim
           Snacks.git.blame_line()
         end,
         desc = 'Git Blame Line',
-      },
-      {
-        '<leader>gf',
-        function()
-          Snacks.lazygit.log_file()
-        end,
-        desc = 'Lazygit Current File History',
-      },
-      {
-        '<leader>gg',
-        function()
-          Snacks.lazygit()
-        end,
-        desc = 'Lazygit',
-      },
-      {
-        '<leader>gl',
-        function()
-          Snacks.lazygit.log()
-        end,
-        desc = 'Lazygit Log (cwd)',
       },
       {
         '<leader>un',
@@ -167,6 +175,11 @@ return -- lazy.nvim
           Snacks.toggle.treesitter():map '<leader>uT'
           -- Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map '<leader>ub'
           Snacks.toggle.inlay_hints():map '<leader>lh'
+          Snacks.toggle.indent():map '<leader>ug'
+          Snacks.toggle.dim():map '<leader>uD'
+
+          Snacks.toggle.profiler():map '<leader>pp'
+          Snacks.toggle.profiler_highlights():map '<leader>ph'
         end,
       })
     end,
@@ -196,6 +209,9 @@ return -- lazy.nvim
         hover = {
           -- enabled = false,
           silent = true,
+        },
+        signature = {
+          enabled = false,
         },
       },
       -- you can enable a preset for easier configuration

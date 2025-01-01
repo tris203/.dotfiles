@@ -1,0 +1,18 @@
+{
+  "desc": {
+    "body": [
+      "describe(\"${1:description}\", function()",
+      "${0}",
+      "end)"
+    ],
+    "prefix": "desc"
+  },
+  "it": {
+    "body": [
+      "it(\"${1:test description}\", function()",
+      "${0}",
+      "end)"
+    ],
+    "prefix": "it"
+  }
+}

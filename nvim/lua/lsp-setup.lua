@@ -71,7 +71,7 @@ mason_lspconfig.setup {
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
-      capabilities = require('lspcapabilities'),
+      capabilities = require 'lspcapabilities',
       on_attach = require 'lspattach',
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,

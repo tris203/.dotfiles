@@ -44,11 +44,11 @@ local on_attach = function(client, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
-  if client:supports_method 'textDocument/foldingRange' then
-    vim.o.foldmethod = 'expr'
-    vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
-    -- vim.o.foldexpr = 'vim.lsp.foldexpr()'
-  end
+  -- if client:supports_method 'textDocument/foldingRange' then
+  --   vim.o.foldmethod = 'expr'
+  --   vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+  --   -- vim.o.foldexpr = 'vim.lsp.foldexpr()'
+  -- end
 end
 
 return on_attach

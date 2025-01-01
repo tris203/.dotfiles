@@ -2,7 +2,7 @@ return {
   {
     -- 'jmederosalvarado/roslyn.nvim',
     'seblj/roslyn.nvim',
-    event = 'VeryLazy',
+    ft = { 'cs', 'razor' },
     dependencies = {
       {
         'tris203/rzls.nvim',
@@ -15,6 +15,14 @@ return {
         end,
       },
     },
+    init = function()
+      vim.filetype.add {
+        extension = {
+          razor = 'razor',
+          cshtml = 'razor',
+        },
+      }
+    end,
     config = function()
       require('roslyn').setup {
         args = {

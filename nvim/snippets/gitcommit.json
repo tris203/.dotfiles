@@ -1,0 +1,6 @@
+{
+  "coc": {
+    "body": "${1|fix,feat,build,chore,ci,docs,style,refactor,perf,test|}(${2:scope}):${3:title}",
+    "prefix": "coc"
+  }
+}

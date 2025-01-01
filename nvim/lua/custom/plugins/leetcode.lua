@@ -8,8 +8,7 @@ return {
     -- optional
 
     'nvim-treesitter/nvim-treesitter',
-    -- 'rcarriga/nvim-notify',
-    'nvim-tree/nvim-web-devicons',
+    'echasnovski/mini.icons',
   },
   opts = {
     plugins = {
@@ -17,7 +16,7 @@ return {
     },
     injector = {
       golang = {
-        before = 'package main'
+        before = 'package main',
       },
     },
   },

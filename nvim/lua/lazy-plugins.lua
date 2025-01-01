@@ -15,7 +15,7 @@ require('lazy').setup({
   } },
 
   -- Detect tabstop and shiftwidth automatically
-  { 'tpope/vim-sleuth', event = 'VeryLazy' },
+  { 'tpope/vim-sleuth', event = 'BufRead' },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -39,44 +39,12 @@ require('lazy').setup({
       -- 'folke/neodev.nvim',
     },
   },
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    enabled = false,
-    config = function()
-      require 'cmp-setup'
-    end,
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      {
-        'L3MON4D3/LuaSnip',
-        build = 'make install_jsregexp',
-        dependencies = {
-          {
-            'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-            end,
-          },
-        },
-      },
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-emoji',
-      'chrisgrieser/cmp-nerdfont',
-      'chrisgrieser/cmp_yanky',
-      'onsails/lspkind.nvim',
-      { 'petertriho/cmp-git', opts = {} },
-    },
-  },
-
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', event = 'VeryLazy', opts = {} },
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -157,15 +125,15 @@ require('lazy').setup({
     end,
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    event = 'VeryLazy',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
-  },
+  -- {
+  --   -- Add indentation guides even on blank lines
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   event = 'VeryLazy',
+  --   -- Enable `lukas-reineke/indent-blankline.nvim`
+  --   -- See `:help ibl`
+  --   main = 'ibl',
+  --   opts = {},
+  -- },
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
   { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {} },
@@ -237,7 +205,7 @@ require('lazy').setup({
         'matchparen',
         'netrwPlugin',
         'tarPlugin',
-        -- 'tohtml',
+        'tohtml',
         'tutor',
         'zipPlugin',
         'man',

@@ -15,14 +15,6 @@ return {
     },
   },
   {
-    -- 'zbirenbaum/copilot-cmp',
-    'tris203/copilot-cmp',
-    branch = 'getcompletions',
-    enabled = false,
-    event = 'VeryLazy',
-    opts = {},
-  },
-  {
     'CopilotC-Nvim/CopilotChat.nvim',
     build = 'make tiktoken',
     cmd = {
@@ -41,9 +33,7 @@ return {
       'CopilotChatOptimize',
       'CopilotChatDocs',
       'CopilotChatTests',
-      'CopilotChatFixDiagnostic',
       'CopilotChatCommit',
-      'CopilotChatCommitStaged',
     },
     dependencies = {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
@@ -52,7 +42,7 @@ return {
     ---@module 'CopilotChat'
     ---@type CopilotChat.config
     opts = {
-      model = 'claude-3.5-sonnet',
+      -- model = 'claude-3.5-sonnet',
       highlight_headers = false,
       separator = '---',
       error_header = '>[!ERROR] Error',
@@ -105,17 +95,9 @@ The result should be wrapped in a markdown block tagged with language `gitcommit
       { '<leader>cco', '<cmd>CopilotChatOptimize<cr>', desc = 'Optimize' },
       { '<leader>ccd', '<cmd>CopilotChatDocs<cr>', desc = 'Document' },
       { '<leader>cct', '<cmd>CopilotChatTests<cr>', desc = 'Test' },
-      { '<leader>ccs', '<cmd>CopilotChatCommitStaged<cr>', desc = 'Write Commit' },
+      { '<leader>ccs', '<cmd>CopilotChatCommit<cr>', desc = 'Write Commit' },
     },
 
     -- See Commands section for default commands if you want to lazy load on them
-  },
-  {
-    'supermaven-inc/supermaven-nvim',
-    event = 'VeryLazy',
-    -- enabled = false,
-    opts = {
-      disable_inline_completion = true,
-    },
   },
 }

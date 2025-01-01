@@ -1,7 +1,7 @@
 return {
   {
     'tris203/precognition.nvim',
-    event = 'VeryLazy',
+    lazy = true,
     dev = true,
     --  enabled = false,
     --- @module "precognition"
@@ -11,7 +11,17 @@ return {
       debounceMs = 0.8 * 1000,
       -- highlightColor = { link = 'Function' },
       -- hints = { Zero = {  prio = 0 } },
-      -- hints = { Zero = { text = 'â', prio = 10 } },
+      -- hints = {
+      --   w = { prio = 0 },
+      --   b = { prio = 0 },
+      --   W = { prio = 0 },
+      --   B = { prio = 0 },
+      --   e = { prio = 0 },
+      --   E = { prio = 0 },
+      --   Dollar = { prio = 0 },
+      --   Caret = { prio = 0 },
+      --   Zero = { prio = 0 },
+      -- },
       disabled_fts = { 'netrw' },
     },
     -- config = function()
@@ -29,7 +39,8 @@ return {
   },
   {
     'm4xshen/hardtime.nvim',
-    enabled = false,
+    event = 'VeryLazy',
+    -- enabled = false,
     opts = {
       disable_mouse = false,
       hints = {
@@ -46,6 +57,7 @@ return {
           length = 3,
         },
       },
+      restriction_mode = 'hint',
       disabled_keys = {
         ['<Up>'] = {},
         ['<Down>'] = {},

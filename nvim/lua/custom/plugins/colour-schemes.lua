@@ -56,7 +56,7 @@ return {
   {
     'rose-pine/neovim',
     name = 'rose-pine',
-    event = 'VeryLazy',
+    lazy = true,
     opts = {
       disable_background = true,
       disable_float_background = true,
@@ -65,7 +65,7 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    event = 'VeryLazy',
+    lazy = true,
     opts = {
       transparent_background = true,
     },
@@ -73,7 +73,7 @@ return {
   {
     'scottmckendry/cyberdream.nvim',
     name = 'cyberdream',
-    event = 'VeryLazy',
+    lazy = true,
     opts = {
       transparent = true,
       italic_comments = true,
@@ -84,7 +84,7 @@ return {
   },
   {
     'rebelot/kanagawa.nvim',
-    event = 'VeryLazy',
+    lazy = true,
     config = function()
       require('kanagawa').setup {
         transparent = true,
@@ -103,7 +103,7 @@ return {
   },
   {
     'darkvoid-theme/darkvoid.nvim',
-    event = 'UIEnter',
+    lazy = true,
     opts = {
       transparent = true,
       glow = true,
