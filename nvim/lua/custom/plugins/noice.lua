@@ -13,6 +13,8 @@ return -- lazy.nvim
           enabled = true,
         },
       },
+      picker = { enabled = true },
+      input = { enabled = true },
       notifier = {
         enabled = true,
         margin = { top = 1, right = 3 },
