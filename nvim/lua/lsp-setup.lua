@@ -1,17 +1,17 @@
-require('which-key').add {
-  {
-    { '<leader>c', group = '[C]ode' },
-    { '<leader>o', group = '[O]bsidian', icon = { icon = '󰇈', color = 'purple' } },
-    { '<leader>cc', group = '[C]opilot [C]hat', icon = ';' },
-    { '<leader>d', group = '[D]ocument' },
-    { '<leader>r', group = '[R]ename' },
-    { '<leader>s', group = '[S]earch' },
-    { '<leader>w', group = '[W]orkspace' },
-    { '<leader>t', group = '[T]ests & Diagnostics' },
-    { '<leader>g', group = '[G]it Search' },
-    { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-  },
-}
+-- require('which-key').add {
+--   {
+--     { '<leader>c', group = '[C]ode' },
+--     { '<leader>o', group = '[O]bsidian', icon = { icon = '󰇈', color = 'purple' } },
+--     { '<leader>cc', group = '[C]opilot [C]hat', icon = ';' },
+--     { '<leader>d', group = '[D]ocument' },
+--     { '<leader>r', group = '[R]ename' },
+--     { '<leader>s', group = '[S]earch' },
+--     { '<leader>w', group = '[W]orkspace' },
+--     { '<leader>t', group = '[T]ests & Diagnostics' },
+--     { '<leader>g', group = '[G]it Search' },
+--     { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+--   },
+-- }
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
@@ -34,12 +34,12 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   html = {},
-  nil_ls = {
-    ['nil'] = {
-      testSetting = 42,
-      formatting = { command = { 'nixpkgs-fmt' } },
-    },
-  },
+  -- nil_ls = {
+  --   ['nil'] = {
+  --     testSetting = 42,
+  --     formatting = { command = { 'nixpkgs-fmt' } },
+  --   },
+  -- },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -60,6 +60,37 @@ local servers = {
     },
   },
 }
+
+local flake_eval = [[(builtins.getFlake "/home/tris/code/.nix/").nixosConfigurations.vm.options]]
+local non_mason_servers = {
+  nixd = {
+    cmd = { 'nixd' },
+    settings = {
+      nixd = {
+        nixpkgs = {
+          expr = 'import <nixpkgs> { }',
+        },
+        formatting = { command = { 'nixpkgs-fmt' } },
+        options = {
+          nixos = {
+            expr = flake_eval,
+          },
+          home_manager = {
+            expr = flake_eval .. '.home-manager.users.type.getSubOptions []',
+          },
+        },
+      },
+    },
+  },
+}
+
+for server_name, config in pairs(non_mason_servers) do
+  require('lspconfig')[server_name].setup {
+    cmd = config.cmd,
+    capabilities = require 'lspcapabilities',
+    settings = config.settings,
+  }
+end
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'

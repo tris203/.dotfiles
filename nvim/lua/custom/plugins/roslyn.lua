@@ -1,7 +1,7 @@
 return {
   {
     -- 'jmederosalvarado/roslyn.nvim',
-    'seblj/roslyn.nvim',
+    'seblyng/roslyn.nvim',
     ft = { 'cs', 'razor' },
     dependencies = {
       {
@@ -15,17 +15,10 @@ return {
         end,
       },
     },
-    init = function()
-      vim.filetype.add {
-        extension = {
-          razor = 'razor',
-          cshtml = 'razor',
-        },
-      }
-    end,
     config = function()
       require('roslyn').setup {
         args = {
+          '--stdio',
           '--logLevel=Information',
           '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
           '--razorSourceGenerator='
@@ -39,7 +32,9 @@ return {
             'Targets',
             'Microsoft.NET.Sdk.Razor.DesignTime.targets'
           ),
+          -- '--stdio',
         },
+        ---@diagnostic disable-next-line: missing-fields
         config = {
           on_attach = require 'lspattach',
           capabilities = require 'lspcapabilities',
@@ -64,6 +59,14 @@ return {
               dotnet_enable_references_code_lens = true,
             },
           },
+        },
+      }
+    end,
+    init = function()
+      vim.filetype.add {
+        extension = {
+          razor = 'razor',
+          cshtml = 'razor',
         },
       }
     end,

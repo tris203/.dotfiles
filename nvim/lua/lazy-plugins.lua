@@ -42,6 +42,7 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   {
     'folke/which-key.nvim',
+    enabled = false,
     event = 'VeryLazy',
     opts = {},
   },
@@ -136,7 +137,7 @@ require('lazy').setup({
   -- },
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
-  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {} },
+  { 'https://github.com/folke/ts-comments.nvim', dev = true, event = 'VeryLazy', opts = {} },
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -165,6 +166,7 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    -- dev = true,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -173,6 +175,12 @@ require('lazy').setup({
       require 'treesitter-setup'
     end,
     build = ':TSUpdate',
+  },
+  {
+    'OXY2DEV/helpview.nvim',
+    opts = {
+      preview = { icon_provider = 'mini' },
+    },
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart

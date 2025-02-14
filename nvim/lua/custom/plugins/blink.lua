@@ -1,29 +1,21 @@
 return {
   {
     'saghen/blink.cmp',
-    -- lazy = false, -- lazy loading handled internally
+    lazy = false, -- lazy loading handled internally
     -- dev = true,
-    event = 'InsertEnter',
+    -- event = 'InsertEnter',
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
       -- 'L3MON4D3/LuaSnip',
-      'saghen/blink.compat',
-      { 'petertriho/cmp-git', opts = {} },
-      'giuxtaposition/blink-cmp-copilot',
+      -- 'saghen/blink.compat',
       {
-        'chrisgrieser/nvim-scissors',
-        ---@module "scissors"
-        ---@type Scissors.Config
-        opts = {
-          jsonFormatter = 'jq',
-          editSnippetPopup = {
-            keymaps = {
-              deleteSnippet = '<C-X>',
-            },
-          },
-        },
+        'Kaiser-Yang/blink-cmp-git',
+        dependencies = { 'nvim-lua/plenary.nvim' },
       },
+      -- 'giuxtaposition/blink-cmp-copilot',
+      'fang2hou/blink-copilot',
+      'ribru17/blink-cmp-spell',
     },
     -- use a release tag to download pre-built binaries
     version = '*',
@@ -51,15 +43,15 @@ return {
         nerd_font_variant = 'mono',
         kind_icons = {
           Copilot = '',
-          Supermaven = '',
-          Git = '󰊤',
+          -- Git = '󰊤',
+          Spell = '﬜',
         },
       },
       completion = {
         menu = {
           winblend = vim.o.pumblend,
           draw = {
-            treesitter = { 'lsp', 'copilot', 'supermaven' },
+            treesitter = { 'lsp', 'copilot' },
             columns = { { 'kind_icon', gap = 1 }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
           },
         },
@@ -70,6 +62,9 @@ return {
         ghost_text = {
           enabled = true,
         },
+      },
+      snippets = {
+        preset = 'default',
       },
       -- snippets = {
       --   expand = function(snippet)
@@ -87,11 +82,33 @@ return {
       -- },
       sources = {
         -- cmdline = {},
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot', 'supermaven', 'dadbod', 'git_cmp' },
+        default = { 'git', 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'copilot', 'dadbod', 'spell' },
         providers = {
+          spell = {
+            name = 'Spell',
+            module = 'blink-cmp-spell',
+            kind = 'Spell',
+            opts = {
+              -- EXAMPLE: Only enable source in `@spell` captures, and disable it
+              -- in `@nospell` captures.
+              enable_in_context = function()
+                local captures = vim.treesitter.get_captures_at_cursor(0)
+                local in_spell_capture = false
+                for _, capture in ipairs(captures) do
+                  if capture == 'spell' then
+                    in_spell_capture = true
+                  elseif capture == 'nospell' then
+                    return false
+                  end
+                end
+                return in_spell_capture
+              end,
+            },
+          },
           copilot = {
             name = 'Copilot',
-            module = 'blink-cmp-copilot',
+            -- module = 'blink-cmp-copilot',
+            module = 'blink-copilot',
             kind = 'Copilot',
             async = true,
           },
@@ -105,22 +122,53 @@ return {
             -- kind = 'Dadbod',
             module = 'vim_dadbod_completion.blink',
           },
-          supermaven = {
-            name = 'supermaven',
-            module = 'blink.compat.source',
-            kind = 'Supermaven',
-            async = true,
-          },
           lazydev = {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
             score_offset = 100,
           },
-          git_cmp = {
-            name = 'git',
-            module = 'lazydev.integrations.blink',
-            kind = 'Git',
+          git = {
+            -- Because we use filetype to enable the source,
+            -- we can make the score higher
+            score_offset = 100,
+            module = 'blink-cmp-git',
+            name = 'Git',
+            -- kind = 'Git',
+            enabled = function()
+              -- enable the source when the filetype is gitcommit or markdown
+              return vim.tbl_contains({ 'gitcommit', 'markdown', 'octo' }, vim.o.filetype)
+            end,
+            --- @module 'blink-cmp-git'
+            --- @type blink-cmp-git.Options
+            -- stylua: ignore
+            opts = {
+              commit = {
+                on_error = function() return true end,
+              },
+              git_centers = {
+                github = {
+                  issue = { on_error = function() return true end },
+                  pull_request = { on_error = function() return true end },
+                  mention = { on_error = function() return true end },
+                },
+              },
+              -- some options for the blink-cmp-git
+            },
           },
+        },
+      },
+      fuzzy = {
+        sorts = {
+          function(a, b)
+            local sort = require 'blink.cmp.fuzzy.sort'
+            if a.source_id == 'spell' and b.source_id == 'spell' then
+              return sort.label(a, b)
+            end
+          end,
+          -- This is the normal default order, which we fall back to
+          'score',
+          'kind',
+          'label',
         },
       },
       -- experimental auto-brackets support
@@ -169,5 +217,23 @@ return {
 
       require('blink.cmp').setup(opts)
     end,
+  },
+  {
+    'chrisgrieser/nvim-scissors',
+    ---@module "scissors"
+    ---@type Scissors.Config
+    ---@diagnostic disable-next-line: missing-fields
+    opts = {
+      jsonFormatter = 'jq',
+      editSnippetPopup = {
+        keymaps = {
+          deleteSnippet = '<C-X>',
+        },
+      },
+      backdrop = {
+        enabled = false,
+      },
+    },
+    cmd = { 'ScissorsAddNewSnippet', 'ScissorsEditSnippet' },
   },
 }

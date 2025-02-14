@@ -37,7 +37,7 @@ return {
       require('cutlass').setup(opts)
 
       local keymap_opts = { noremap = true, silent = true }
-      local cut_key = "m"
+      local cut_key = 'm'
       vim.keymap.set('n', cut_key, 'd', keymap_opts)
       vim.keymap.set('x', cut_key, 'd', keymap_opts)
       vim.keymap.set('n', cut_key .. cut_key, 'dd', keymap_opts)

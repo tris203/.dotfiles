@@ -59,8 +59,8 @@ end
 return {
   'willothy/nvim-cokeline',
   -- enabled = false,
-  -- event = 'UIEnter',
-  lazy = false,
+  event = 'UIEnter',
+  -- lazy = false,
   priority = 900,
   dependencies = {
     'nvim-lua/plenary.nvim', -- Required for v0.4.0+

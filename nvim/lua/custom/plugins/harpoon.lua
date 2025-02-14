@@ -16,6 +16,9 @@ return {
       harpoon:setup {
         settings = { save_on_toggle = true },
       }
+
+      local harpoon_extensions = require 'harpoon.extensions'
+      harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
     end,
     dependencies = {
       'nvim-lua/plenary.nvim',

@@ -17,7 +17,7 @@ vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', opts)
 vim.keymap.set('n', 'J', 'mzJ`z')
 
 --find and replace word under cursor
-vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Find and Replace" })
+vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Find and Replace' })
 
 -- reset cursoe position after search
 vim.api.nvim_set_keymap('n', 'n', 'nzzzv', opts)

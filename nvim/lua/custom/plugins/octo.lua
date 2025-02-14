@@ -3,6 +3,7 @@ return {
     'pwntester/octo.nvim',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
+      'nvim-telscope/telescope.nvim',
     },
     dev = true,
     ---@module 'octo'

@@ -40,7 +40,7 @@ return {
   {
     'm4xshen/hardtime.nvim',
     event = 'VeryLazy',
-    -- enabled = false,
+    enabled = false,
     opts = {
       disable_mouse = false,
       hints = {

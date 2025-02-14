@@ -44,7 +44,7 @@ return {
     opts = {
       -- model = 'claude-3.5-sonnet',
       highlight_headers = false,
-      separator = '---',
+      -- separator = '---',
       error_header = '>[!ERROR] Error',
 
       -- debug = true, -- Enable debugging

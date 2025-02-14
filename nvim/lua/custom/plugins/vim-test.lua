@@ -1,10 +1,10 @@
 return {
-"vim-test/vim-test",
-  event = "VeryLazy",
+  'vim-test/vim-test',
+  event = 'VeryLazy',
   dependencies = {
-    "preservim/vimux",
+    'preservim/vimux',
   },
   config = function()
-    vim.cmd("let test#strategy = 'vimux'")
+    vim.cmd "let test#strategy = 'vimux'"
   end,
 }

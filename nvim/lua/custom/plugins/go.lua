@@ -13,6 +13,7 @@ return {
         lsp_on_attach = require 'lspattach',
         lsp_inlay_hints = { enable = false },
         trouble = true,
+        diagnostic = false,
       }
     end,
     event = { 'CmdlineEnter' },

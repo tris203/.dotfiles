@@ -8,8 +8,7 @@ return {
   config = function()
     require('telescope').load_extension 'refactoring'
     require('refactoring').setup {}
-    vim.keymap.set({ 'n', 'x' }, '<leader>re',
-      '<esc><CR><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>', { desc = 'Refactor' })
+    vim.keymap.set({ 'n', 'x' }, '<leader>re', '<esc><CR><cmd>lua require("telescope").extensions.refactoring.refactors()<CR>', { desc = 'Refactor' })
   end,
   -- keys = {
   --   {

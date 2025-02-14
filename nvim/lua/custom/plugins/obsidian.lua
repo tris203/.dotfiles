@@ -17,7 +17,7 @@ return {
   -- version = '*', -- recommended, use latest release instead of latest commit
   keys = {
     { '<leader>of', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Obsidan Quick Switch' },
-    { '<leader>og', '<cmd>ObsidianSearch<cr>',      desc = 'Obsidian Search' },
+    { '<leader>og', '<cmd>ObsidianSearch<cr>', desc = 'Obsidian Search' },
     {
       '<leader>on',
       function()

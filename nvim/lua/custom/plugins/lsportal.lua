@@ -1,5 +1,5 @@
 return {
-  event = "VeryLazy",
+  event = 'VeryLazy',
   enabled = false,
   'lsportal/lsportal.nvim',
   dev = true,

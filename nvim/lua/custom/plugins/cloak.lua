@@ -1,6 +1,6 @@
 return {
   'laytan/cloak.nvim',
-  event = 'BufRead',
+  event = 'UIEnter',
   opts = {
     cloak_length = 30,
   },
