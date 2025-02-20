@@ -1,9 +1,9 @@
 return {
   {
     'saghen/blink.cmp',
-    lazy = false, -- lazy loading handled internally
+    -- lazy = false, -- lazy loading handled internally
     -- dev = true,
-    -- event = 'InsertEnter',
+    event = 'InsertEnter',
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
@@ -80,8 +80,17 @@ return {
       --     require('luasnip').jump(direction)
       --   end,
       -- },
+      cmdline = {
+        -- enabled = false,
+        completion = {
+          menu = {
+            draw = {
+              columns = { { 'kind_icon', gap = 1 }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
+            },
+          },
+        }
+      },
       sources = {
-        -- cmdline = {},
         default = { 'git', 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'copilot', 'dadbod', 'spell' },
         providers = {
           spell = {

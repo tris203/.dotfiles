@@ -18,6 +18,12 @@
           "octo"
         ],
         "path": "./octo.json"
+      },
+      {
+        "language": [
+          "markdown"
+        ],
+        "path": "./markdown.json"
       }
     ]
   },

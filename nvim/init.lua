@@ -83,10 +83,6 @@ require 'keymaps'
 
 -- vim.print = _G.dd
 
--- [[ Configure Telescope ]]
--- (fuzzy finder)
--- require('telescope-setup')
-
 -- [[ Configure Treesitter ]]
 -- (syntax parser for highlighting)
 -- require('treesitter-setup')

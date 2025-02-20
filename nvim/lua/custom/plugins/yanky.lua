@@ -4,21 +4,16 @@ return {
     event = 'VeryLazy',
     dependencies = {
       'kkharji/sqlite.lua',
-      'nvim-telescope/telescope.nvim',
     },
-    config = function()
-      require('yanky').setup {
-        highlight = {
-          timer = 200.,
-        },
-        ring = {
-          storage = 'sqlite',
-        },
-      }
-      require('telescope').load_extension 'yank_history'
-    end,
+    opts = {
+      highlight = {
+        timer = 200.,
+      },
+      ring = {
+        storage = 'sqlite',
+      },
+    },
     keys = {
-      { '<leader>sy', '<cmd>Telescope yank_history<CR>' },
       { 'p', '<Plug>(YankyPutAfter)', { 'x', 'n' } },
       { 'P', '<Plug>(YankyPutBefore)', { 'x', 'n' } },
       { 'gp', '<Plug>(YankyGPutAfter)', { 'x', 'n' } },

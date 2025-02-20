@@ -41,7 +41,7 @@ return {
         desc = 'Toggle Harpoon List',
       },
       {
-        '<c-h>',
+        '<leader>j',
         function()
           local harpoon = require 'harpoon'
           local prev_buf = checkifDefaultBuffer()
@@ -53,7 +53,7 @@ return {
         desc = 'Select Harpoon List 1',
       },
       {
-        '<c-j>',
+        '<leader>k',
         function()
           local prev_buf = checkifDefaultBuffer()
           local harpoon = require 'harpoon'
@@ -65,7 +65,7 @@ return {
         desc = 'Select Harpoon List 2',
       },
       {
-        '<c-k>',
+        '<leader>l',
         function()
           local prev_buf = checkifDefaultBuffer()
           local harpoon = require 'harpoon'
@@ -77,7 +77,7 @@ return {
         desc = 'Select Harpoon List 3',
       },
       {
-        '<c-l>',
+        '<leader>;',
         function()
           local harpoon = require 'harpoon'
           local prev_buf = checkifDefaultBuffer()
@@ -88,18 +88,18 @@ return {
         end,
         desc = 'Select Harpoon List 4',
       },
-      {
-        '<c-;>',
-        function()
-          local harpoon = require 'harpoon'
-          local prev_buf = checkifDefaultBuffer()
-          harpoon:list():select(5)
-          if prev_buf then
-            vim.api.nvim_buf_delete(prev_buf, {})
-          end
-        end,
-        desc = 'Select Harpoon List 4',
-      },
+      -- {
+      --   '<c-;>',
+      --   function()
+      --     local harpoon = require 'harpoon'
+      --     local prev_buf = checkifDefaultBuffer()
+      --     harpoon:list():select(5)
+      --     if prev_buf then
+      --       vim.api.nvim_buf_delete(prev_buf, {})
+      --     end
+      --   end,
+      --   desc = 'Select Harpoon List 4',
+      -- },
     },
   },
 }

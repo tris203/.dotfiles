@@ -7,14 +7,16 @@ return {
       'neovim/nvim-lspconfig',
       'nvim-treesitter/nvim-treesitter',
     },
-    config = function()
-      require('go').setup {
-        lsp_cfg = true,
-        lsp_on_attach = require 'lspattach',
-        lsp_inlay_hints = { enable = false },
-        trouble = true,
-        diagnostic = false,
-      }
+
+    opts = {
+      lsp_cfg = true,
+      lsp_on_attach = require 'lspattach',
+      lsp_inlay_hints = { enable = false },
+      trouble = true,
+      diagnostic = false,
+    },
+    config = function(_, opts)
+      require('go').setup(opts)
     end,
     event = { 'CmdlineEnter' },
     ft = { 'go', 'gomod' },

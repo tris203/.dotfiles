@@ -1,9 +1,9 @@
 return {
   {
     'pwntester/octo.nvim',
+    cmd = 'Octo',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
-      'nvim-telscope/telescope.nvim',
     },
     dev = true,
     ---@module 'octo'
@@ -13,11 +13,11 @@ return {
       default_merge_method = 'squash',
       enable_builtin = true,
       default_to_projects_v2 = true,
+      picker = 'snacks',
     },
     config = function(_, opts)
       require('octo').setup(opts)
       vim.treesitter.language.register('markdown', { 'octo' })
     end,
-    cmd = 'Octo',
   },
 }

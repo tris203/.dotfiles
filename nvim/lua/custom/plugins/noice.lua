@@ -6,6 +6,7 @@ return -- lazy.nvim
     lazy = false,
     ---@module 'snacks'
     ---@type snacks.Config
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       indent = {
         enabled = true,
@@ -13,7 +14,15 @@ return -- lazy.nvim
           enabled = true,
         },
       },
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        layout = {
+          preset = function()
+            return vim.o.columns >= 120 and 'telescope' or 'vertical'
+          end,
+        },
+      },
+      image = { enabled = true },
       input = { enabled = true },
       notifier = {
         enabled = true,
@@ -26,6 +35,7 @@ return -- lazy.nvim
       zen = { enabled = true },
       styles = {
         -- wo = { wrap = true },
+        ---@diagnostic disable-next-line: missing-fields
         notification = {
           wo = {
             winblend = 0,
@@ -153,6 +163,67 @@ return -- lazy.nvim
           }
         end,
       },
+      {
+        '<leader>ro',
+        function()
+          Snacks.picker.recent()
+        end,
+      },
+      {
+        '<leader>sb',
+        function()
+          Snacks.picker.buffers()
+        end,
+      },
+      {
+        '<leader>sf',
+        function()
+          Snacks.picker.files()
+        end,
+      },
+      {
+        '<leader>sg',
+        function()
+          Snacks.picker.grep()
+        end,
+      },
+      {
+        '<leader>sn',
+        function()
+          local config_path = vim.fn.stdpath 'config' --[[@as string]]
+          Snacks.picker.files { cwd = config_path }
+        end,
+      },
+      {
+        '<leader>sh',
+        function()
+          Snacks.picker.help()
+        end,
+      },
+      {
+        '<leader>sd',
+        function()
+          Snacks.picker.diagnostics()
+        end,
+      },
+      {
+        '<leader>sr',
+        function()
+          Snacks.picker.resume()
+        end,
+      },
+      {
+        'z=',
+        function()
+          Snacks.picker.spelling()
+        end,
+      },
+      {
+        '<leader>sc',
+        function()
+          Snacks.picker.colorschemes()
+        end,
+      },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {
@@ -193,6 +264,7 @@ return -- lazy.nvim
     -- enabled = false,
     ---@module "noice"
     ---@type NoiceConfig
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       views = {
         mini = {

@@ -12,7 +12,10 @@ local function getPath()
 end
 
 return {
-  'epwalsh/obsidian.nvim',
+  -- 'epwalsh/obsidian.nvim',
+  --TODO: remove when https://github.com/epwalsh/obsidian.nvim/pull/823 is merged
+  'tris203/obsidian.nvim',
+  branch = 'merged_prs',
   cmd = { 'ObsidianOpen', 'ObsidianSearch', 'ObsidianQuickSwitch', 'ObsidianNew' },
   -- version = '*', -- recommended, use latest release instead of latest commit
   keys = {
@@ -40,10 +43,17 @@ return {
   dependencies = {
     -- Required.
     'nvim-lua/plenary.nvim',
-
     -- see below for full list of optional dependencies 👇
   },
+  ---@module 'obsidian'
+  ---@type obsidian.config.ClientOpts
+  ---@diagnostic disable-next-line: missing-fields
   opts = {
+    completion = {
+      blink = true,
+      nvim_cmp = false,
+      min_chars = 0,
+    },
     ui = { enable = false },
     workspaces = {
       {

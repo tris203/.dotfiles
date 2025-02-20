@@ -1,55 +1,28 @@
 return {
-  -- {
-  --   'vague2k/huez.nvim',
-  --   -- import = 'huez-manager.import',
-  --   priority = 1000,
-  --   event = 'UIEnter',
-  --   dependencies = {
-  --     'nvim-telescope/telescope.nvim',
-  --   },
-  --   -- event = 'UIEnter',
-  --   -- config = function()
-  --   --   local scheme = require('huez.api').colorscheme.get()
-  --   --   -- local scheme = 'tokyonight'
-  --   --   vim.cmd('colorscheme ' .. scheme)
-  --   -- end,
-  --   opts = {},
-  --   keys = {
-  --     {
-  --       '<leader>hh',
-  --       '<cmd>Huez<CR>',
-  --       desc = 'Change colorscheme',
-  --     },
-  --     {
-  --       '<leader>hl',
-  --       '<cmd>HuezLive<CR>',
-  --       desc = 'View Registry',
-  --     },
-  --   },
-  -- },
   {
     'folke/tokyonight.nvim',
     priority = 1000,
-    config = function()
-      require('tokyonight').setup {
-        transparent = true,
-        -- on_colors = function(colors)
-        --   ---@diagnostic disable-next-line: inject-field
-        --   -- colors.fg_gutter = '#b2b8cf'
-        -- end,
-        on_highlights = function(hl, _colors)
-          hl.Folded = {
-            link = 'Normal',
-          }
-          hl.LspInlayHint = {
-            link = 'Comment',
-          }
-        end,
-        styles = {
-          sidebars = 'transparent',
-          floats = 'transparent',
-        },
-      }
+    opts = {
+      transparent = true,
+      -- on_colors = function(colors)
+      --   ---@diagnostic disable-next-line: inject-field
+      --   -- colors.fg_gutter = '#b2b8cf'
+      -- end,
+      on_highlights = function(hl, _colors)
+        hl.Folded = {
+          link = 'Normal',
+        }
+        hl.LspInlayHint = {
+          link = 'Comment',
+        }
+      end,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
       vim.cmd 'colorscheme tokyonight'
     end,
   },
@@ -78,7 +51,7 @@ return {
       transparent = true,
       italic_comments = true,
       hide_fillchars = true,
-      borderless_telescope = false,
+      borderless_pickers = false,
       terminal_colors = true,
     },
   },
@@ -107,6 +80,14 @@ return {
     opts = {
       transparent = true,
       glow = true,
+    },
+  },
+  {
+    '0xstepit/flow.nvim',
+    opts = {
+      theme = {
+        transparent = true,
+      },
     },
   },
 }

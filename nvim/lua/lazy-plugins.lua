@@ -8,7 +8,7 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   -- Git related plugins
   { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
-  { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
+  -- { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
   { 'tpope/vim-unimpaired', event = 'VeryLazy' },
   { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {
     move_cursor = 'sticky',
@@ -40,12 +40,12 @@ require('lazy').setup({
     },
   },
   -- Useful plugin to show you pending keybinds.
-  {
-    'folke/which-key.nvim',
-    enabled = false,
-    event = 'VeryLazy',
-    opts = {},
-  },
+  -- {
+  --   'folke/which-key.nvim',
+  --   enabled = false,
+  --   event = 'VeryLazy',
+  --   opts = {},
+  -- },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -138,31 +138,6 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
   { 'https://github.com/folke/ts-comments.nvim', dev = true, event = 'VeryLazy', opts = {} },
-  -- Fuzzy Finder (files, lsp, etc)
-  {
-    'nvim-telescope/telescope.nvim',
-    event = 'VeryLazy',
-    -- branch = '0.1.x',
-    config = function()
-      require 'telescope-setup'
-    end,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-      -- Only load if `make` is available. Make sure you have the system
-      -- requirements installed.
-      'nvim-telescope/telescope-symbols.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
-    },
-  },
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -178,6 +153,7 @@ require('lazy').setup({
   },
   {
     'OXY2DEV/helpview.nvim',
+    ft = 'help',
     opts = {
       preview = { icon_provider = 'mini' },
     },
