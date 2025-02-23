@@ -32,6 +32,9 @@ vim.o.foldenable = true
 -- Enable break indent
 vim.o.breakindent = true
 
+---global statusline
+vim.o.laststatus = 3
+
 -- Save undo history
 vim.o.undofile = true
 
@@ -55,5 +58,5 @@ vim.o.termguicolors = true
 vim.opt.spelllang = 'en_gb'
 vim.opt.spell = true
 
-vim.o.diffopt = "internal,filler,closeoff,linematch:30"
+vim.o.diffopt = 'internal,filler,closeoff,linematch:30'
 -- vim: ts=2 sts=2 sw=2 et

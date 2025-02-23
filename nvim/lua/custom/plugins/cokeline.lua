@@ -1,5 +1,5 @@
 local cache = {}
-local harpoon_keys = { 'j', 'k', 'l', ';' }
+local harpoon_keys = { 'h', 'j', 'k', 'l' }
 local function harpoon_sorter()
   local setup = false
 

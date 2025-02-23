@@ -4,10 +4,11 @@ return {
     priority = 1000,
     opts = {
       transparent = true,
-      -- on_colors = function(colors)
-      --   ---@diagnostic disable-next-line: inject-field
-      --   -- colors.fg_gutter = '#b2b8cf'
-      -- end,
+      on_colors = function(colors)
+        ---@diagnostic disable-next-line: inject-field
+        -- colors.fg_gutter = '#b2b8cf'
+        colors.border = '#b2b8cf'
+      end,
       on_highlights = function(hl, _colors)
         hl.Folded = {
           link = 'Normal',

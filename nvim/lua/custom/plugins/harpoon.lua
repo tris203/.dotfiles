@@ -33,7 +33,7 @@ return {
         desc = 'Add to Harpoon List',
       },
       {
-        '<leader>h',
+        '<leader>H',
         function()
           local harpoon = require 'harpoon'
           harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -41,7 +41,7 @@ return {
         desc = 'Toggle Harpoon List',
       },
       {
-        '<leader>j',
+        '<leader>h',
         function()
           local harpoon = require 'harpoon'
           local prev_buf = checkifDefaultBuffer()
@@ -53,7 +53,7 @@ return {
         desc = 'Select Harpoon List 1',
       },
       {
-        '<leader>k',
+        '<leader>j',
         function()
           local prev_buf = checkifDefaultBuffer()
           local harpoon = require 'harpoon'
@@ -65,7 +65,7 @@ return {
         desc = 'Select Harpoon List 2',
       },
       {
-        '<leader>l',
+        '<leader>k',
         function()
           local prev_buf = checkifDefaultBuffer()
           local harpoon = require 'harpoon'
@@ -77,7 +77,7 @@ return {
         desc = 'Select Harpoon List 3',
       },
       {
-        '<leader>;',
+        '<leader>l',
         function()
           local harpoon = require 'harpoon'
           local prev_buf = checkifDefaultBuffer()

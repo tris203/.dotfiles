@@ -2,6 +2,9 @@ return {
   {
     'zbirenbaum/copilot.lua',
     event = 'VeryLazy',
+    dependencies = {
+      'williamboman/mason.nvim',
+    },
     opts = {
       -- suggestion = {
       --   auto_trigger = true,
@@ -9,10 +12,24 @@ return {
       suggestion = {
         enabled = false,
       },
+      panel = {
+        enabled = false,
+      },
     },
-    panel = {
-      enabled = false,
-    },
+    config = function(_, opts)
+      vim.schedule(function()
+        local mason_installation = vim.fs.joinpath(vim.fn.stdpath 'data' --[[@as string]], 'mason', 'bin', 'copilot-language-server')
+        if vim.fn.executable(mason_installation) then
+          opts.server_opts_overrides = {
+            cmd = {
+              mason_installation,
+              '--stdio',
+            },
+          }
+        end
+        require('copilot').setup(opts)
+      end)
+    end,
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',

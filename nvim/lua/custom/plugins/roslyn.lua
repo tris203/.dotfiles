@@ -16,22 +16,14 @@ return {
       },
     },
     config = function()
+      local rzls_path = vim.fs.joinpath(require('mason-registry').get_package('rzls'):get_install_path(), 'libexec')
       require('roslyn').setup {
         args = {
           '--stdio',
           '--logLevel=Information',
           '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
-          '--razorSourceGenerator='
-            .. vim.fs.joinpath(vim.fn.stdpath 'data' --[[@as string]], 'mason', 'packages', 'roslyn', 'libexec', 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
-          '--razorDesignTimePath=' .. vim.fs.joinpath(
-            vim.fn.stdpath 'data' --[[@as string]],
-            'mason',
-            'packages',
-            'rzls',
-            'libexec',
-            'Targets',
-            'Microsoft.NET.Sdk.Razor.DesignTime.targets'
-          ),
+          '--razorSourceGenerator=' .. vim.fs.joinpath(rzls_path, 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
+          '--razorDesignTimePath=' .. vim.fs.joinpath(rzls_path, 'Targets', 'Microsoft.NET.Sdk.Razor.DesignTime.targets'),
           -- '--stdio',
         },
         ---@diagnostic disable-next-line: missing-fields
