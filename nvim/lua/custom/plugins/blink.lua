@@ -21,7 +21,7 @@ return {
     version = '*',
     -- commit = 'b2d13ba',
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    build = 'cargo build --release',
+    build = require('helpers.nix').is_nixos and 'nix run .#build-plugin' or 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
     -- build = 'nix run .#build-plugin',
     ---@module 'blink.cmp'
@@ -88,7 +88,7 @@ return {
               columns = { { 'kind_icon', gap = 1 }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
             },
           },
-        }
+        },
       },
       sources = {
         default = { 'git', 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'copilot', 'dadbod', 'spell' },
