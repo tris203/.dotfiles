@@ -10,6 +10,7 @@ return {
   {
     -- NOTE: Yes, you can install new plugins here!
     'mfussenegger/nvim-dap',
+    enabled = not require('helpers.nix').is_nixos,
     -- NOTE: And you can specify dependencies as well
     event = 'VeryLazy',
     dependencies = {
