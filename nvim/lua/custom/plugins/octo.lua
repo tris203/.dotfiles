@@ -5,7 +5,6 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
-    dev = true,
     ---@module 'octo'
     ---@type OctoConfig
     ---@diagnostic disable-next-line: missing-fields

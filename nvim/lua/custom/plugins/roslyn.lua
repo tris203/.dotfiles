@@ -8,7 +8,9 @@ return {
         'tris203/rzls.nvim',
         dev = true,
         config = function()
+          local is_nixos = require('helpers.nix').is_nixos
           require('rzls').setup {
+            path = is_nixos and 'rzls' or nil,
             on_attach = require 'lspattach',
             capabilities = require 'lspcapabilities',
           }
@@ -16,8 +18,10 @@ return {
       },
     },
     config = function()
-      local rzls_path = vim.fs.joinpath(require('mason-registry').get_package('rzls'):get_install_path(), 'libexec')
+      local rzls_path = require('helpers.path').get_basepath 'rzls'
+      local is_nixos = require('helpers.nix').is_nixos
       require('roslyn').setup {
+        exe = is_nixos and 'Microsoft.CodeAnalysis.LanguageServer' or nil,
         args = {
           '--stdio',
           '--logLevel=Information',

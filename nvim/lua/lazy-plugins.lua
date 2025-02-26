@@ -24,12 +24,17 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     config = function()
-      require 'lsp-setup'
+      local is_nixos = require('helpers.nix').is_nixos
+      if not is_nixos then
+        require 'lsp-setup'
+      else
+        require('lsp-nix')
+      end
     end,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      { 'williamboman/mason.nvim', enabled = not require('helpers.nix').is_nixos },
+      { 'williamboman/mason-lspconfig.nvim', enabled = not require('helpers.nix').is_nixos },
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -137,7 +142,7 @@ require('lazy').setup({
   -- },
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
-  { 'https://github.com/folke/ts-comments.nvim', dev = true, event = 'VeryLazy', opts = {} },
+  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {} },
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
