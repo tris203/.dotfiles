@@ -58,7 +58,29 @@ local non_mason_servers = {
   },
 }
 
+local additional_nix_servers = {
+    -- ◍ bash-language-server bashls, bashls
+    -- ◍ biome
+    -- ◍ buf buf_ls, buf_ls
+    -- ◍ clangd
+    -- ◍ copilot-language-server
+    -- ◍ docker-compose-language-service docker_compose_language_service, docker_compose_language_service
+    -- ◍ dockerfile-language-server dockerls, dockerls
+    -- ◍ html-lsp html, html
+    -- ◍ intelephense
+    -- ◍ json-lsp jsonls, jsonls
+    -- ◍ lua-language-server lua_ls, lua_ls
+    -- ◍ nil nil_ls, nil_ls
+    -- ◍ roslyn
+    -- ◍ rzls
+    -- ◍ tailwindcss-language-server tailwindcss, tailwindcss
+    -- ◍ templ
+    -- ◍ vtsls
+    -- ◍ vue-language-server volar, volar
+    -- ◍ zls
+}
+
 return {
-servers = servers,
-non_mason_servers = non_mason_servers,
+  servers = servers,
+  non_mason_servers = non_mason_servers,
 }
