@@ -35,7 +35,7 @@ local servers = {
   },
 }
 
-local flake_eval = [[(builtins.getFlake "/home/tris/code/.nix/").nixosConfigurations.x1.options]]
+local flake_eval = string.format([[(builtins.getFlake "%s").nixosConfigurations.%s.options]], require('helpers.nix').flake_loc, vim.uv.os_gethostname())
 local non_mason_servers = {
   nixd = {
     cmd = { 'nixd' },
@@ -59,25 +59,25 @@ local non_mason_servers = {
 }
 
 local additional_nix_servers = {
-    -- ◍ bash-language-server bashls, bashls
-    -- ◍ biome
-    -- ◍ buf buf_ls, buf_ls
-    -- ◍ clangd
-    -- ◍ copilot-language-server
-    -- ◍ docker-compose-language-service docker_compose_language_service, docker_compose_language_service
-    -- ◍ dockerfile-language-server dockerls, dockerls
-    -- ◍ html-lsp html, html
-    -- ◍ intelephense
-    -- ◍ json-lsp jsonls, jsonls
-    -- ◍ lua-language-server lua_ls, lua_ls
-    -- ◍ nil nil_ls, nil_ls
-    -- ◍ roslyn
-    -- ◍ rzls
-    -- ◍ tailwindcss-language-server tailwindcss, tailwindcss
-    -- ◍ templ
-    -- ◍ vtsls
-    -- ◍ vue-language-server volar, volar
-    -- ◍ zls
+  -- ◍ bash-language-server bashls, bashls
+  -- ◍ biome
+  -- ◍ buf buf_ls, buf_ls
+  -- ◍ clangd
+  -- ◍ copilot-language-server
+  -- ◍ docker-compose-language-service docker_compose_language_service, docker_compose_language_service
+  -- ◍ dockerfile-language-server dockerls, dockerls
+  -- ◍ html-lsp html, html
+  -- ◍ intelephense
+  -- ◍ json-lsp jsonls, jsonls
+  -- ◍ lua-language-server lua_ls, lua_ls
+  -- ◍ nil nil_ls, nil_ls
+  -- ◍ roslyn
+  -- ◍ rzls
+  -- ◍ tailwindcss-language-server tailwindcss, tailwindcss
+  -- ◍ templ
+  -- ◍ vtsls
+  -- ◍ vue-language-server volar, volar
+  -- ◍ zls
 }
 
 return {

@@ -7,9 +7,10 @@ function M.get_basepath(lsp_name)
   local is_nixos = require('helpers.nix').is_nixos
 
   if is_nixos then
-    vim.print 'not implemented yet'
-    --TODO: What do we do here, return eval
-    local result = vim.system({ 'nix', 'eval', '--raw', string.format('/home/tris/code/.nix/.#nixosConfigurations.x1.pkgs.%s.outPath', lsp_name) }):wait()
+    local hostname = vim.uv.os_gethostname()
+    local result = vim
+      .system({ 'nix', 'eval', '--raw', string.format('%s.#nixosConfigurations.%s.pkgs.%s.outPath', require('helpers.nix').flake_loc, hostname, lsp_name) })
+      :wait()
     assert(result.code == 0, 'Failed to get base path code:' .. vim.inspect(result))
     local basepath = result.stdout
 
