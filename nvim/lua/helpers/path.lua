@@ -7,7 +7,7 @@ function M.get_basepath(lsp_name)
   local is_nixos = require('helpers.nix').is_nixos
 
   if is_nixos then
-    local hostname = vim.uv.os_gethostname()
+    local hostname = require('helpers.nix').get_hostname()
     local result = vim
       .system({ 'nix', 'eval', '--raw', string.format('%s.#nixosConfigurations.%s.pkgs.%s.outPath', require('helpers.nix').flake_loc, hostname, lsp_name) })
       :wait()

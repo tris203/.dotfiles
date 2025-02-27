@@ -35,7 +35,8 @@ local servers = {
   },
 }
 
-local flake_eval = string.format([[(builtins.getFlake "%s").nixosConfigurations.%s.options]], require('helpers.nix').flake_loc, vim.uv.os_gethostname())
+local flake_eval =
+  string.format([[(builtins.getFlake "%s").nixosConfigurations.%s.options]], require('helpers.nix').flake_loc, require('helpers.nix').get_hostname())
 local non_mason_servers = {
   nixd = {
     cmd = { 'nixd' },
