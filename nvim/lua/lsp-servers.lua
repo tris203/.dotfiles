@@ -35,7 +35,7 @@ local servers = {
   },
 }
 
-local flake_eval = [[(builtins.getFlake "/home/tris/code/.nix/").nixosConfigurations.vm.options]]
+local flake_eval = [[(builtins.getFlake "/home/tris/code/.nix/").nixosConfigurations.x1.options]]
 local non_mason_servers = {
   nixd = {
     cmd = { 'nixd' },
