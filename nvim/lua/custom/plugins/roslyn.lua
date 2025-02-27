@@ -16,7 +16,7 @@ return {
       },
     },
     config = function()
-      local rzls_path = vim.fs.joinpath(require('mason-registry').get_package('rzls'):get_install_path(), 'libexec')
+      local rzls_path = vim.fs.joinpath(require('helpers.path').get_basepath 'rzls', 'libexec')
       require('roslyn').setup {
         args = {
           '--stdio',
