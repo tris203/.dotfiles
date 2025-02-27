@@ -19,14 +19,17 @@ return {
     },
     config = function(_, opts)
       vim.schedule(function()
-        local mason_installation = vim.fs.joinpath(vim.fn.stdpath 'data' --[[@as string]], 'mason', 'bin', 'copilot-language-server')
-        if vim.fn.executable(mason_installation) then
+        local copilot_server_path = vim.fn.exepath 'copilot-language-server'
+
+        if copilot_server_path ~= '' then
           opts.server_opts_overrides = {
             cmd = {
-              mason_installation,
+              copilot_server_path,
               '--stdio',
             },
           }
+        else
+          vim.notify 'Copilot Language Server not found'
         end
         require('copilot').setup(opts)
       end)
