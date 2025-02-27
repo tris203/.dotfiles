@@ -32,7 +32,6 @@ return {
       vim.keymap.set('n', '<c-h>', require('smart-splits').resize_left)
       vim.keymap.set('n', '<c-j>', require('smart-splits').resize_down)
       vim.keymap.set('n', '<c-k>', require('smart-splits').resize_up)
-      --TODO: This doesnt work
       vim.keymap.set('n', '<c-l>', require('smart-splits').resize_right)
     end,
   },
