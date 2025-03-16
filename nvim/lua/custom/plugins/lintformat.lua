@@ -20,7 +20,16 @@ return {
       }, {
         group = group,
         callback = function()
+          local progress = require('fidget').progress.handle.create {
+            message = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t'),
+            title = 'Linting',
+            lsp_client = {
+              name = 'conform',
+            },
+            cancelable = false,
+          }
           lint.try_lint()
+          progress:finish()
         end,
       })
 
@@ -30,7 +39,16 @@ return {
       }, {
         group = group,
         callback = function()
+          local progress = require('fidget').progress.handle.create {
+            message = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t'),
+            title = 'Linting',
+            lsp_client = {
+              name = 'conform',
+            },
+            cancelable = false,
+          }
           lint.try_lint()
+          progress:finish()
         end,
       })
     end,
@@ -68,7 +86,17 @@ return {
       {
         '<leader>lf',
         function()
-          require('conform').format { async = true }
+          local progress = require('fidget').progress.handle.create {
+            message = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t'),
+            title = 'Formatting',
+            lsp_client = {
+              name = 'conform',
+            },
+            cancelable = false,
+          }
+          require('conform').format({ async = true }, function()
+            progress:finish()
+          end)
         end,
         desc = 'Format Buffer',
       },

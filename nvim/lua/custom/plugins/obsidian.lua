@@ -13,14 +13,12 @@ end
 
 return {
   -- 'epwalsh/obsidian.nvim',
-  --TODO: remove when https://github.com/epwalsh/obsidian.nvim/pull/823 is merged
-  'tris203/obsidian.nvim',
-  branch = 'merged_prs',
+  'obsidian-nvim/obsidian.nvim',
   cmd = { 'ObsidianOpen', 'ObsidianSearch', 'ObsidianQuickSwitch', 'ObsidianNew' },
   -- version = '*', -- recommended, use latest release instead of latest commit
   keys = {
-    { '<leader>of', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Obsidan Quick Switch' },
-    { '<leader>og', '<cmd>ObsidianSearch<cr>', desc = 'Obsidian Search' },
+    -- { '<leader>of', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Obsidan Quick Switch' },
+    -- { '<leader>og', '<cmd>ObsidianSearch<cr>', desc = 'Obsidian Search' },
     {
       '<leader>on',
       function()
@@ -31,6 +29,18 @@ return {
     },
     { '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = 'Obsidian Open' },
     { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = 'Obsidian Tags' },
+    {
+      '<leader>of',
+      function()
+        Snacks.picker.files { cwd = getPath(), follow = true }
+      end,
+    },
+    {
+      '<leader>og',
+      function()
+        Snacks.picker.grep { cwd = getPath(), follow = true }
+      end,
+    },
   },
   ft = 'markdown',
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:

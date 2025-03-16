@@ -12,6 +12,16 @@ return {
       enable_tailwind = true,
     },
   },
+  {
+    {
+      'razak17/tailwind-fold.nvim',
+      opts = {
+        min_chars = 20,
+      },
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact', 'php', 'blade', 'razor' },
+    },
+  },
 }
 
 -- #000000 #ffffff

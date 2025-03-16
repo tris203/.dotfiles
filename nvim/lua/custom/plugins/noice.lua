@@ -178,13 +178,15 @@ return -- lazy.nvim
       {
         '<leader>sf',
         function()
-          Snacks.picker.files()
+          Snacks.picker.files { hidden = true }
         end,
       },
       {
         '<leader>sg',
         function()
-          Snacks.picker.grep()
+          Snacks.picker.grep {
+            hidden = true,
+          }
         end,
       },
       {
@@ -287,6 +289,9 @@ return -- lazy.nvim
         signature = {
           enabled = false,
         },
+        progress = {
+          enabled = false,
+        },
       },
       -- you can enable a preset for easier configuration
       presets = {
@@ -317,7 +322,7 @@ return -- lazy.nvim
             event = 'notify',
             kind = 'info',
             cond = function(message)
-              local sources = { 'rzls.nvim', 'roslyn.nvim' }
+              local sources = { 'rzls.nvim', 'roslyn.nvim', 'savior', 'conform' }
               return vim.tbl_contains(sources, message.opts.title)
             end,
           },
