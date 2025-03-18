@@ -59,7 +59,7 @@ return {
     ---@module 'CopilotChat'
     ---@type CopilotChat.config
     opts = {
-      -- model = 'claude-3.5-sonnet',
+      model = 'o3-mini',
       highlight_headers = false,
       -- separator = '---',
       error_header = '>[!ERROR] Error',

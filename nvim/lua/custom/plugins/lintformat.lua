@@ -17,23 +17,6 @@ return {
       vim.api.nvim_create_autocmd({
         'TextChangedI',
         'InsertLeave',
-      }, {
-        group = group,
-        callback = function()
-          local progress = require('fidget').progress.handle.create {
-            message = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t'),
-            title = 'Linting',
-            lsp_client = {
-              name = 'conform',
-            },
-            cancelable = false,
-          }
-          lint.try_lint()
-          progress:finish()
-        end,
-      })
-
-      vim.api.nvim_create_autocmd({
         'TextChanged',
         'BufWritePost',
       }, {
@@ -45,7 +28,8 @@ return {
             lsp_client = {
               name = 'conform',
             },
-            cancelable = false,
+            cancellable = false,
+            done = false,
           }
           lint.try_lint()
           progress:finish()
@@ -92,7 +76,8 @@ return {
             lsp_client = {
               name = 'conform',
             },
-            cancelable = false,
+            cancellable = false,
+            done = false,
           }
           require('conform').format({ async = true }, function()
             progress:finish()

@@ -20,6 +20,13 @@ return {
       { 'gP', '<Plug>(YankyGPutNefore)', { 'x', 'n' } },
       { '<C-p>', '<Plug>(YankyPreviousEntry)' },
       { '<C-n>', '<Plug>(YankyNextEntry)' },
+      {
+        '<leader>sy',
+        function()
+          ---@diagnostic disable-next-line: undefined-field
+          Snacks.picker.yanky()
+        end,
+      },
     },
   },
   {
