@@ -42,7 +42,7 @@ return {
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono',
         kind_icons = {
-          Copilot = '',
+          -- Copilot = '',
           -- Git = '󰊤',
           Spell = '﬜',
         },
@@ -88,13 +88,12 @@ return {
               columns = { { 'kind_icon', gap = 1 }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
             },
           },
-        }
+        },
       },
       sources = {
         default = { 'git', 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'copilot', 'dadbod', 'spell' },
         providers = {
           spell = {
-            name = 'Spell',
             module = 'blink-cmp-spell',
             kind = 'Spell',
             opts = {
@@ -115,7 +114,6 @@ return {
             },
           },
           copilot = {
-            name = 'Copilot',
             -- module = 'blink-cmp-copilot',
             module = 'blink-copilot',
             kind = 'Copilot',
@@ -127,7 +125,6 @@ return {
             },
           },
           dadbod = {
-            name = 'Dadbod',
             -- kind = 'Dadbod',
             module = 'vim_dadbod_completion.blink',
           },
@@ -141,8 +138,6 @@ return {
             -- we can make the score higher
             score_offset = 100,
             module = 'blink-cmp-git',
-            name = 'Git',
-            -- kind = 'Git',
             enabled = function()
               -- enable the source when the filetype is gitcommit or markdown
               return vim.tbl_contains({ 'gitcommit', 'markdown', 'octo' }, vim.o.filetype)
