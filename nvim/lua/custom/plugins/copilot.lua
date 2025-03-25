@@ -15,6 +15,7 @@ return {
       panel = {
         enabled = false,
       },
+      copilot_model = 'gpt-4o-copilot',
     },
     config = function(_, opts)
       vim.schedule(function()

@@ -1,6 +1,6 @@
 return {
   {
-    lazy = true,
+    lazy = false,
     'echasnovski/mini.test',
     opts = {},
   },
