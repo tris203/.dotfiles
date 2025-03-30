@@ -7,6 +7,7 @@ return {
     opts = {
       keymaps = {
         useDefaults = true,
+        disabledDefaults = { 'al', 'il' },
       },
     },
   },
