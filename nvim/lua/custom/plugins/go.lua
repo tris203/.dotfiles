@@ -15,6 +15,7 @@ return {
       trouble = true,
       diagnostic = false,
       remap_commands = { GoDoc = false },
+      textobjects = false,
     },
     config = function(_, opts)
       require('go').setup(opts)

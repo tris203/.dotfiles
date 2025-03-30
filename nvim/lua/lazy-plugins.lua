@@ -28,7 +28,7 @@ require('lazy').setup({
       if not is_nixos then
         require 'lsp-setup'
       else
-        require('lsp-nix')
+        require 'lsp-nix'
       end
     end,
     dependencies = {
@@ -146,9 +146,69 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     -- dev = true,
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        branch = 'main',
+        opts = {
+          select = {
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+            -- You can choose the select mode (default is charwise 'v')
+            --
+            -- Can also be a function which gets passed a table with the keys
+            -- * query_string: eg '@function.inner'
+            -- * method: eg 'v' or 'o'
+            -- and should return the mode ('v', 'V', or '<c-v>') or a table
+            -- mapping query_strings to modes.
+            selection_modes = {
+              ['@parameter.outer'] = 'v', -- charwise
+              ['@function.outer'] = 'V', -- linewise
+              ['@class.outer'] = '<c-v>', -- blockwise
+            },
+            -- If you set this to `true` (default is `false`) then any textobject is
+            -- extended to include preceding or succeeding whitespace. Succeeding
+            -- whitespace has priority in order to act similarly to eg the built-in
+            -- `ap`.
+            --
+            -- Can also be a function which gets passed a table with the keys
+            -- * query_string: eg '@function.inner'
+            -- * selection_mode: eg 'v'
+            -- and should return true of false
+            include_surrounding_whitespace = function(action)
+              local remove_whitespace = { '@function.outer' }
+              if vim.tbl_contains(remove_whitespace, action.query_string) then
+                return true
+              end
+              return false
+            end,
+          },
+        },
+        config = function(_, opts)
+          require('nvim-treesitter-textobjects').setup(opts)
+
+          vim.keymap.set({ 'x', 'o' }, 'af', function()
+            require('nvim-treesitter-textobjects.select').select_textobject('@function.outer', 'textobjects')
+          end)
+          vim.keymap.set({ 'x', 'o' }, 'if', function()
+            require('nvim-treesitter-textobjects.select').select_textobject('@function.inner', 'textobjects')
+          end)
+          vim.keymap.set({ 'x', 'o' }, 'ac', function()
+            require('nvim-treesitter-textobjects.select').select_textobject('@class.outer', 'textobjects')
+          end)
+          vim.keymap.set({ 'x', 'o' }, 'ic', function()
+            require('nvim-treesitter-textobjects.select').select_textobject('@class.inner', 'textobjects')
+          end)
+          vim.keymap.set({ 'x', 'o' }, 'al', function()
+            require('nvim-treesitter-textobjects.select').select_textobject('@loop.outer', 'textobjects')
+          end)
+          vim.keymap.set({ 'x', 'o' }, 'il', function()
+            require('nvim-treesitter-textobjects.select').select_textobject('@loop.inner', 'textobjects')
+          end)
+        end,
+      },
     },
     event = 'VeryLazy',
     config = function()
