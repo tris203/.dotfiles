@@ -15,7 +15,6 @@ return {
       },
       -- 'giuxtaposition/blink-cmp-copilot',
       'fang2hou/blink-copilot',
-      'ribru17/blink-cmp-spell',
     },
     -- use a release tag to download pre-built binaries
     version = '*',
@@ -41,11 +40,6 @@ return {
         -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono',
-        kind_icons = {
-          -- Copilot = '',
-          -- Git = '󰊤',
-          Spell = '﬜',
-        },
       },
       completion = {
         menu = {
@@ -91,32 +85,11 @@ return {
         },
       },
       sources = {
-        default = { 'git', 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'copilot', 'dadbod', 'spell' },
+        default = { 'git', 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'copilot', 'dadbod' },
         providers = {
-          spell = {
-            module = 'blink-cmp-spell',
-            kind = 'Spell',
-            opts = {
-              -- EXAMPLE: Only enable source in `@spell` captures, and disable it
-              -- in `@nospell` captures.
-              enable_in_context = function()
-                local captures = vim.treesitter.get_captures_at_cursor(0)
-                local in_spell_capture = false
-                for _, capture in ipairs(captures) do
-                  if capture == 'spell' then
-                    in_spell_capture = true
-                  elseif capture == 'nospell' then
-                    return false
-                  end
-                end
-                return in_spell_capture
-              end,
-            },
-          },
           copilot = {
             -- module = 'blink-cmp-copilot',
             module = 'blink-copilot',
-            kind = 'Copilot',
             async = true,
           },
           snippets = {
@@ -161,20 +134,6 @@ return {
           },
         },
       },
-      fuzzy = {
-        sorts = {
-          function(a, b)
-            local sort = require 'blink.cmp.fuzzy.sort'
-            if a.source_id == 'spell' and b.source_id == 'spell' then
-              return sort.label(a, b)
-            end
-          end,
-          -- This is the normal default order, which we fall back to
-          'score',
-          'kind',
-          'label',
-        },
-      },
       -- experimental auto-brackets support
       -- completion = { accept = { auto_brackets = { enabled = true } } }
 
@@ -191,33 +150,6 @@ return {
 
       vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
       vim.opt.shortmess:append 'c'
-
-      for _, provider in pairs(opts.sources.providers or {}) do
-        ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
-        if provider.kind then
-          local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
-          local kind_idx = #CompletionItemKind + 1
-
-          CompletionItemKind[kind_idx] = provider.kind
-          ---@diagnostic disable-next-line: no-unknown
-          CompletionItemKind[provider.kind] = kind_idx
-
-          ---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
-          local transform_items = provider.transform_items
-          ---@param ctx blink.cmp.Context
-          ---@param items blink.cmp.CompletionItem[]
-          provider.transform_items = function(ctx, items)
-            items = transform_items and transform_items(ctx, items) or items
-            for _, item in ipairs(items) do
-              item.kind = kind_idx or item.kind
-            end
-            return items
-          end
-
-          -- Unset custom prop to pass blink.cmp validation
-          provider.kind = nil
-        end
-      end
 
       require('blink.cmp').setup(opts)
     end,

@@ -11,6 +11,7 @@ return {
         -- When relative, you can also provide a path to the library in the plugin dir
         'luvit-meta/library', -- see below
         { path = 'snacks.nvim', words = { 'Snacks' } },
+        { path = 'mini.test', words = { 'MiniTest' } },
       },
     },
   },
