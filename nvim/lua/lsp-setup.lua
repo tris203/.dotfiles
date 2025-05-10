@@ -25,11 +25,11 @@ for server_name, config in pairs(servers) do
 end
 
 for server_name, config in pairs(non_mason_servers) do
-  vim.lsp.config(server_name, {
-    cmd = config.cmd,
-    settings = config.settings,
-  })
-  vim.lsp.enable(server_name)
+  vim.lsp.config(server_name, config)
+  if vim.fn.executable(config.cmd[1]) == 1 then
+    -- may not be executable if its nix env'd
+    vim.lsp.enable(server_name)
+  end
 end
 
 -- Ensure the servers above are installed
