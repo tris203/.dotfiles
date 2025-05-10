@@ -33,8 +33,8 @@ require('lazy').setup({
     end,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'mason-org/mason.nvim', enabled = not require('helpers.nix').is_nixos, version = '1.11.0' },
-      { 'mason-org/mason-lspconfig.nvim', enabled = not require('helpers.nix').is_nixos, version = '1.32.0' },
+      { 'mason-org/mason.nvim', enabled = not require('helpers.nix').is_nixos },
+      { 'mason-org/mason-lspconfig.nvim', enabled = not require('helpers.nix').is_nixos },
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`

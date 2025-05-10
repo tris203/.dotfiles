@@ -18,9 +18,7 @@ function M.get_basepath(lsp_name)
   end
 
   --- Mason install:
-  local base = require('mason-registry').get_package(lsp_name):get_install_path()
-
-  return vim.fs.joinpath(base, 'libexec')
+  return vim.fn.expand '$MASON/packages/' .. lsp_name .. '/libexec'
 end
 
 return M
