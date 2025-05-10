@@ -33,8 +33,8 @@ require('lazy').setup({
     end,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', enabled = not require('helpers.nix').is_nixos },
-      { 'williamboman/mason-lspconfig.nvim', enabled = not require('helpers.nix').is_nixos },
+      { 'mason-org/mason.nvim', enabled = not require('helpers.nix').is_nixos, version = '1.11.0' },
+      { 'mason-org/mason-lspconfig.nvim', enabled = not require('helpers.nix').is_nixos, version = '1.32.0' },
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -147,7 +147,6 @@ require('lazy').setup({
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     branch = 'main',
-    -- dev = true,
     dependencies = {
       {
         'nvim-treesitter/nvim-treesitter-textobjects',
