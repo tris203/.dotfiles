@@ -21,17 +21,19 @@ return {
       local rzls_path = require('helpers.path').get_basepath 'rzls'
       local is_nixos = require('helpers.nix').is_nixos
       require('roslyn').setup {
-        exe = is_nixos and 'Microsoft.CodeAnalysis.LanguageServer' or nil,
-        args = {
-          '--stdio',
-          '--logLevel=Information',
-          '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
-          '--razorSourceGenerator=' .. vim.fs.joinpath(rzls_path, 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
-          '--razorDesignTimePath=' .. vim.fs.joinpath(rzls_path, 'Targets', 'Microsoft.NET.Sdk.Razor.DesignTime.targets'),
-          -- '--stdio',
-        },
         ---@diagnostic disable-next-line: missing-fields
         config = {
+          cmd = {
+            is_nixos and 'Microsoft.CodeAnalysis.LanguageServer' or 'roslyn',
+            '--stdio',
+            '--logLevel=Information',
+            '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
+            '--razorSourceGenerator=' .. vim.fs.joinpath(rzls_path, 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
+            '--razorDesignTimePath=' .. vim.fs.joinpath(rzls_path, 'Targets', 'Microsoft.NET.Sdk.Razor.DesignTime.targets'),
+            '--extension',
+            vim.fs.joinpath(rzls_path, 'RazorExtension', 'Microsoft.VisualStudioCode.RazorExtension.dll'),
+            -- '--stdio',
+          },
           on_attach = require 'lspattach',
           capabilities = require 'lspcapabilities',
           handlers = require 'rzls.roslyn_handlers',
