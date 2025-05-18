@@ -85,6 +85,7 @@ return {
   },
   {
     '0xstepit/flow.nvim',
+    lazy = true,
     opts = {
       theme = {
         transparent = true,
