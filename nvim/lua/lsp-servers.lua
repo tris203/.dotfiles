@@ -26,13 +26,13 @@ local servers = {
       },
     },
   },
-  volar = {
-    init_options = {
-      typescript = {
-        tsdk = vim.fn.getcwd() .. '/node_modules/typescript/lib',
-      },
-    },
-  },
+  -- volar = {
+  --   init_options = {
+  --     typescript = {
+  --       tsdk = vim.fn.getcwd() .. '/node_modules/typescript/lib',
+  --     },
+  --   },
+  -- },
 }
 
 local flake_eval =
