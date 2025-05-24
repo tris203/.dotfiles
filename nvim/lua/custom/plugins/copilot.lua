@@ -1,37 +1,24 @@
 return {
   {
-    'zbirenbaum/copilot.lua',
-    event = 'VeryLazy',
-    dependencies = {
-      'williamboman/mason.nvim',
-    },
-    opts = {
-      -- suggestion = {
-      --   auto_trigger = true,
-      -- },
-      suggestion = {
-        enabled = false,
-      },
-      panel = {
-        enabled = false,
-      },
-      copilot_model = 'gpt-4o-copilot',
-    },
-    config = function(_, opts)
-      vim.schedule(function()
-        local copilot_server_path = vim.fn.exepath 'copilot-language-server'
-
-        if copilot_server_path ~= '' then
-          opts.server_opts_overrides = {
-            cmd = {
-              copilot_server_path,
-              '--stdio',
-            },
-          }
+    'copilotlsp-nvim/copilot-lsp',
+    dev = true,
+    init = function()
+      vim.g.copilot_nes_debounce = 250
+      vim.lsp.enable 'copilot_ls'
+      vim.keymap.set('n', '<tab>', function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local state = vim.b[bufnr].nes_state
+        if state then
+          local _ = require('copilot-lsp.nes').walk_cursor_start_edit()
+            or (require('copilot-lsp.nes').apply_pending_nes() and require('copilot-lsp.nes').walk_cursor_end_edit())
         else
-          vim.notify 'Copilot Language Server not found'
+          vim.notify 'jumplist instead'
         end
-        require('copilot').setup(opts)
+      end)
+      vim.keymap.set('n', '<esc>', function()
+        if vim.b.nes_state then
+          vim.cmd 'CopilotLsp clear'
+        end
       end)
     end,
   },
@@ -57,7 +44,7 @@ return {
       'CopilotChatCommit',
     },
     dependencies = {
-      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+      -- { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
       { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
     },
     ---@module 'CopilotChat'
