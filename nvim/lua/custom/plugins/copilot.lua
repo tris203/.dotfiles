@@ -16,8 +16,9 @@ return {
         end
       end)
       vim.keymap.set('n', '<esc>', function()
-        if vim.b.nes_state then
-          vim.cmd 'CopilotLsp clear'
+        ---@diagnostic disable-next-line: empty-block
+        if not require('copilot-lsp.nes').clear() then
+          -- fallback to other functionality
         end
       end)
     end,
