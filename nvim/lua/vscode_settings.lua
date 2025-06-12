@@ -29,6 +29,8 @@ vim.api.nvim_create_autocmd('User', {
       require('vscode').action 'workbench.view.scm'
     end)
 
+    vim.keymap.set('n', '<leader>bp', '<cmd>Tabfind<cr>')
+
     -- Keep undo/redo lists in sync with VsCode
     vim.keymap.set('n', 'u', function()
       require('vscode').call 'undo'
