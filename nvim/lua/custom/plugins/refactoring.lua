@@ -4,7 +4,7 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
   },
-  epts = {},
+  opts = {},
   keys = {
     {
       '<leader>re',

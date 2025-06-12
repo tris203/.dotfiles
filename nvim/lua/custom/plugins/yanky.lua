@@ -1,9 +1,13 @@
 return {
   {
     'gbprod/yanky.nvim',
+    vscode = true,
     event = 'VeryLazy',
     dependencies = {
-      'kkharji/sqlite.lua',
+      {
+        'kkharji/sqlite.lua',
+        vscode = true,
+      },
     },
     opts = {
       highlight = {
@@ -32,6 +36,7 @@ return {
   {
     'gbprod/cutlass.nvim',
     event = 'UIEnter',
+    vscode = true,
     opts = {
       exclude = { 'ns', 'nS' },
     },

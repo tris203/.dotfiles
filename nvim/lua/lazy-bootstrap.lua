@@ -14,4 +14,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local health = require 'lazy.health'
+vim.list_extend(health.valid, {
+  'vscode',
+})
+
 -- vim: ts=2 sts=2 sw=2 et

@@ -1,6 +1,7 @@
 return {
   {
     'chrisgrieser/nvim-various-textobjs',
+    vscode = true,
     event = 'VeryLazy',
     ---@module "various-textobjs"
     ---@type VariousTextobjs.Config

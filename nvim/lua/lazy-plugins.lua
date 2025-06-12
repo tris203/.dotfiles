@@ -10,7 +10,7 @@ require('lazy').setup({
   { 'tpope/vim-fugitive', cmd = { 'Git' }, keys = { { '<leader>go', '<cmd>Git<CR>', desc = '[G]it [O]pen' } } },
   -- { 'tpope/vim-rhubarb', cmd = { 'Gbrowse' } },
   { 'tpope/vim-unimpaired', event = 'VeryLazy' },
-  { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {
+  { 'kylechui/nvim-surround', event = 'VeryLazy', vscode = true, opts = {
     move_cursor = 'sticky',
   } },
 
@@ -142,14 +142,16 @@ require('lazy').setup({
   -- },
   -- "gc" to comment visual regions/lines
   -- { 'numToStr/Comment.nvim', opts = {}, event = 'LSPAttach' },
-  { 'https://github.com/folke/ts-comments.nvim', event = 'VeryLazy', opts = {} },
+  { 'https://github.com/folke/ts-comments.nvim', vscode = true, event = 'VeryLazy', opts = {} },
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    vscode = true,
     branch = 'main',
     dependencies = {
       {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        vscode = true,
         branch = 'main',
         opts = {
           select = {
@@ -236,6 +238,7 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
+  { import = 'vscode_settings' },
 }, {
   dev = {
     path = '~/code',

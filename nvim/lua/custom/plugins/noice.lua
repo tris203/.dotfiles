@@ -3,6 +3,7 @@ return -- lazy.nvim
   {
     'folke/snacks.nvim',
     priority = 1000,
+    vscode = false,
     lazy = false,
     ---@module 'snacks'
     ---@type snacks.Config
@@ -263,6 +264,7 @@ return -- lazy.nvim
     'folke/noice.nvim',
     priority = 1000,
     lazy = false,
+    dev = true,
     -- enabled = false,
     ---@module "noice"
     ---@type NoiceConfig
