@@ -1,4 +1,4 @@
-local fts = { 'markdown', 'Avante', 'copilot-chat', 'octo', 'blink-cmp-documentation' }
+local fts = { 'markdown', 'Avante', 'codecompanion', 'copilot-chat', 'octo', 'blink-cmp-documentation' }
 return {
   {
     'MeanderingProgrammer/render-markdown.nvim',

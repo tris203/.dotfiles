@@ -29,25 +29,46 @@ return {
     end,
   },
   {
+    'olimorris/codecompanion.nvim',
+    opts = {
+      display = {
+        chat = {
+          window = {
+            position = 'right',
+          },
+        },
+      },
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    keys = {
+      { '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle Chat' },
+      { '<leader>ccs', '<cmd>CodeCompanion /commit<cr>', desc = 'Write Commit' },
+    },
+  },
+  {
     'CopilotC-Nvim/CopilotChat.nvim',
+    enabled = false,
     build = 'make tiktoken',
     cmd = {
       'CopilotChat',
-      'CopilotChatOpen',
       'CopilotChatClose',
-      'CopilotChatToggle',
-      'CopilotChatStop',
-      'CopilotChatReset',
-      'CopilotChatSave',
-      'CopilotChatLoad',
-      'CopilotChatDebugInfo',
-      'CopilotChatExplain',
-      'CopilotChatReview',
-      'CopilotChatFix',
-      'CopilotChatOptimize',
-      'CopilotChatDocs',
-      'CopilotChatTests',
       'CopilotChatCommit',
+      'CopilotChatDebugInfo',
+      'CopilotChatDocs',
+      'CopilotChatExplain',
+      'CopilotChatFix',
+      'CopilotChatLoad',
+      'CopilotChatOpen',
+      'CopilotChatOptimize',
+      'CopilotChatReset',
+      'CopilotChatReview',
+      'CopilotChatSave',
+      'CopilotChatStop',
+      'CopilotChatTests',
+      'CopilotChatToggle',
     },
     dependencies = {
       -- { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
@@ -56,7 +77,6 @@ return {
     ---@module 'CopilotChat'
     ---@type CopilotChat.config
     opts = {
-      model = 'o3-mini',
       highlight_headers = false,
       -- separator = '---',
       error_header = '>[!ERROR] Error',
