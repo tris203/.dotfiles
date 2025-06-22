@@ -85,6 +85,9 @@ return {
         },
       },
       sources = {
+        per_filetype = {
+          codecompanion = { 'codecompanion' },
+        },
         default = { 'git', 'lsp', 'path', 'buffer', 'snippets', 'lazydev', 'copilot', 'dadbod' },
         providers = {
           copilot = {
