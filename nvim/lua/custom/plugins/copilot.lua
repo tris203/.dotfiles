@@ -43,6 +43,7 @@ return {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
     },
+    event = { 'CmdlineEnter' },
     keys = {
       { '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle Chat' },
       { '<leader>ccs', '<cmd>CodeCompanion /commit<cr>', desc = 'Write Commit' },
