@@ -11,15 +11,20 @@ return {
         if state then
           local _ = require('copilot-lsp.nes').walk_cursor_start_edit()
             or (require('copilot-lsp.nes').apply_pending_nes() and require('copilot-lsp.nes').walk_cursor_end_edit())
+          return nil
         else
-          vim.notify 'jumplist instead'
+          return '<C-i>'
         end
-      end)
+      end, { desc = 'Accept Copilot NES suggestion', expr = true })
       vim.keymap.set('n', '<esc>', function()
         ---@diagnostic disable-next-line: empty-block
         if not require('copilot-lsp.nes').clear() then
-          -- fallback to other functionality
+          return '<esc>'
         end
+        vim.keymap.set('n', '<leader>cr', function()
+          require('copilot-lsp.nes').restore_suggestion()
+          return nil
+        end, { desc = 'Restore previous Copilot suggestion', expr = true })
       end)
     end,
   },
