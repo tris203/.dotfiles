@@ -14,6 +14,10 @@ return {
       }
       local group = vim.api.nvim_create_augroup('nvim-lint_au', { clear = true })
 
+      local lint_exclude_ft = {
+        codecompanion = true,
+      }
+
       vim.api.nvim_create_autocmd({
         'TextChangedI',
         'InsertLeave',
@@ -22,6 +26,10 @@ return {
       }, {
         group = group,
         callback = function()
+          local buf = vim.api.nvim_get_current_buf()
+          if lint_exclude_ft[vim.bo[buf].filetype] then
+            return
+          end
           local progress = require('fidget').progress.handle.create {
             message = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t'),
             title = 'Linting',
