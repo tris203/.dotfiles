@@ -2,6 +2,7 @@ return {
   {
     'copilotlsp-nvim/copilot-lsp',
     dev = true,
+    event = 'BufEnter',
     init = function()
       vim.g.copilot_nes_debounce = 250
       vim.lsp.enable 'copilot_ls'

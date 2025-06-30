@@ -7,7 +7,7 @@ return {
     },
     keys = {
       {
-        'ga.',
+        'gac',
         function()
           ---@module 'textcase'
           local commands = require('textcase').api
@@ -36,12 +36,6 @@ return {
         desc = 'Text Case Select',
       },
     },
-    cmd = {
-      -- NOTE: The Subs command name can be customized via the option "substitude_command_name"
-      'Subs',
-      'TextCaseOpenTelescope',
-      'TextCaseOpenTelescopeQuickChange',
-      'TextCaseOpenTelescopeLSPChange',
-    },
+    cmd = {},
   },
 }
