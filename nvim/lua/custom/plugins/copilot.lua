@@ -3,7 +3,7 @@ return {
     'copilotlsp-nvim/copilot-lsp',
     dev = true,
     event = 'BufEnter',
-    init = function()
+    config = function()
       vim.g.copilot_nes_debounce = 250
       vim.lsp.enable 'copilot_ls'
       vim.keymap.set('n', '<tab>', function()
@@ -47,8 +47,9 @@ return {
       'nvim-treesitter/nvim-treesitter',
       'j-hui/fidget.nvim',
     },
-    init = function()
+    config = function(_, opts)
       require('helpers.codecompanion_spinner').init {}
+      require('codecompanion').setup(opts)
     end,
     event = { 'CmdlineEnter' },
     keys = {
