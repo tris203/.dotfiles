@@ -3,7 +3,7 @@ return {
     'copilotlsp-nvim/copilot-lsp',
     dev = true,
     event = 'BufEnter',
-    config = function()
+    init = function()
       vim.g.copilot_nes_debounce = 250
       vim.lsp.enable 'copilot_ls'
       vim.keymap.set('n', '<tab>', function()
