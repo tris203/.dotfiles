@@ -14,7 +14,7 @@ end
 return {
   -- 'epwalsh/obsidian.nvim',
   'obsidian-nvim/obsidian.nvim',
-  cmd = { 'ObsidianOpen', 'ObsidianSearch', 'ObsidianQuickSwitch', 'ObsidianNew' },
+  cmd = { 'Obsidian' },
   -- version = '*', -- recommended, use latest release instead of latest commit
   keys = {
     -- { '<leader>of', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Obsidan Quick Switch' },
@@ -23,12 +23,12 @@ return {
       '<leader>on',
       function()
         local note_name = vim.fn.input 'Note name: '
-        vim.cmd('ObsidianNew ' .. note_name)
+        vim.cmd('Obsidian new ' .. note_name)
       end,
       desc = 'Obsidian New',
     },
-    { '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = 'Obsidian Open' },
-    { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = 'Obsidian Tags' },
+    { '<leader>oo', '<cmd>Obsidian open<cr>', desc = 'Obsidian Open' },
+    { '<leader>ot', '<cmd>Obsidian tags<cr>', desc = 'Obsidian Tags' },
     {
       '<leader>of',
       function()
@@ -59,6 +59,7 @@ return {
   ---@type obsidian.config.ClientOpts
   ---@diagnostic disable-next-line: missing-fields
   opts = {
+    legacy_commands = false,
     completion = {
       blink = true,
       nvim_cmp = false,
