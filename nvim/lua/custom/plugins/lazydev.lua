@@ -2,7 +2,18 @@ return {
   {
     'folke/lazydev.nvim',
     ft = 'lua', -- only load on lua files
+    ---@module "lazydev"
+    ---@class lazydev.Config
     opts = {
+      enabled = function()
+        if vim.g.lazydev_enabled ~= nil then
+          return false
+        end
+
+        local cwd = vim.uv.cwd()
+        local is_dev = cwd and vim.uv.fs_stat(cwd .. '/runtime') and true or false
+        return not is_dev
+      end,
       library = {
         -- Library items can be absolute paths
         -- "~/projects/my-awesome-lib",
