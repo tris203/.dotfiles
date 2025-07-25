@@ -33,7 +33,16 @@ require('lazy').setup({
     end,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'mason-org/mason.nvim', enabled = not require('helpers.nix').is_nixos },
+      {
+        'mason-org/mason.nvim',
+        enabled = not require('helpers.nix').is_nixos,
+        dependencies = {
+          {
+            'zapling/mason-lock.nvim',
+            opts = {},
+          },
+        },
+      },
       { 'mason-org/mason-lspconfig.nvim', enabled = not require('helpers.nix').is_nixos },
 
       -- Useful status updates for LSP
