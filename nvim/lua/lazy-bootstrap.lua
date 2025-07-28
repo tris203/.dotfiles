@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
-vim.opt.rtp:prepend(lazypath)
+vim.o.rtp = lazypath .. ',' .. vim.o.rtp
 
 local health = require 'lazy.health'
 vim.list_extend(health.valid, {

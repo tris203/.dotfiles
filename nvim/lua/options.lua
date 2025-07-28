@@ -1,6 +1,6 @@
--- [[ Setting options ]]
+-- [[ Setting oions ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
+-- NOTE: You can change these oions as you wish!
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -12,7 +12,7 @@ vim.wo.number = true
 vim.o.mouse = 'a'
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
+--  Remove this oion if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 -- vim.o.clipboard = 'unnamedplus'
 
@@ -20,7 +20,7 @@ vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- vim.o.foldtext =
 --     [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
 
-vim.opt.foldtext = require 'foldtext'
+vim.o.foldtext = require 'foldtext'
 vim.o.fillchars = 'fold: '
 vim.o.foldnestmax = 3
 vim.o.foldminlines = 1
@@ -49,14 +49,11 @@ vim.wo.signcolumn = 'yes'
 vim.o.updatetime = 250
 vim.o.timeoutlen = 750
 
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.opt.spelllang = 'en_gb'
-vim.opt.spell = true
+vim.o.spelllang = 'en_gb'
+vim.o.spell = true
 
 vim.o.diffopt = 'internal,filler,closeoff,linematch:30'
 -- vim: ts=2 sts=2 sw=2 et

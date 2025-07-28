@@ -151,8 +151,8 @@ return {
       --   loadfile(ft_path)()
       -- end
 
-      vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-      vim.opt.shortmess:append 'c'
+      vim.o.completeopt = 'menu,menuone,noselect'
+      vim.o.shortmess = vim.o.shortmess .. 'c'
 
       require('blink.cmp').setup(opts)
     end,
