@@ -33,6 +33,7 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
+    enabled = false,
     opts = {
       display = {
         chat = {
@@ -59,7 +60,6 @@ return {
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
-    enabled = false,
     build = 'make tiktoken',
     cmd = {
       'CopilotChat',
@@ -83,21 +83,20 @@ return {
       -- { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
       { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
     },
-    ---@module 'CopilotChat'
-    ---@type CopilotChat.config
-    opts = {
-      highlight_headers = false,
-      -- separator = '---',
-      error_header = '>[!ERROR] Error',
-
-      -- debug = true, -- Enable debugging
-      -- See Configuration section for rest
-      window = {
-        layout = 'float',
-      },
-      prompts = {
-        NeovimCommit = {
-          prompt = [[> #git:staged
+    config = function(_, _opts)
+      require('CopilotChat').setup {
+        error_header = '>[!ERROR] Error',
+        -- debug = true, -- Enable debugging
+        -- See Configuration section for rest
+        window = {
+          layout = 'float',
+        },
+        prompts = {
+          Commit = {
+            selection = require('CopilotChat.select').buffer,
+          },
+          NeovimCommit = {
+            prompt = [[> #git:staged
 
 You are an expert in generating accurate, professional commit messages for version control systems following the Conventional Commits specification.
 Your task is to analyze the given git diff output and craft a commit message that adheres to these rules:
@@ -127,9 +126,10 @@ Output format:
 A fully formatted commit message, including subject and body, following all specified rules.
 The result MUST only contain the message
 The result should be wrapped in a markdown block tagged with language `gitcommit`]],
+          },
         },
-      },
-    },
+      }
+    end,
     keys = {
       { '<leader>cc', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Chat' },
       { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'Explain' },
