@@ -10,6 +10,12 @@ return {
 
     opts = {
       lsp_cfg = true,
+      lsp_impl = {
+        enable = true,
+        prefix = '',
+        separator = ', ',
+        highlight = 'Comment',
+      },
       lsp_on_attach = require 'lspattach',
       lsp_inlay_hints = { enable = false },
       trouble = true,
@@ -41,10 +47,5 @@ return {
         type = 'snacks',
       },
     },
-  },
-  {
-    'maxandron/goplements.nvim',
-    ft = 'go',
-    opts = {},
   },
 }
