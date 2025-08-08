@@ -13,7 +13,6 @@ local servers = require('lsp-servers').servers
 local non_mason_servers = require('lsp-servers').non_mason_servers
 
 vim.lsp.config('*', {
-  on_attach = require 'lspattach',
   capabilities = require 'lspcapabilities',
 })
 

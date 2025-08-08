@@ -16,7 +16,6 @@ return {
         separator = ', ',
         highlight = 'Comment',
       },
-      lsp_on_attach = require 'lspattach',
       lsp_inlay_hints = { enable = false },
       trouble = true,
       diagnostic = false,

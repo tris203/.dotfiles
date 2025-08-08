@@ -5,7 +5,6 @@ for server_name, config in pairs(non_mason_servers) do
   require('lspconfig')[server_name].setup {
     cmd = config.cmd,
     capabilities = require 'lspcapabilities',
-    on_attach = require 'lspattach',
     settings = config.settings,
   }
 end
@@ -14,7 +13,6 @@ for server_name, config in pairs(servers) do
   require('lspconfig')[server_name].setup {
     cmd = config.cmd,
     capabilities = require 'lspcapabilities',
-    on_attach = require 'lspattach',
     settings = config.settings,
   }
 end

@@ -81,6 +81,8 @@ require 'options'
 -- [[ Basic Keymaps ]]
 require 'keymaps'
 
+require 'lspattach'
+
 -- vim.print = _G.dd
 
 -- [[ Configure Treesitter ]]
