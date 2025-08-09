@@ -12,7 +12,6 @@ return {
           require('rzls').setup {
             path = is_nixos and 'rzls' or nil,
             on_attach = require 'lspattach',
-            capabilities = require 'lspcapabilities',
           }
         end,
       },
@@ -33,7 +32,6 @@ return {
           '--stdio',
         },
         on_attach = require 'lspattach',
-        -- capabilities = require 'lspcapabilities',
         handlers = require 'rzls.roslyn_handlers',
         settings = {
           ['csharp|inlay_hints'] = {

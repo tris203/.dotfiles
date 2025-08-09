@@ -4,7 +4,6 @@ local non_mason_servers = require('lsp-servers').non_mason_servers
 for server_name, config in pairs(non_mason_servers) do
   require('lspconfig')[server_name].setup {
     cmd = config.cmd,
-    capabilities = require 'lspcapabilities',
     settings = config.settings,
   }
 end
@@ -12,7 +11,6 @@ end
 for server_name, config in pairs(servers) do
   require('lspconfig')[server_name].setup {
     cmd = config.cmd,
-    capabilities = require 'lspcapabilities',
     settings = config.settings,
   }
 end

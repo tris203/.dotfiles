@@ -12,10 +12,6 @@ require('mason-lspconfig').setup()
 local servers = require('lsp-servers').servers
 local non_mason_servers = require('lsp-servers').non_mason_servers
 
-vim.lsp.config('*', {
-  capabilities = require 'lspcapabilities',
-})
-
 for server_name, config in pairs(servers) do
   vim.lsp.config(server_name, {
     settings = config,
@@ -41,7 +37,6 @@ end
 -- mason_lspconfig.setup_handlers {
 --   function(server_name)
 --     require('lspconfig')[server_name].setup {
---       capabilities = require 'lspcapabilities',
 --       on_attach = require 'lspattach',
 --       settings = servers[server_name],
 --       filetypes = (servers[server_name] or {}).filetypes,
