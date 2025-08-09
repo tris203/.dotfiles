@@ -31,7 +31,28 @@ return {
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
       -- see the "default configuration" section below for full documentation on how to define
       -- your own keymap.
-      keymap = { preset = 'super-tab' },
+      keymap = {
+        preset = 'super-tab',
+        ['<Tab>'] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          function()
+            if vim.fn.pumvisible() == 1 then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-y>', true, false, true), 'n', false)
+              return true
+            else
+              return false
+            end
+          end,
+          'snippet_forward',
+          'fallback',
+        },
+      },
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
         -- Useful for when your theme doesn't support blink.cmp
@@ -153,6 +174,14 @@ return {
 
       vim.o.completeopt = 'menu,menuone,noselect'
       vim.o.shortmess = vim.o.shortmess .. 'c'
+
+      vim.keymap.set({ 'i', 's' }, '<Esc>', function()
+        if vim.snippet.active() then
+          vim.snippet.stop()
+          return ''
+        end
+        return '<Esc>'
+      end, { expr = true, desc = 'Close snippet session' })
 
       require('blink.cmp').setup(opts)
     end,
