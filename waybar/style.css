@@ -1,0 +1,189 @@
+* {
+  border: none;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  color: #c0caf5;           /* Tokyo Night foreground */
+  border-radius: 5px;
+  padding: 0px;
+  transition-duration: 1s;
+  box-shadow: none; 
+  background: transparent;
+}
+
+
+tooltip {
+  border-radius: 0px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgba(26, 27, 38, 0); 
+  color: #c0caf5;
+}
+
+#workspaces button {
+  margin-right: 0px;
+  color: mix(#c0caf5, #1a1b26, 0.4); /* Slightly lighter Tokyo Night foreground */
+  border-radius: 5px;
+}
+
+#workspaces button.active {
+  color: #bb9af7; /* Tokyo Night Purple */
+}
+
+#workspaces button.focused {
+  color: #7dcfff; /* Tokyo Night Cyan */
+}
+
+#workspaces button.urgent {
+  color: #c0caf5;
+}
+
+#workspaces button:hover {
+  color: #9ece6a; /* Tokyo Night Green */
+}
+
+#temperature {
+  color: mix(#f7768e, #c0caf5, 0.8); /* Tokyo Night Red */
+}
+
+#temperature.critical {
+  color: #f7768e; /* Tokyo Night Red */
+}
+
+#backlight {
+  color: #7dcfff; /* Tokyo Night Cyan */
+}
+
+#workspaces {
+  padding: 0px;
+}
+
+#mpris {
+  color: #bb9af7; /* Tokyo Night Purple */
+}
+
+#custom-cava, #custom-euro {
+  color: #bb9af7; /* Tokyo Night Purple */
+}
+
+#custom-power_profile {
+  color: mix(#9ece6a, #c0caf5, 0.5); /* Tokyo Night Green */
+}
+
+#window {
+  color: #c0caf5; /* Tokyo Night Foreground */
+}
+
+#clock {
+  color: #bb9af7; /* Tokyo Night Purple */
+}
+
+#workspaces, #light, #audio {
+}
+
+#custom-arch {
+  color: #7aa2f7; /* Tokyo Night Blue */
+}
+
+#custom-quit {
+  color: mix(#ff9e64, #c0caf5, 0.6); /* Tokyo Night Orange */
+}
+
+#custom-lock {
+  color: mix(#9ece6a, #c0caf5, 0.6); /* Tokyo Night Green */
+}
+
+#custom-sleep {
+  color: mix(#7dcfff, #c0caf5, 0.6); /* Tokyo Night Cyan */
+}
+
+#custom-reboot {
+  color: mix(#ff9e64, #c0caf5, 0.6); /* Tokyo Night Orange */
+}
+
+#custom-shutdown {
+  color: mix(#f7768e, #c0caf5, 0.6); /* Tokyo Night Red */
+}
+
+#network {
+  color: #7aa2f7; /* Tokyo Night Blue */
+}
+
+#bluetooth {
+  color: #7dcfff; /* Tokyo Night Cyan */
+}
+
+#pulseaudio:not(.microphone) {
+  color: mix(#ff9e64, #c0caf5, 0.5); /* Tokyo Night Orange */
+}
+
+#pulseaudio.microphone {
+  color: mix(#9ece6a, #c0caf5, 0.5); /* Tokyo Night Green */
+}
+
+#pulseaudio.bluetooth:not(.microphone) {
+  color: mix(#7dcfff, #c0caf5, 0.5); /* Tokyo Night Cyan */
+}
+
+#pulseaudio.muted:not(.microphone) {
+  color: mix(#f7768e, #c0caf5, 0.5); /* Tokyo Night Red */
+}
+
+#pulseaudio.microphone.source-muted {
+  color: mix(#f7768e, #c0caf5, 0.5); /* Tokyo Night Red */
+}
+
+#battery {
+  color: mix(#9ece6a, #c0caf5, 0.5); /* Tokyo Night Green */
+}
+
+battery.bat2 {
+  color: mix(#9ece6a, #c0caf5, 0.5); /* Tokyo Night Green */
+}
+
+#custom-weather {
+  color: mix(#ff9e64, #c0caf5, 0.5); /* Tokyo Night Orange */
+}
+
+#tray {
+  padding: 0;
+}
+
+window#waybar > box > box > widget > *,
+window#waybar > box > box > box {
+  margin: 0 5px;
+  border-radius: 5px;
+  background-color: rgba(26, 27, 38, 0.6);
+}
+
+widget > * {
+  padding: 0 10px;
+}
+
+slider {
+  min-height: 0px;
+  min-width: 0px;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+trough {
+  min-height: 20px;
+  min-width: 80px;
+  border-radius: 5px;
+}
+
+highlight {
+  min-height: 10px;
+  border-radius: 5px;
+}
+
+#light {
+  border-radius: 5px;
+}
