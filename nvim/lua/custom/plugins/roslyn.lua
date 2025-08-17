@@ -11,7 +11,6 @@ return {
           local is_nixos = require('helpers.nix').is_nixos
           require('rzls').setup {
             path = is_nixos and 'rzls' or nil,
-            on_attach = require 'lspattach',
           }
         end,
       },
@@ -31,7 +30,6 @@ return {
           vim.fs.joinpath(rzls_path, 'RazorExtension', 'Microsoft.VisualStudioCode.RazorExtension.dll'),
           '--stdio',
         },
-        on_attach = require 'lspattach',
         handlers = require 'rzls.roslyn_handlers',
         settings = {
           ['csharp|inlay_hints'] = {
