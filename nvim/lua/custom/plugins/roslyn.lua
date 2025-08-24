@@ -16,7 +16,7 @@ return {
       },
     },
     config = function()
-      local rzls_path = require('helpers.path').get_basepath 'rzls'
+      local rzls_path = require('helpers.path').get_path('rzls', 'lib/rzls')
       local is_nixos = require('helpers.nix').is_nixos
       vim.lsp.config('roslyn', {
         cmd = {
@@ -27,8 +27,13 @@ return {
           '--razorSourceGenerator=' .. vim.fs.joinpath(rzls_path, 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
           '--razorDesignTimePath=' .. vim.fs.joinpath(rzls_path, 'Targets', 'Microsoft.NET.Sdk.Razor.DesignTime.targets'),
           '--extension',
-          vim.fs.joinpath(rzls_path, 'RazorExtension', 'Microsoft.VisualStudioCode.RazorExtension.dll'),
-          '--stdio',
+          vim.fs.joinpath(
+            is_nixos
+                and require('helpers.path').get_path('vscode-extensions.ms-dotnettools.csharp', 'share/vscode/extensions/ms-dotnettools.csharp/.razorExtension')
+              or vim.fs.joinpath(rzls_path, 'RazorExtension'),
+            'Microsoft.VisualStudioCode.RazorExtension.dll'
+          ),
+          -- '/home/tris/code/nixpkgs/result/share/vscode/extensions/ms-dotnettools.csharp/.razorExtension/Microsoft.VisualStudioCode.RazorExtension.dll',
         },
         handlers = require 'rzls.roslyn_handlers',
         settings = {
