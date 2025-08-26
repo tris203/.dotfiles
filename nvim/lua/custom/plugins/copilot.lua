@@ -92,9 +92,6 @@ return {
           layout = 'float',
         },
         prompts = {
-          Commit = {
-            selection = require('CopilotChat.select').buffer,
-          },
           NeovimCommit = {
             prompt = [[> #git:staged
 
