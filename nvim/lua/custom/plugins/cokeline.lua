@@ -64,7 +64,7 @@ return {
   priority = 900,
   dependencies = {
     'nvim-lua/plenary.nvim', -- Required for v0.4.0+
-    'echasnovski/mini.icons',
+    'nvim-mini/mini.icons',
     -- 'stevearc/resession.nvim',     -- Optional, for persistent history
   },
   config = function()

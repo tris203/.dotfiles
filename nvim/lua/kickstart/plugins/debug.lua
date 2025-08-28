@@ -150,7 +150,7 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = {
-      'echasnovski/mini.icons',
+      'nvim-mini/mini.icons',
     },
     opts = {
       modes = {

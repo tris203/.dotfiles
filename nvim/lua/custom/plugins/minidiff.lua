@@ -1,6 +1,6 @@
 return {
   {
-    'echasnovski/mini.diff',
+    'nvim-mini/mini.diff',
     event = 'VeryLazy',
     config = function()
       require('mini.diff').setup {

@@ -1,7 +1,7 @@
 return {
   {
     lazy = false,
-    'echasnovski/mini.test',
+    'nvim-mini/mini.test',
     opts = {},
   },
 }
