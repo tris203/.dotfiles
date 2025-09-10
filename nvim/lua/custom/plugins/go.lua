@@ -29,6 +29,15 @@ return {
     ft = { 'go', 'gomod' },
   },
   {
+    'pcolladosoto/tinygo.nvim',
+    opts = {},
+    cmd = {
+      'TinyGoTargets',
+      'TinyGoEnv',
+      'TinyGoSetTarget',
+    },
+  },
+  {
     'fredrikaverpil/godoc.nvim',
     dependencies = {
       { 'folke/snacks.nvim' },
