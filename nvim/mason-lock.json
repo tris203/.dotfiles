@@ -4,7 +4,7 @@
   "buf": "v1.55.1",
   "clang-format": "20.1.8",
   "clangd": "20.1.8",
-  "copilot-language-server": "1.367.0",
+  "copilot-language-server": "1.371.0",
   "cspell": "9.2.0",
   "delve": "v1.25.1",
   "docker-compose-language-service": "0.4.0",
