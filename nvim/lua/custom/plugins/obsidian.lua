@@ -1,7 +1,7 @@
 local function getPath()
   --check hostname for different paths
   local path
-  local hostname = vim.loop.os_gethostname()
+  local hostname = vim.uv.os_gethostname()
   if hostname == 'pop-os' then
     path = '~/Obsidian/Home'
   else
