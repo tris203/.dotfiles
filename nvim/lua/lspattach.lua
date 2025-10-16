@@ -25,7 +25,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, { buffer = args.buf, desc = '[W]orkspace [S]ymbols' })
     vim.keymap.set('n', '<C-m-k>', vim.lsp.buf.signature_help, { buffer = args.buf, desc = 'Signature Documentation' })
 
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = args.buf, desc = '[G]oto [D]eclaration' })
+    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = args.buf, desc = '[G]oto [D]eclaration' })
+    vim.keymap.set('n', 'gD', vim.lsp.buf.type_definition, { buffer = args.buf, desc = '[G]oto [D]eclaration' })
     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = args.buf, desc = '[W]orkspace [A]dd Folder' })
     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = args.buf, desc = '[W]orkspace [R]emove Folder' })
     vim.keymap.set('n', '<leader>wl', function()
