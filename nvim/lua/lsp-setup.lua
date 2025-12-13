@@ -7,7 +7,11 @@ require('mason').setup {
     'github:crashdummyy/mason-registry',
   },
 }
-require('mason-lspconfig').setup()
+require('mason-lspconfig').setup {
+  automatic_enable = {
+    exclude = { 'copilot' },
+  },
+}
 
 local servers = require('lsp-servers').servers
 local non_mason_servers = require('lsp-servers').non_mason_servers
