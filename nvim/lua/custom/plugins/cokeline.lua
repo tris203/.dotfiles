@@ -58,7 +58,7 @@ end
 
 return {
   'willothy/nvim-cokeline',
-  -- enabled = false,
+  enabled = false,
   event = 'UIEnter',
   -- lazy = false,
   priority = 900,
