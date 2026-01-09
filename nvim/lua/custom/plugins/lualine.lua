@@ -6,7 +6,7 @@ return {
   config = function()
     require('lualine').setup {
       options = {
-        icons_enabled = true,
+        icons_enabled = false,
         -- theme = 'palenight',
         component_separators = '|',
         section_separators = '',
@@ -15,7 +15,7 @@ return {
         lualine_b = { 'branch' },
         lualine_c = {
           {
-            'buffers',
+            'fancybuffers',
             -- show_filename_only = true, -- Shows shortened relative path when set to false.
             -- hide_filename_extension = false, -- Hide filename extension when set to true.
             show_modified_status = true, -- Shows indicator when the buffer is modified.
@@ -37,6 +37,7 @@ return {
             -- -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
             -- use_mode_colors = false,
             --
+            -- max_length = vim.o.columns / 3 * 6,
             buffers_color = {
               -- Same values as the general color option can be used here.
               active = 'lualine_c_normal', -- Color for active buffer.
@@ -45,6 +46,7 @@ return {
             fmt = function(name, ctx)
               local bufnr = ctx.bufnr
               local diags = vim.diagnostic.count(bufnr)
+              local icon, icon_color = require('mini.icons').get('file', ctx.file)
               -- Find all buffers with the same name
               local buffers = vim.tbl_filter(function(b)
                 return vim.api.nvim_buf_is_loaded(b)
@@ -76,9 +78,14 @@ return {
                   end
                 end
               end
-
               if vim.tbl_isempty(diags) then
-                return string.format('%s %s', harpoon_name, display_name)
+                return string.format(
+                  '%s%s%s %s',
+                  '%#' .. icon_color .. '#' .. icon .. ' ',
+                  require('lualine.highlight').component_format_highlight(ctx.highlights[(ctx.current and 'active' or 'inactive')]),
+                  harpoon_name,
+                  display_name
+                )
               end
               local severity = next(diags) and math.min(unpack(vim.tbl_keys(diags))) or nil
               local color = {
@@ -88,7 +95,9 @@ return {
                 [vim.diagnostic.severity.HINT] = '',
               }
               return string.format(
-                '%s %s%s%s',
+                '%s%s%s %s%s%s',
+                '%#' .. icon_color .. '#' .. icon .. ' ',
+                require('lualine.highlight').component_format_highlight(ctx.highlights[(ctx.current and 'active' or 'inactive')]),
                 harpoon_name,
                 color[severity] or '',
                 display_name,
