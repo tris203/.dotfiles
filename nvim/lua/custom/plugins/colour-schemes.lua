@@ -16,6 +16,10 @@ return {
         hl.LspInlayHint = {
           link = 'Comment',
         }
+        hl.FlashLabel = {
+          fg = '#ff007c',
+          bg = '#1f2335',
+        }
       end,
       styles = {
         sidebars = 'transparent',

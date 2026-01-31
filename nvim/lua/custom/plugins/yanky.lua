@@ -11,7 +11,8 @@ return {
     },
     opts = {
       highlight = {
-        timer = 200.,
+        timer = 150,
+        on_yank = false,
       },
       ring = {
         storage = 'sqlite',

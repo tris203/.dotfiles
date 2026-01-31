@@ -56,4 +56,11 @@ vim.o.spelllang = 'en_gb'
 vim.o.spell = true
 
 vim.o.diffopt = 'internal,filler,closeoff,linematch:30'
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { higroup = 'Visual', timeout = 150 }
+  end,
+})
 -- vim: ts=2 sts=2 sw=2 et
