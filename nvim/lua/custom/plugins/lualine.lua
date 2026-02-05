@@ -73,7 +73,7 @@ return {
                 local path = require('plenary.path'):new(vim.api.nvim_buf_get_name(bufnr)):make_relative(vim.uv.cwd())
                 for i, mark in ipairs(require('harpoon'):list():display()) do
                   if mark == path then
-                    harpoon_name = '󱡁' .. harpoon_keys[i]
+                    harpoon_name = '󱡁' .. (harpoon_keys[i] or '')
                     break
                   end
                 end
