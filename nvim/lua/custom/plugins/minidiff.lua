@@ -15,4 +15,16 @@ return {
       }
     end,
   },
+  {
+    'barrettruth/diffs.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'tpope/vim-fugitive' },
+    init = function()
+      vim.g.diffs = {
+        highlights = {
+          gutter = false,
+        },
+      }
+    end,
+  },
 }
