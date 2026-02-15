@@ -23,6 +23,7 @@ return {
       vim.g.diffs = {
         highlights = {
           gutter = false,
+          intra = { enabled = false },
         },
       }
     end,
