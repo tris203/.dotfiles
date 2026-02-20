@@ -21,6 +21,7 @@ return {
     dependencies = { 'tpope/vim-fugitive' },
     init = function()
       vim.g.diffs = {
+        fugitive = true,
         highlights = {
           gutter = false,
           intra = { enabled = false },
