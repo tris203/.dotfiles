@@ -180,8 +180,17 @@ function Buffer:apply_mode(name)
     return string.format('%s%s %s%s', self.alternate_file_icon, self.bufnr or '', self.icon, self.modified_icon)
   end
 
-  -- if self.options.mode == 4 then
-  return string.format('%s%s %s%s%s', self.alternate_file_icon, self.bufnr or '', self.icon, name, self.modified_icon)
+  if self.options.mode == 4 then
+    return string.format('%s%s %s%s%s', self.alternate_file_icon, self.bufnr or '', self.icon, name, self.modified_icon)
+  end
+
+  if self.options.mode == 'picking' then
+    -- Pick mode: highlight pick character with space, keep filename
+    local pick_char = self.buf_index or ''
+    return string.format('%s %%#Constant#%s%%* %s%s', self.alternate_file_icon, pick_char, name, self.modified_icon)
+  end
+
+  return name
 end
 
 return Buffer

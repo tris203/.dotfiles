@@ -2,6 +2,7 @@
 -- MIT license, see LICENSE for more details.
 local require = require('lualine_require').require
 local Buffer = require 'lualine.components.fancybuffers.buffer'
+local pick = require 'lualine.components.fancybuffers.pick'
 local M = require('lualine.component'):extend()
 local highlight = require 'lualine.highlight'
 
@@ -67,12 +68,13 @@ function M:init(options)
   end
 end
 
-function M:new_buffer(bufnr, buf_index)
+function M:new_buffer(bufnr, buf_index, pick_char)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   buf_index = buf_index or ''
+  pick_char = pick_char or ''
   return Buffer:new {
     bufnr = bufnr,
-    buf_index = buf_index,
+    buf_index = pick_char ~= '' and pick_char or buf_index,
     options = self.options,
     highlights = self.highlights,
   }
@@ -81,9 +83,18 @@ end
 function M:buffers()
   local buffers = {}
   M.bufpos2nr = {}
+
+  -- Get pick characters if in pick mode
+  local pick_chars = {}
+  if pick.active and #pick.bufpos2char > 0 then
+    pick_chars = pick.bufpos2char
+  end
+
   for b = 1, vim.fn.bufnr '$' do
     if vim.fn.buflisted(b) ~= 0 and vim.api.nvim_buf_get_option(b, 'buftype') ~= 'quickfix' then
-      buffers[#buffers + 1] = self:new_buffer(b, #buffers + 1)
+      local buf_pos = #buffers + 1
+      local pick_char = pick_chars[buf_pos] or ''
+      buffers[#buffers + 1] = self:new_buffer(b, buf_pos, pick_char)
       M.bufpos2nr[#buffers] = b
     end
   end
@@ -92,6 +103,11 @@ function M:buffers()
 end
 
 function M:update_status()
+  -- Save original mode and switch to mode 6 when in pick mode
+  local original_mode = self.options.mode
+  if pick.active then
+    self.options.mode = 'picking'
+  end
   local data = {}
   local buffers = self:buffers()
   local current = -2
@@ -133,7 +149,11 @@ function M:update_status()
   -- start drawing from current buffer and draw left and right of it until
   -- all buffers are drawn or max_length has been reached.
   if current == -2 then
-    local b = self:new_buffer()
+    local pick_char = ''
+    if pick.active and #pick.bufpos2char > 0 then
+      pick_char = pick.bufpos2char[#buffers + 1] or ''
+    end
+    local b = self:new_buffer(nil, nil, pick_char)
     b.current = true
     if self.options.self.section < 'x' then
       b.last = true
@@ -197,6 +217,9 @@ function M:update_status()
     end
   end
 
+  -- Restore original mode
+  self.options.mode = original_mode
+
   return table.concat(data)
 end
 
@@ -238,6 +261,8 @@ vim.cmd [[
   endfunction
 
   command! -nargs=1 -bang LualineBuffersJump call v:lua.require'lualine.components.buffers'.buffer_jump(<f-args>, "<bang>")
+  
+  command! LualineBuffersPick lua require'lualine.components.fancybuffers.pick'.enter()
 ]]
 
 return M
