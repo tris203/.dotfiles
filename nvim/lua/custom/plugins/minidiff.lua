@@ -17,11 +17,12 @@ return {
   },
   {
     'barrettruth/diffs.nvim',
-    event = 'VeryLazy',
     dependencies = { 'tpope/vim-fugitive' },
     init = function()
       vim.g.diffs = {
-        fugitive = true,
+        integrations = {
+          fugitive = true,
+        },
         highlights = {
           gutter = false,
           intra = { enabled = false },
