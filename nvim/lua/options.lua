@@ -63,4 +63,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'Visual', timeout = 150 }
   end,
 })
+
+vim.cmd 'packadd nvim.undotree'
+vim.keymap.set('n', '<leader>u', require('undotree').open)
 -- vim: ts=2 sts=2 sw=2 et
