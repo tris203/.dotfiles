@@ -14,9 +14,7 @@ return {
       }
       local group = vim.api.nvim_create_augroup('nvim-lint_au', { clear = true })
 
-      local lint_exclude_ft = {
-        codecompanion = true,
-      }
+      local lint_exclude_ft = {}
 
       lint.linters.eslint_d = require('lint.util').wrap(lint.linters.eslint_d, function(diagnostic)
         if diagnostic.message:find 'Error: Could not find config file' then
@@ -33,22 +31,11 @@ return {
         'BufWritePost',
       }, {
         group = group,
-        callback = function()
-          local buf = vim.api.nvim_get_current_buf()
-          if lint_exclude_ft[vim.bo[buf].filetype] then
+        callback = function(ev)
+          if lint_exclude_ft[vim.bo[ev.buf].filetype] then
             return
           end
-          local progress = require('fidget').progress.handle.create {
-            message = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t'),
-            title = 'Linting',
-            lsp_client = {
-              name = 'conform',
-            },
-            cancellable = false,
-            done = false,
-          }
           lint.try_lint()
-          progress:finish()
         end,
       })
     end,
@@ -86,18 +73,17 @@ return {
       {
         '<leader>lf',
         function()
-          local progress = require('fidget').progress.handle.create {
-            message = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ':t'),
-            title = 'Formatting',
-            lsp_client = {
-              name = 'conform',
-            },
-            cancellable = false,
-            done = false,
-          }
-          require('conform').format({ async = true }, function()
-            progress:finish()
-          end)
+          local id = vim.api.nvim_echo(
+            { { 'Formatting started...' } },
+            true,
+            { kind = 'progress', status = 'running', percent = 10, title = 'conform', source = 'format' }
+          )
+          require('conform').format { async = true }
+          vim.api.nvim_echo(
+            { { 'Formatting complete.' } },
+            true,
+            { id = id, kind = 'progress', status = 'success', percent = 100, title = 'conform', source = 'format' }
+          )
         end,
         desc = 'Format Buffer',
       },

@@ -1,7 +1,6 @@
 return {
   {
-    -- 'folke/lazydev.nvim',
-    'FelipeLema/lazydev.nvim',
+    'folke/lazydev.nvim',
     ft = 'lua', -- only load on lua files
     ---@module "lazydev"
     ---@type lazydev.Config

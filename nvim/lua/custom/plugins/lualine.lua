@@ -116,13 +116,11 @@ return {
         lualine_y = {
           {
             function()
-              ---@type string
-              ---@diagnostic disable-next-line: undefined-field
-              local status = require('noice').api.status.mode.get()
-              if string.find(status, 'recording') then
-                return status
-              end
-              return ''
+              local reg = vim.fn.reg_recording()
+              if reg == '' then
+                return ''
+              end -- not recording
+              return '● @ ' .. reg
             end,
           },
           {
@@ -131,5 +129,6 @@ return {
         },
       },
     }
+    vim.keymap.set('n', '<leader>bp', ':LualineBuffersPick<CR>', { desc = 'Pick buffer' })
   end,
 }

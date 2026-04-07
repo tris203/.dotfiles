@@ -32,33 +32,6 @@ return {
     end,
   },
   {
-    'olimorris/codecompanion.nvim',
-    enabled = false,
-    opts = {
-      display = {
-        chat = {
-          window = {
-            position = 'right',
-          },
-        },
-      },
-    },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      'j-hui/fidget.nvim',
-    },
-    config = function(_, opts)
-      require('helpers.codecompanion_spinner').init {}
-      require('codecompanion').setup(opts)
-    end,
-    event = { 'CmdlineEnter' },
-    keys = {
-      { '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle Chat' },
-      { '<leader>ccs', '<cmd>CodeCompanion /commit<cr>', desc = 'Write Commit' },
-    },
-  },
-  {
     'CopilotC-Nvim/CopilotChat.nvim',
     build = 'make tiktoken',
     cmd = {
