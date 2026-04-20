@@ -22,6 +22,7 @@ return {
       vim.g.diffs = {
         integrations = {
           fugitive = true,
+          neojj = true,
         },
         highlights = {
           gutter = false,

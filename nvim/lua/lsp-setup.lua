@@ -31,6 +31,10 @@ for server_name, config in pairs(non_mason_servers) do
   end
 end
 
+vim.api.nvim_create_user_command('LspLog', function()
+  vim.cmd('edit ' .. vim.lsp.log.get_filename())
+end, {})
+
 -- Ensure the servers above are installed
 -- local mason_lspconfig = require 'mason-lspconfig'
 
