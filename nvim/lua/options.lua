@@ -87,7 +87,7 @@ require('vim._core.ui2').enable {
       list_cmd = 'pager',
       lua_error = 'pager',
       lua_print = 'msg',
-      progress = 'pager',
+      progress = 'msg',
       rpc_error = 'pager',
       quickfix = 'msg',
       search_cmd = 'cmd',
