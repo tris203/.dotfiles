@@ -34,7 +34,7 @@
   "mini.diff": { "branch": "main", "commit": "ab11575a6c147ecfba894d676d0c93e855021d34" },
   "mini.icons": { "branch": "main", "commit": "bac6317300e205335df425296570d84322730067" },
   "mini.test": { "branch": "main", "commit": "4b187876dc134c820677f9e67f0b28910be739ea" },
-  "neojj": { "branch": "main", "commit": "0f9bcac53e4def035acb330aa0307d09dfe1a6d0" },
+  "neojj": { "branch": "main", "commit": "5c864165de5d143419ecd141429cea44f58039cb" },
   "neotest": { "branch": "master", "commit": "fd0b7986dd0ae04e38ec7dc0c78a432e3820839c" },
   "neotest-go": { "branch": "main", "commit": "59b50505053f9c45a9febb79e11a56206c3e3901" },
   "neotest-plenary": { "branch": "master", "commit": "3523adcf9ffaad1911960c5813b0136c1b63a2ec" },
