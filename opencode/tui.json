@@ -5,4 +5,7 @@
     "messages_page_up": "ctrl+u",
     "messages_page_down": "ctrl+d"
   },
+  "plugin": [
+    "@slkiser/opencode-quota"
+  ]
 }

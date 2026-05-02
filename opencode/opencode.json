@@ -1,0 +1,12 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "experimental": {
+        "quotaToast": {
+            "formatStyle": "grouped",
+            "enableToast": false,
+        }
+    },
+    "plugin": [
+        "@slkiser/opencode-quota"
+    ]
+}
