@@ -25,7 +25,6 @@ return {
           neojj = true,
         },
         highlights = {
-          gutter = false,
           intra = { enabled = false },
         },
       }
