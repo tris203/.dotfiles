@@ -55,11 +55,7 @@ return {
   ---@diagnostic disable-next-line: missing-fields
   opts = {
     legacy_commands = false,
-    completion = {
-      blink = true,
-      nvim_cmp = false,
-      min_chars = 0,
-    },
+    sync = { enabled = true },
     ui = { enable = false },
     workspaces = {
       {
