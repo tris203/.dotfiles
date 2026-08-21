@@ -30,7 +30,7 @@
   "templ": "v0.3.924",
   "tree-sitter-cli": "v0.26.8",
   "ts_query_ls": "v3.16.0",
-  "tsgo": "7.0.0-dev.20260515.1",
+  "tsc": "7.0.2",
   "vue-language-server": "3.0.4",
   "yaml-language-server": "1.24.0",
   "yamllint": "1.37.1",
