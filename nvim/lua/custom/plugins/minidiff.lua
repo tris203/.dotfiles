@@ -16,7 +16,7 @@ return {
     end,
   },
   {
-    'barrettruth/diffs.nvim',
+    'https://forge.barrettruth.com/barrettruth/diffs.nvim',
     dependencies = { 'tpope/vim-fugitive' },
     init = function()
       vim.g.diffs = {
